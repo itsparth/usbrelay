@@ -1,0 +1,78 @@
+syntax = "proto3";
+import "root/message.proto";
+
+service EmployeeService {
+  rpc employeeCreate (EmployeeCreateRequest) returns (IdMessage);
+  rpc employeeRead (IdMessage) returns (EmployeeReadResponse);
+  rpc employeeUpdate (EmployeeUpdateRequest) returns (IdMessage);
+  rpc employeeDelete (IdMessage) returns (OkMessage);
+  rpc employeeList (EmployeeListRequest) returns (EmployeeListResponse);
+}
+service WeaponService {
+  rpc weaponCreate (WeaponCreateRequest) returns (IdMessage);
+  rpc weaponRead (IdMessage) returns (WeaponReadResponse);
+  rpc weaponUpdate (WeaponUpdateRequest) returns (IdMessage);
+  rpc weaponDelete (IdMessage) returns (OkMessage);
+  rpc weaponList (WeaponListRequest) returns (WeaponListResponse);
+}
+service AmmoService {
+  rpc ammoCreate (AmmoCreateRequest) returns (IdMessage);
+  rpc ammoRead (IdMessage) returns (AmmoReadResponse);
+  rpc ammoUpdate (AmmoUpdateRequest) returns (IdMessage);
+  rpc ammoDelete (IdMessage) returns (OkMessage);
+  rpc ammoList (AmmoListRequest) returns (AmmoListResponse);
+}
+service AssignmentService {
+  rpc assignmentCreate (AssignmentCreateRequest) returns (IdMessage);
+  rpc assignmentRead (IdMessage) returns (AssignmentReadResponse);
+  rpc assignmentUpdate (AssignmentUpdateRequest) returns (IdMessage);
+  rpc assignmentDelete (IdMessage) returns (OkMessage);
+  rpc assignmentList (AssignmentListRequest) returns (AssignmentListResponse);
+}
+service ScheduleService {
+  rpc scheduleAssignmentsAdd (ScheduleAssignmentsAddRequest) returns (IdMessage);
+  rpc scheduleAssignmentsList (ScheduleAssignmentsListRequest) returns (ScheduleAssignmentsListResponse);
+  rpc scheduleCreate (ScheduleCreateRequest) returns (IdMessage);
+  rpc scheduleRead (IdMessage) returns (ScheduleReadResponse);
+  rpc scheduleUpdate (ScheduleUpdateRequest) returns (IdMessage);
+  rpc scheduleDelete (IdMessage) returns (OkMessage);
+  rpc scheduleList (ScheduleListRequest) returns (ScheduleListResponse);
+}
+service CommonInfoService {
+  rpc commonInfoCreate (CommonInfoCreateRequest) returns (IdMessage);
+  rpc commonInfoRead (IdMessage) returns (CommonInfoReadResponse);
+  rpc commonInfoUpdate (CommonInfoUpdateRequest) returns (IdMessage);
+  rpc commonInfoDelete (IdMessage) returns (OkMessage);
+  rpc commonInfoList (CommonInfoListRequest) returns (CommonInfoListResponse);
+}
+service AmmoInfoService {
+  rpc ammoInfoCreate (AmmoInfoCreateRequest) returns (IdMessage);
+  rpc ammoInfoRead (IdMessage) returns (AmmoInfoReadResponse);
+  rpc ammoInfoUpdate (AmmoInfoUpdateRequest) returns (IdMessage);
+  rpc ammoInfoDelete (IdMessage) returns (OkMessage);
+  rpc ammoInfoList (AmmoInfoListRequest) returns (AmmoInfoListResponse);
+}
+service FlowsService {
+  rpc flowsCreate (FlowsCreateRequest) returns (IdMessage);
+  rpc flowsRead (IdMessage) returns (FlowsReadResponse);
+  rpc flowsUpdate (FlowsUpdateRequest) returns (IdMessage);
+  rpc flowsDelete (IdMessage) returns (OkMessage);
+  rpc flowsList (FlowsListRequest) returns (FlowsListResponse);
+  rpc flowsOnScan (FlowsOnScanRequest) returns (FlowsOnScanResponse);
+  rpc flowsListen (OkMessage) returns (stream FlowsReadResponse);
+}
+service AlertService {
+  rpc alertRead (IdMessage) returns (AlertReadResponse);
+  rpc alertList (AlertListRequest) returns (AlertListResponse);
+}
+service AuthService {
+  rpc signIn (SignInRequest) returns (SignInResponse);
+  rpc signOut (OkMessage) returns (OkMessage);
+}
+service FileObjectService {
+  rpc fileObjectCreate (FileObjectCreateRequest) returns (IdMessage);
+  rpc fileObjectRead (IdMessage) returns (FileObjectReadResponse);
+  rpc fileObjectUpdate (FileObjectUpdateRequest) returns (IdMessage);
+  rpc fileObjectDelete (IdMessage) returns (OkMessage);
+  rpc fileObjectList (FileObjectListRequest) returns (FileObjectListResponse);
+}
