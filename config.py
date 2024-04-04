@@ -18,6 +18,12 @@ PositionPinMap: dict[Position, PinMap] = {
     Position.Position_clearing: PinMap(buzzer=7, red=8, green=9),
 }
 
+PositionUriMap: dict[Position, str] = {
+    Position.Position_weapon: "http://localhost:5000",
+    Position.Position_ammo: "http://localhost:5001",
+    Position.Position_clearing: "http://localhost:5002",
+}
+
 DefaultDuration: float = 1
 
 GrpcServerAddress: str = "localhost:50051"
