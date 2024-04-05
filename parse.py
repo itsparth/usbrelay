@@ -15,11 +15,11 @@ class Event:
     date: str
     time: str
     eventId: int
-    detail1: int
-    detail2: int
-    detail3: int
-    detail4: int
-    detail5: int
+    detail1: str
+    detail2: str
+    detail3: str
+    detail4: str
+    detail5: str
 
     @property
     def datetime(self) -> datetime:
@@ -36,11 +36,11 @@ def parseEvents(events: str) -> List[Event]:
         date = event_elem.find("date").text
         time = event_elem.find("time").text
         event_id = int(event_elem.find("event-id").text)
-        detail1 = int(event_elem.find("detail-1").text)
-        detail2 = int(event_elem.find("detail-2").text)
-        detail3 = int(event_elem.find("detail-3").text)
-        detail4 = int(event_elem.find("detail-4").text)
-        detail5 = int(event_elem.find("detail-5").text)
+        detail1 = event_elem.find("detail-1").text
+        detail2 = event_elem.find("detail-2").text
+        detail3 = event_elem.find("detail-3").text
+        detail4 = event_elem.find("detail-4").text
+        detail5 = event_elem.find("detail-5").text
         event = Event(
             roll_over_count,
             seq_no,
