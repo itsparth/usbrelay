@@ -1,6 +1,7 @@
 import signal
 import threading
 import time
+from typing import List
 
 import requests
 from config import (
@@ -101,7 +102,7 @@ def pollPosition(position: Position, ev: threading.Event):
 
 
 def listenAll():
-    threads: list[threading.Thread] = []
+    threads: List[threading.Thread] = []
     event = threading.Event()
 
     signal.signal(signal.SIGINT, lambda sig, frame: event.set())

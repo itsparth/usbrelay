@@ -1,4 +1,3 @@
-import grpc
 from config import DefaultDuration, GrpcChannel, PositionPinMap
 from relay import turnOnForAsync
 from root.message_pb2 import FlowsOnScanRequest, FlowsOnScanResponse, Position

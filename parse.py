@@ -3,6 +3,7 @@
 """
 
 from dataclasses import dataclass
+from typing import List
 import xml.etree.ElementTree as ET
 from datetime import datetime
 
@@ -26,7 +27,7 @@ class Event:
         return datetime.strptime(datetimeStr, "%d/%m/%Y %H:%M:%S")
 
 
-def parseEvents(events: str) -> list[Event]:
+def parseEvents(events: str) -> List[Event]:
     root = ET.fromstring(events)
     event_list = []
     for event_elem in root.findall("Events"):
