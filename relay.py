@@ -8,16 +8,15 @@ print("Count: ", count)
 boards = usbrelay_py.board_details()
 print("Boards: ", boards)
 
-board = boards[0]
-print("Board: ", board)
-
 
 def turnOn(index: int):
+    board = boards[0]
     result = usbrelay_py.board_control(board[0], index, 1)
     print("Turn on: ", result)
 
 
 def turnOff(index: int):
+    board = boards[0]
     result = usbrelay_py.board_control(board[0], index, 0)
     print("Turn off: ", result)
 
