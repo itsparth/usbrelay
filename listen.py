@@ -67,6 +67,7 @@ def pollPosition(position: Position, ev: threading.Event):
             time.sleep(ErrorSleepInterval)
             continue
         events = parseEvents(resp.text)
+        print(f"{position} Skipping Events: {len(events)}")
 
         if len(events) == 0:
             break
