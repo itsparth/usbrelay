@@ -1,10 +1,11 @@
 from dataclasses import dataclass
+import enum
 from typing import Dict
 
 from diskcache import Cache
 import grpc
 
-from root.message_pb2 import Position
+from root.message_pb2 import Position as GrpcPosition
 
 
 @dataclass
@@ -12,6 +13,20 @@ class PinMap:
     buzzer: int
     red: int
     green: int
+
+
+class Position(enum.Enum):
+    Position_weapon = 1
+    Position_ammo = 2
+    Position_clearing = 3
+
+    @property
+    def grpc(self):
+        return {
+            Position.Position_weapon: GrpcPosition.Position_weapon,
+            Position.Position_ammo: GrpcPosition.Position_ammo,
+            Position.Position_clearing: GrpcPosition.Position_clearing,
+        }[self]
 
 
 PositionPinMap: Dict[Position, PinMap] = {

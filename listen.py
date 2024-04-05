@@ -12,9 +12,9 @@ from config import (
     PositionPortMap,
     PositionUriMap,
     SleepInterval,
+    Position,
 )
 from parse import parseEvents
-from root.message_pb2 import Position
 from rpc import onMatrixScan
 import socket
 

@@ -1,12 +1,12 @@
-from config import DefaultDuration, GrpcChannel, PositionPinMap
+from config import DefaultDuration, GrpcChannel, Position, PositionPinMap
 from relay import turnOnForAsync
-from root.message_pb2 import FlowsOnScanRequest, FlowsOnScanResponse, Position
+from root.message_pb2 import FlowsOnScanRequest, FlowsOnScanResponse
 from root.service_pb2_grpc import FlowsServiceStub
 
 
 def onFlowsScan(matrixId: int, position: Position) -> FlowsOnScanResponse:
     return FlowsServiceStub(GrpcChannel).flowsOnScan(
-        FlowsOnScanRequest(matrixId=matrixId, position=position)
+        FlowsOnScanRequest(matrixId=matrixId, position=position.grpc)
     )
 
 
