@@ -36,14 +36,14 @@ PositionPinMap: Dict[Position, PinMap] = {
 }
 
 PositionUriMap: Dict[Position, str] = {
-    Position.Position_weapon: "http://localhost:5000",
-    Position.Position_ammo: "http://localhost:5001",
-    Position.Position_clearing: "http://localhost:5002",
+    Position.Position_weapon: "http://192.168.2.11:80",
+    Position.Position_ammo: "http://192.168.2.12:80",
+    Position.Position_clearing: "http://192.168.2.13:80",
 }
 
 DefaultDuration: float = 1
 
-GrpcServerAddress: str = "localhost:50051"
+GrpcServerAddress: str = "localhost:8080"
 
 GrpcChannel = grpc.insecure_channel(GrpcServerAddress)
 
