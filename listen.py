@@ -7,6 +7,7 @@ import requests
 from config import (
     DeviceIp,
     ErrorSleepInterval,
+    MatrixAuth,
     MaxEventsFetch,
     PositionCacheMap,
     PositionPortMap,
@@ -60,7 +61,7 @@ def pollPosition(position: Position, ev: threading.Event):
     while not ev.is_set():
         pollUri = f"{pollUriBase}&roll-over-count={lastROC}&seq-number={lastSeqNo}"
         try:
-            resp = requests.get(pollUri)
+            resp = requests.get(pollUri, auth=MatrixAuth)
         except Exception as e:
             print(f"{position} Error: {e}")
             time.sleep(ErrorSleepInterval)
@@ -81,7 +82,7 @@ def pollPosition(position: Position, ev: threading.Event):
     while not ev.is_set():
         try:
             pollUri = f"{pollUriBase}&roll-over-count={lastROC}&seq-number={lastSeqNo}"
-            resp = requests.get(pollUri)
+            resp = requests.get(pollUri, auth=MatrixAuth)
             events = parseEvents(resp.text)
 
             if len(events) > 0:

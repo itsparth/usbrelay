@@ -7,6 +7,7 @@ import requests
 from config import (
     DeviceIp,
     ErrorSleepInterval,
+    MatrixAuth,
     MaxEventsFetch,
     PositionCacheMap,
     PositionPortMap,
@@ -30,7 +31,7 @@ def pollPositionDebug(position: Position):
     pollUri = f"{pollUriBase}&roll-over-count={lastROC}&seq-number={lastSeqNo}"
 
     print(pollUri)
-    resp = requests.get(pollUri)
+    resp = requests.get(pollUri, auth=MatrixAuth)
     print(resp.text)
 
     events = parseEvents(resp.text)

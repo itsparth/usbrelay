@@ -66,3 +66,6 @@ MaxEventsFetch = 100
 
 SleepInterval = 1
 ErrorSleepInterval = 3
+
+
+MatrixAuth = ("admin", "1234")
