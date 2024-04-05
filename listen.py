@@ -95,6 +95,7 @@ def pollPosition(position: Position, ev: threading.Event):
                     print(f"{position} EventId: {event.eventId}")
             else:
                 print(f"{position} No Events")
+                time.sleep(SleepInterval)
                 continue
 
             lastROC = events[-1].rollOverCount
