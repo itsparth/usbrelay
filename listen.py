@@ -94,13 +94,13 @@ def pollPosition(position: Position, ev: threading.Event):
                 for event in events:
                     print(f"{position} EventId: {event.eventId}")
 
-            for event in events:
-                onMatrixScan(event.eventId, position)
-
             lastROC = events[-1].rollOverCount
             lastSeqNo = events[-1].seqNo + 1
             cache["lastROC"] = lastROC
             cache["lastSeqNo"] = lastSeqNo
+            for event in events:
+                onMatrixScan(event.eventId, position)
+
             time.sleep(SleepInterval)
 
         except Exception as e:
