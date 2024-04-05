@@ -31,7 +31,7 @@ def listenPosition(position: Position, ev: threading.Event):
 
     # Create a tcp socket to listener on port port
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.bind((DeviceIp, listenPort))
+    server.bind(("0.0.0.0", listenPort))
     server.listen()
 
     while True:
