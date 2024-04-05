@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 import enum
-from typing import Dict
+from typing import Dict, Tuple
 
 from diskcache import Cache
 import grpc
@@ -60,6 +60,12 @@ PositionCacheMap: Dict[Position, Cache] = {
     Position.Position_weapon: Cache("cache/weapon"),
     Position.Position_ammo: Cache("cache/ammo"),
     Position.Position_clearing: Cache("cache/clearing"),
+}
+
+PositionROCSeqMap: Dict[Position, Tuple[int, int]] = {
+    Position.Position_weapon: (0, 1),
+    Position.Position_ammo: (0, 1),
+    Position.Position_clearing: (0, 1),
 }
 
 MaxEventsFetch = 100

@@ -11,6 +11,7 @@ from config import (
     MaxEventsFetch,
     PositionCacheMap,
     PositionPortMap,
+    PositionROCSeqMap,
     PositionUriMap,
     SleepInterval,
     Position,
@@ -54,8 +55,9 @@ def pollPosition(position: Position, ev: threading.Event):
     cache = PositionCacheMap[position]
 
     pollUriBase = f"{uri}/device.cgi/events?action=getevent&no-of-events={MaxEventsFetch}&format=xml"
-    lastROC = cache.get("lastROC", 0)
-    lastSeqNo = cache.get("lastSeqNo", 1)
+    configRoc, configSeq = PositionROCSeqMap[position]
+    lastROC = max(configRoc, cache.get("lastROC", 0))
+    lastSeqNo = max(configSeq, cache.get("lastSeqNo", 1))
 
     # Skip to the last known event
     while not ev.is_set():
@@ -72,7 +74,7 @@ def pollPosition(position: Position, ev: threading.Event):
             break
 
         lastROC = events[-1].rollOverCount
-        lastSeqNo = events[-1].seqNo
+        lastSeqNo = events[-1].seqNo + 1
         cache["lastROC"] = lastROC
         cache["lastSeqNo"] = lastSeqNo
 
