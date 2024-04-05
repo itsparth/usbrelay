@@ -98,6 +98,7 @@ def pollPosition(position: Position, ev: threading.Event):
             lastSeqNo = events[-1].seqNo + 1
             cache["lastROC"] = lastROC
             cache["lastSeqNo"] = lastSeqNo
+
             for event in events:
                 onMatrixScan(event.eventId, position)
 
