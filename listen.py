@@ -91,6 +91,8 @@ def pollPosition(position: Position, ev: threading.Event):
 
             if len(events) > 0:
                 print(f"{position} Events: {len(events)}")
+                for event in events:
+                    print(f"{position} EventId: {event.eventId}")
 
             for event in events:
                 onMatrixScan(event.eventId, position)
