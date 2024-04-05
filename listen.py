@@ -97,7 +97,7 @@ def pollPosition(position: Position, ev: threading.Event):
                 lastROC = event.rollOverCount
                 lastSeqNo = event.seqNo
                 cache["lastROC"] = lastROC
-                cache["lastSeqNo"] = lastSeqNo
+                cache["lastSeqNo"] = lastSeqNo + 1
 
             time.sleep(SleepInterval)
 
