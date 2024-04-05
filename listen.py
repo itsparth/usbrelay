@@ -67,7 +67,6 @@ def pollPosition(position: Position, ev: threading.Event):
             time.sleep(ErrorSleepInterval)
             continue
         events = parseEvents(resp.text)
-        print(f"{position} Skipping Events: {len(events)}")
 
         if len(events) == 0:
             break
@@ -76,6 +75,8 @@ def pollPosition(position: Position, ev: threading.Event):
         lastSeqNo = events[-1].seqNo
         cache["lastROC"] = lastROC
         cache["lastSeqNo"] = lastSeqNo
+
+        print(f"{position} Skipping Events: {len(events)} from {lastROC}:{lastSeqNo}")
 
     if not ev.is_set():
         print(f"Polling for position: {position} from {lastROC}:{lastSeqNo}")
