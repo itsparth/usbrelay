@@ -1,13 +1,16 @@
+import signal
 import threading
 import time
 
 import requests
 from config import (
     DeviceIp,
+    ErrorSleepInterval,
     MaxEventsFetch,
     PositionCacheMap,
     PositionPortMap,
     PositionUriMap,
+    SleepInterval,
 )
 from parse import parseEvents
 from root.message_pb2 import Position
@@ -15,7 +18,7 @@ from rpc import onMatrixScan
 import socket
 
 
-def listenPosition(position: Position):
+def listenPosition(position: Position, ev: threading.Event):
     print(f"Listening for position: {position}")
     uri = PositionUriMap[position]
     listenPort = PositionPortMap[position]
@@ -53,9 +56,14 @@ def pollPosition(position: Position, ev: threading.Event):
     lastSeqNo = cache.get("lastSeqNo", 0)
 
     # Skip to the last known event
-    while True:
+    while not ev.is_set():
         pollUri = f"{pollUriBase}&roll-over-count={lastROC}&seq-number={lastSeqNo}"
-        resp = requests.get(pollUri)
+        try:
+            resp = requests.get(pollUri)
+        except Exception as e:
+            print(f"{position} Error: {e}")
+            time.sleep(ErrorSleepInterval)
+            continue
         events = parseEvents(resp.text)
 
         if len(events) == 0:
@@ -66,12 +74,17 @@ def pollPosition(position: Position, ev: threading.Event):
         cache["lastROC"] = lastROC
         cache["lastSeqNo"] = lastSeqNo
 
+    if not ev.is_set():
+        print(f"Polling for position: {position} from {lastROC}:{lastSeqNo}")
     # Start polling
     while not ev.is_set():
         try:
             pollUri = f"{pollUriBase}&roll-over-count={lastROC}&seq-number={lastSeqNo}"
             resp = requests.get(pollUri)
             events = parseEvents(resp.text)
+
+            if len(events) > 0:
+                print(f"{position} Events: {len(events)}")
 
             for event in events:
                 onMatrixScan(event.eventId, position)
@@ -80,19 +93,26 @@ def pollPosition(position: Position, ev: threading.Event):
                 cache["lastROC"] = lastROC
                 cache["lastSeqNo"] = lastSeqNo
 
+            time.sleep(SleepInterval)
+
         except Exception as e:
-            print(f"Error: {e}")
-            time.sleep(5)
+            print(f"{position} Error: {e}")
+            time.sleep(ErrorSleepInterval)
 
 
 def listenAll():
     threads: list[threading.Thread] = []
+    event = threading.Event()
+
+    signal.signal(signal.SIGINT, lambda sig, frame: event.set())
+    signal.signal(signal.SIGTERM, lambda sig, frame: event.set())
+
     for position in [
         Position.Position_weapon,
         Position.Position_ammo,
         Position.Position_clearing,
     ]:
-        t = threading.Thread(target=pollPosition, args=(position,))
+        t = threading.Thread(target=pollPosition, args=(position, event))
         threads.append(t)
         t.start()
 

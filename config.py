@@ -41,9 +41,12 @@ PositionPortMap: dict[Position, int] = {
 
 
 PositionCacheMap: dict[Position, Cache] = {
-    Position.Position_weapon: Cache("weapon"),
-    Position.Position_ammo: Cache("ammo"),
-    Position.Position_clearing: Cache("clearing"),
+    Position.Position_weapon: Cache("cache/weapon"),
+    Position.Position_ammo: Cache("cache/ammo"),
+    Position.Position_clearing: Cache("cache/clearing"),
 }
 
 MaxEventsFetch = 100
+
+SleepInterval = 1
+ErrorSleepInterval = 3
