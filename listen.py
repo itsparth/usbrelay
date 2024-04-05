@@ -55,7 +55,7 @@ def pollPosition(position: Position, ev: threading.Event):
 
     pollUriBase = f"{uri}/device.cgi/events?action=getevent&no-of-events={MaxEventsFetch}&format=xml"
     lastROC = cache.get("lastROC", 0)
-    lastSeqNo = cache.get("lastSeqNo", 0)
+    lastSeqNo = cache.get("lastSeqNo", 1)
 
     # Skip to the last known event
     while not ev.is_set():
