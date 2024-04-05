@@ -92,9 +92,9 @@ def pollPosition(position: Position, ev: threading.Event):
             if len(events) > 0:
                 print(f"{position} Events: {len(events)}")
                 for event in events:
-                    print(f"{position} EventId: {int(event.detail1)}")
+                    print(f"{position} Details: {event.details}")
             else:
-                print(f"{position} No Events")
+                print(f".", end="")
                 time.sleep(SleepInterval)
                 continue
 

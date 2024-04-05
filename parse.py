@@ -26,6 +26,10 @@ class Event:
         datetimeStr = f"{self.date} {self.time}"  # 1/3/2024 14:9:56
         return datetime.strptime(datetimeStr, "%d/%m/%Y %H:%M:%S")
 
+    @property
+    def details(self) -> List[str]:
+        return [self.detail1, self.detail2, self.detail3, self.detail4, self.detail5]
+
 
 def parseEvents(events: str) -> List[Event]:
     root = ET.fromstring(events)
