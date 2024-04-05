@@ -92,6 +92,7 @@ message AssignmentCreateRequest {
   AssignmentCreateRequestWeapon weapon = 2;
   AssignmentCreateRequestAmmo ammo = 3;
   string dutyPost = 4;
+  int32 ammoCount = 5;
 }
 message AssignmentReadResponse {
   string id = 1;
@@ -99,6 +100,7 @@ message AssignmentReadResponse {
   AssignmentReadResponseWeapon weapon = 3;
   AssignmentReadResponseAmmo ammo = 4;
   string dutyPost = 5;
+  int32 ammoCount = 6;
 }
 message AssignmentUpdateRequest {
   string id = 1;
@@ -106,6 +108,7 @@ message AssignmentUpdateRequest {
   AssignmentUpdateRequestWeapon weapon = 3;
   AssignmentUpdateRequestAmmo ammo = 4;
   string dutyPost = 5;
+  int32 ammoCount = 6;
 }
 message AssignmentListRequest {
   optional AssignmentFilters filters = 1;
@@ -162,19 +165,19 @@ message ScheduleListResponse {
 }
 message CommonInfoCreateRequest {
   google.protobuf.Timestamp time = 1;
-  CommonInfoCreateRequestAcknowledgedBy acknowledgedBy = 2;
+  optional CommonInfoCreateRequestAcknowledgedBy acknowledgedBy = 2;
   optional string remarks = 3;
 }
 message CommonInfoReadResponse {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  CommonInfoReadResponseAcknowledgedBy acknowledgedBy = 3;
+  optional CommonInfoReadResponseAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
 }
 message CommonInfoUpdateRequest {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  CommonInfoUpdateRequestAcknowledgedBy acknowledgedBy = 3;
+  optional CommonInfoUpdateRequestAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
 }
 message CommonInfoListRequest {
@@ -190,21 +193,21 @@ message CommonInfoListResponse {
 }
 message AmmoInfoCreateRequest {
   google.protobuf.Timestamp time = 1;
-  AmmoInfoCreateRequestAcknowledgedBy acknowledgedBy = 2;
+  optional AmmoInfoCreateRequestAcknowledgedBy acknowledgedBy = 2;
   optional string remarks = 3;
   int32 count = 4;
 }
 message AmmoInfoReadResponse {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  AmmoInfoReadResponseAcknowledgedBy acknowledgedBy = 3;
+  optional AmmoInfoReadResponseAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
   int32 count = 5;
 }
 message AmmoInfoUpdateRequest {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  AmmoInfoUpdateRequestAcknowledgedBy acknowledgedBy = 3;
+  optional AmmoInfoUpdateRequestAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
   int32 count = 5;
 }
@@ -269,13 +272,18 @@ message FlowsOnScanResponse {
   bool green = 3;
   bool buzzer = 4;
 }
+message AlertCreateRequest {
+  AlertCreateRequestEmployee employee = 1;
+  AlertType type = 2;
+  google.protobuf.Timestamp time = 3;
+  optional string remarks = 4;
+}
 message AlertReadResponse {
   string id = 1;
   AlertReadResponseEmployee employee = 2;
   AlertType type = 3;
   google.protobuf.Timestamp time = 4;
-  AlertReadResponseAcknowledgedBy acknowledgedBy = 5;
-  optional string remarks = 6;
+  optional string remarks = 5;
 }
 message AlertListRequest {
   optional AlertFilters filters = 1;
@@ -441,6 +449,8 @@ message AssignmentFilters {
   repeated string ammoIn = 4;
   optional string dutyPostMin = 5;
   optional string dutyPostMax = 6;
+  optional int32 ammoCountMin = 7;
+  optional int32 ammoCountMax = 8;
 }
 message AssignmentCursor {
   string id = 1;
@@ -453,6 +463,7 @@ message Assignment {
   AssignmentWeapon weapon = 3;
   AssignmentAmmo ammo = 4;
   string dutyPost = 5;
+  int32 ammoCount = 6;
 }
 message ScheduleReadResponseAssignments {
   string id = 1;
@@ -491,7 +502,6 @@ message CommonInfoFilters {
   repeated string idIn = 1;
   optional google.protobuf.Timestamp timeMin = 2;
   optional google.protobuf.Timestamp timeMax = 3;
-  repeated string acknowledgedByIn = 4;
 }
 message CommonInfoCursor {
   string id = 1;
@@ -501,7 +511,7 @@ message CommonInfoCursor {
 message CommonInfo {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  CommonInfoAcknowledgedBy acknowledgedBy = 3;
+  optional CommonInfoAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
 }
 message AmmoInfoCreateRequestAcknowledgedBy {
@@ -518,9 +528,8 @@ message AmmoInfoFilters {
   repeated string idIn = 1;
   optional google.protobuf.Timestamp timeMin = 2;
   optional google.protobuf.Timestamp timeMax = 3;
-  repeated string acknowledgedByIn = 4;
-  optional int32 countMin = 5;
-  optional int32 countMax = 6;
+  optional int32 countMin = 4;
+  optional int32 countMax = 5;
 }
 message AmmoInfoCursor {
   string id = 1;
@@ -530,7 +539,7 @@ message AmmoInfoCursor {
 message AmmoInfo {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  AmmoInfoAcknowledgedBy acknowledgedBy = 3;
+  optional AmmoInfoAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
   int32 count = 5;
 }
@@ -539,75 +548,80 @@ message FlowsCreateRequestAssignment {
 }
 message FlowsCreateRequestWeaponEntry {
   google.protobuf.Timestamp time = 1;
-  FlowsCreateRequestWeaponEntryAcknowledgedBy acknowledgedBy = 2;
+  optional FlowsCreateRequestWeaponEntryAcknowledgedBy acknowledgedBy = 2;
   optional string remarks = 3;
 }
 message FlowsCreateRequestClearingEntry {
   google.protobuf.Timestamp time = 1;
-  FlowsCreateRequestClearingEntryAcknowledgedBy acknowledgedBy = 2;
+  optional FlowsCreateRequestClearingEntryAcknowledgedBy acknowledgedBy = 2;
   optional string remarks = 3;
 }
 message FlowsCreateRequestAmmoEntry {
   google.protobuf.Timestamp time = 1;
-  FlowsCreateRequestAmmoEntryAcknowledgedBy acknowledgedBy = 2;
+  optional FlowsCreateRequestAmmoEntryAcknowledgedBy acknowledgedBy = 2;
   optional string remarks = 3;
   int32 count = 4;
 }
 message FlowsCreateRequestAmmoExit {
   google.protobuf.Timestamp time = 1;
-  FlowsCreateRequestAmmoExitAcknowledgedBy acknowledgedBy = 2;
+  optional FlowsCreateRequestAmmoExitAcknowledgedBy acknowledgedBy = 2;
   optional string remarks = 3;
   int32 count = 4;
 }
 message FlowsCreateRequestClearingExit {
   google.protobuf.Timestamp time = 1;
-  FlowsCreateRequestClearingExitAcknowledgedBy acknowledgedBy = 2;
+  optional FlowsCreateRequestClearingExitAcknowledgedBy acknowledgedBy = 2;
   optional string remarks = 3;
 }
 message FlowsCreateRequestWeaponExit {
   google.protobuf.Timestamp time = 1;
-  FlowsCreateRequestWeaponExitAcknowledgedBy acknowledgedBy = 2;
+  optional FlowsCreateRequestWeaponExitAcknowledgedBy acknowledgedBy = 2;
   optional string remarks = 3;
 }
 message FlowsReadResponseAssignment {
   string id = 1;
+  FlowsReadResponseAssignmentEmployee employee = 2;
+  FlowsReadResponseAssignmentWeapon weapon = 3;
+  FlowsReadResponseAssignmentAmmo ammo = 4;
+  string dutyPost = 5;
+  int32 ammoCount = 6;
 }
 message FlowsReadResponseWeaponEntry {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  FlowsReadResponseWeaponEntryAcknowledgedBy acknowledgedBy = 3;
+  optional FlowsReadResponseWeaponEntryAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
 }
 message FlowsReadResponseClearingEntry {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  FlowsReadResponseClearingEntryAcknowledgedBy acknowledgedBy = 3;
+  optional FlowsReadResponseClearingEntryAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
 }
 message FlowsReadResponseAmmoEntry {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  FlowsReadResponseAmmoEntryAcknowledgedBy acknowledgedBy = 3;
+  optional FlowsReadResponseAmmoEntryAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
   int32 count = 5;
 }
 message FlowsReadResponseAmmoExit {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  FlowsReadResponseAmmoExitAcknowledgedBy acknowledgedBy = 3;
+  optional FlowsReadResponseAmmoExitAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
   int32 count = 5;
 }
 message FlowsReadResponseClearingExit {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  FlowsReadResponseClearingExitAcknowledgedBy acknowledgedBy = 3;
+  optional FlowsReadResponseClearingExitAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
 }
 message FlowsReadResponseWeaponExit {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  FlowsReadResponseWeaponExitAcknowledgedBy acknowledgedBy = 3;
+  optional FlowsReadResponseWeaponExitAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
 }
 message FlowsUpdateRequestAssignment {
@@ -616,39 +630,39 @@ message FlowsUpdateRequestAssignment {
 message FlowsUpdateRequestWeaponEntry {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  FlowsUpdateRequestWeaponEntryAcknowledgedBy acknowledgedBy = 3;
+  optional FlowsUpdateRequestWeaponEntryAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
 }
 message FlowsUpdateRequestClearingEntry {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  FlowsUpdateRequestClearingEntryAcknowledgedBy acknowledgedBy = 3;
+  optional FlowsUpdateRequestClearingEntryAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
 }
 message FlowsUpdateRequestAmmoEntry {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  FlowsUpdateRequestAmmoEntryAcknowledgedBy acknowledgedBy = 3;
+  optional FlowsUpdateRequestAmmoEntryAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
   int32 count = 5;
 }
 message FlowsUpdateRequestAmmoExit {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  FlowsUpdateRequestAmmoExitAcknowledgedBy acknowledgedBy = 3;
+  optional FlowsUpdateRequestAmmoExitAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
   int32 count = 5;
 }
 message FlowsUpdateRequestClearingExit {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  FlowsUpdateRequestClearingExitAcknowledgedBy acknowledgedBy = 3;
+  optional FlowsUpdateRequestClearingExitAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
 }
 message FlowsUpdateRequestWeaponExit {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  FlowsUpdateRequestWeaponExitAcknowledgedBy acknowledgedBy = 3;
+  optional FlowsUpdateRequestWeaponExitAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
 }
 message FlowsFilters {
@@ -670,11 +684,10 @@ message Flows {
   optional FlowsClearingExit clearingExit = 7;
   optional FlowsWeaponExit weaponExit = 8;
 }
-message AlertReadResponseEmployee {
+message AlertCreateRequestEmployee {
   string id = 1;
-  string name = 2;
 }
-message AlertReadResponseAcknowledgedBy {
+message AlertReadResponseEmployee {
   string id = 1;
   string name = 2;
 }
@@ -684,7 +697,6 @@ message AlertFilters {
   repeated AlertType typeIn = 3;
   optional google.protobuf.Timestamp timeMin = 4;
   optional google.protobuf.Timestamp timeMax = 5;
-  repeated string acknowledgedByIn = 6;
 }
 message AlertCursor {
   string id = 1;
@@ -696,8 +708,7 @@ message Alert {
   AlertEmployee employee = 2;
   AlertType type = 3;
   google.protobuf.Timestamp time = 4;
-  AlertAcknowledgedBy acknowledgedBy = 5;
-  optional string remarks = 6;
+  optional string remarks = 5;
 }
 message FileObjectFilters {
   repeated string idIn = 1;
@@ -769,6 +780,21 @@ message FlowsCreateRequestClearingExitAcknowledgedBy {
 message FlowsCreateRequestWeaponExitAcknowledgedBy {
   string id = 1;
 }
+message FlowsReadResponseAssignmentEmployee {
+  string id = 1;
+  string name = 2;
+  FileObject photo = 3;
+}
+message FlowsReadResponseAssignmentWeapon {
+  string id = 1;
+  string name = 2;
+  FileObject photo = 3;
+}
+message FlowsReadResponseAssignmentAmmo {
+  string id = 1;
+  string name = 2;
+  FileObject photo = 3;
+}
 message FlowsReadResponseWeaponEntryAcknowledgedBy {
   string id = 1;
   string name = 2;
@@ -817,46 +843,42 @@ message FlowsAssignment {
 message FlowsWeaponEntry {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  FlowsWeaponEntryAcknowledgedBy acknowledgedBy = 3;
+  optional FlowsWeaponEntryAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
 }
 message FlowsClearingEntry {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  FlowsClearingEntryAcknowledgedBy acknowledgedBy = 3;
+  optional FlowsClearingEntryAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
 }
 message FlowsAmmoEntry {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  FlowsAmmoEntryAcknowledgedBy acknowledgedBy = 3;
+  optional FlowsAmmoEntryAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
   int32 count = 5;
 }
 message FlowsAmmoExit {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  FlowsAmmoExitAcknowledgedBy acknowledgedBy = 3;
+  optional FlowsAmmoExitAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
   int32 count = 5;
 }
 message FlowsClearingExit {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  FlowsClearingExitAcknowledgedBy acknowledgedBy = 3;
+  optional FlowsClearingExitAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
 }
 message FlowsWeaponExit {
   string id = 1;
   google.protobuf.Timestamp time = 2;
-  FlowsWeaponExitAcknowledgedBy acknowledgedBy = 3;
+  optional FlowsWeaponExitAcknowledgedBy acknowledgedBy = 3;
   optional string remarks = 4;
 }
 message AlertEmployee {
-  string id = 1;
-  string name = 2;
-}
-message AlertAcknowledgedBy {
   string id = 1;
   string name = 2;
 }
@@ -907,6 +929,8 @@ enum AssignmentSort {
   assignmentSort_unspecified = 0;
   assignmentSort_dutyPostAsc = 1;
   assignmentSort_dutyPostDesc = 2;
+  assignmentSort_ammoCountAsc = 3;
+  assignmentSort_ammoCountDesc = 4;
 }
 enum ScheduleSort {
   scheduleSort_unspecified = 0;

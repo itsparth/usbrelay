@@ -34,6 +34,8 @@ class AssignmentSort(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     assignmentSort_unspecified: _ClassVar[AssignmentSort]
     assignmentSort_dutyPostAsc: _ClassVar[AssignmentSort]
     assignmentSort_dutyPostDesc: _ClassVar[AssignmentSort]
+    assignmentSort_ammoCountAsc: _ClassVar[AssignmentSort]
+    assignmentSort_ammoCountDesc: _ClassVar[AssignmentSort]
 
 class ScheduleSort(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -114,6 +116,8 @@ ammoSort_nameDesc: AmmoSort
 assignmentSort_unspecified: AssignmentSort
 assignmentSort_dutyPostAsc: AssignmentSort
 assignmentSort_dutyPostDesc: AssignmentSort
+assignmentSort_ammoCountAsc: AssignmentSort
+assignmentSort_ammoCountDesc: AssignmentSort
 scheduleSort_unspecified: ScheduleSort
 scheduleSort_startTimeAsc: ScheduleSort
 scheduleSort_startTimeDesc: ScheduleSort
@@ -325,44 +329,50 @@ class AmmoListResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[Ammo, _Mapping]]] = ..., cursor: _Optional[_Union[AmmoCursor, _Mapping]] = ...) -> None: ...
 
 class AssignmentCreateRequest(_message.Message):
-    __slots__ = ("employee", "weapon", "ammo", "dutyPost")
+    __slots__ = ("employee", "weapon", "ammo", "dutyPost", "ammoCount")
     EMPLOYEE_FIELD_NUMBER: _ClassVar[int]
     WEAPON_FIELD_NUMBER: _ClassVar[int]
     AMMO_FIELD_NUMBER: _ClassVar[int]
     DUTYPOST_FIELD_NUMBER: _ClassVar[int]
+    AMMOCOUNT_FIELD_NUMBER: _ClassVar[int]
     employee: AssignmentCreateRequestEmployee
     weapon: AssignmentCreateRequestWeapon
     ammo: AssignmentCreateRequestAmmo
     dutyPost: str
-    def __init__(self, employee: _Optional[_Union[AssignmentCreateRequestEmployee, _Mapping]] = ..., weapon: _Optional[_Union[AssignmentCreateRequestWeapon, _Mapping]] = ..., ammo: _Optional[_Union[AssignmentCreateRequestAmmo, _Mapping]] = ..., dutyPost: _Optional[str] = ...) -> None: ...
+    ammoCount: int
+    def __init__(self, employee: _Optional[_Union[AssignmentCreateRequestEmployee, _Mapping]] = ..., weapon: _Optional[_Union[AssignmentCreateRequestWeapon, _Mapping]] = ..., ammo: _Optional[_Union[AssignmentCreateRequestAmmo, _Mapping]] = ..., dutyPost: _Optional[str] = ..., ammoCount: _Optional[int] = ...) -> None: ...
 
 class AssignmentReadResponse(_message.Message):
-    __slots__ = ("id", "employee", "weapon", "ammo", "dutyPost")
+    __slots__ = ("id", "employee", "weapon", "ammo", "dutyPost", "ammoCount")
     ID_FIELD_NUMBER: _ClassVar[int]
     EMPLOYEE_FIELD_NUMBER: _ClassVar[int]
     WEAPON_FIELD_NUMBER: _ClassVar[int]
     AMMO_FIELD_NUMBER: _ClassVar[int]
     DUTYPOST_FIELD_NUMBER: _ClassVar[int]
+    AMMOCOUNT_FIELD_NUMBER: _ClassVar[int]
     id: str
     employee: AssignmentReadResponseEmployee
     weapon: AssignmentReadResponseWeapon
     ammo: AssignmentReadResponseAmmo
     dutyPost: str
-    def __init__(self, id: _Optional[str] = ..., employee: _Optional[_Union[AssignmentReadResponseEmployee, _Mapping]] = ..., weapon: _Optional[_Union[AssignmentReadResponseWeapon, _Mapping]] = ..., ammo: _Optional[_Union[AssignmentReadResponseAmmo, _Mapping]] = ..., dutyPost: _Optional[str] = ...) -> None: ...
+    ammoCount: int
+    def __init__(self, id: _Optional[str] = ..., employee: _Optional[_Union[AssignmentReadResponseEmployee, _Mapping]] = ..., weapon: _Optional[_Union[AssignmentReadResponseWeapon, _Mapping]] = ..., ammo: _Optional[_Union[AssignmentReadResponseAmmo, _Mapping]] = ..., dutyPost: _Optional[str] = ..., ammoCount: _Optional[int] = ...) -> None: ...
 
 class AssignmentUpdateRequest(_message.Message):
-    __slots__ = ("id", "employee", "weapon", "ammo", "dutyPost")
+    __slots__ = ("id", "employee", "weapon", "ammo", "dutyPost", "ammoCount")
     ID_FIELD_NUMBER: _ClassVar[int]
     EMPLOYEE_FIELD_NUMBER: _ClassVar[int]
     WEAPON_FIELD_NUMBER: _ClassVar[int]
     AMMO_FIELD_NUMBER: _ClassVar[int]
     DUTYPOST_FIELD_NUMBER: _ClassVar[int]
+    AMMOCOUNT_FIELD_NUMBER: _ClassVar[int]
     id: str
     employee: AssignmentUpdateRequestEmployee
     weapon: AssignmentUpdateRequestWeapon
     ammo: AssignmentUpdateRequestAmmo
     dutyPost: str
-    def __init__(self, id: _Optional[str] = ..., employee: _Optional[_Union[AssignmentUpdateRequestEmployee, _Mapping]] = ..., weapon: _Optional[_Union[AssignmentUpdateRequestWeapon, _Mapping]] = ..., ammo: _Optional[_Union[AssignmentUpdateRequestAmmo, _Mapping]] = ..., dutyPost: _Optional[str] = ...) -> None: ...
+    ammoCount: int
+    def __init__(self, id: _Optional[str] = ..., employee: _Optional[_Union[AssignmentUpdateRequestEmployee, _Mapping]] = ..., weapon: _Optional[_Union[AssignmentUpdateRequestWeapon, _Mapping]] = ..., ammo: _Optional[_Union[AssignmentUpdateRequestAmmo, _Mapping]] = ..., dutyPost: _Optional[str] = ..., ammoCount: _Optional[int] = ...) -> None: ...
 
 class AssignmentListRequest(_message.Message):
     __slots__ = ("filters", "search", "sort", "cursor", "limit")
@@ -688,21 +698,31 @@ class FlowsOnScanResponse(_message.Message):
     buzzer: bool
     def __init__(self, position: _Optional[_Union[Position, str]] = ..., red: bool = ..., green: bool = ..., buzzer: bool = ...) -> None: ...
 
+class AlertCreateRequest(_message.Message):
+    __slots__ = ("employee", "type", "time", "remarks")
+    EMPLOYEE_FIELD_NUMBER: _ClassVar[int]
+    TYPE_FIELD_NUMBER: _ClassVar[int]
+    TIME_FIELD_NUMBER: _ClassVar[int]
+    REMARKS_FIELD_NUMBER: _ClassVar[int]
+    employee: AlertCreateRequestEmployee
+    type: AlertType
+    time: _timestamp_pb2.Timestamp
+    remarks: str
+    def __init__(self, employee: _Optional[_Union[AlertCreateRequestEmployee, _Mapping]] = ..., type: _Optional[_Union[AlertType, str]] = ..., time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., remarks: _Optional[str] = ...) -> None: ...
+
 class AlertReadResponse(_message.Message):
-    __slots__ = ("id", "employee", "type", "time", "acknowledgedBy", "remarks")
+    __slots__ = ("id", "employee", "type", "time", "remarks")
     ID_FIELD_NUMBER: _ClassVar[int]
     EMPLOYEE_FIELD_NUMBER: _ClassVar[int]
     TYPE_FIELD_NUMBER: _ClassVar[int]
     TIME_FIELD_NUMBER: _ClassVar[int]
-    ACKNOWLEDGEDBY_FIELD_NUMBER: _ClassVar[int]
     REMARKS_FIELD_NUMBER: _ClassVar[int]
     id: str
     employee: AlertReadResponseEmployee
     type: AlertType
     time: _timestamp_pb2.Timestamp
-    acknowledgedBy: AlertReadResponseAcknowledgedBy
     remarks: str
-    def __init__(self, id: _Optional[str] = ..., employee: _Optional[_Union[AlertReadResponseEmployee, _Mapping]] = ..., type: _Optional[_Union[AlertType, str]] = ..., time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., acknowledgedBy: _Optional[_Union[AlertReadResponseAcknowledgedBy, _Mapping]] = ..., remarks: _Optional[str] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., employee: _Optional[_Union[AlertReadResponseEmployee, _Mapping]] = ..., type: _Optional[_Union[AlertType, str]] = ..., time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., remarks: _Optional[str] = ...) -> None: ...
 
 class AlertListRequest(_message.Message):
     __slots__ = ("filters", "search", "sort", "cursor", "limit")
@@ -1019,20 +1039,24 @@ class AssignmentUpdateRequestAmmo(_message.Message):
     def __init__(self, id: _Optional[str] = ...) -> None: ...
 
 class AssignmentFilters(_message.Message):
-    __slots__ = ("idIn", "employeeIn", "weaponIn", "ammoIn", "dutyPostMin", "dutyPostMax")
+    __slots__ = ("idIn", "employeeIn", "weaponIn", "ammoIn", "dutyPostMin", "dutyPostMax", "ammoCountMin", "ammoCountMax")
     IDIN_FIELD_NUMBER: _ClassVar[int]
     EMPLOYEEIN_FIELD_NUMBER: _ClassVar[int]
     WEAPONIN_FIELD_NUMBER: _ClassVar[int]
     AMMOIN_FIELD_NUMBER: _ClassVar[int]
     DUTYPOSTMIN_FIELD_NUMBER: _ClassVar[int]
     DUTYPOSTMAX_FIELD_NUMBER: _ClassVar[int]
+    AMMOCOUNTMIN_FIELD_NUMBER: _ClassVar[int]
+    AMMOCOUNTMAX_FIELD_NUMBER: _ClassVar[int]
     idIn: _containers.RepeatedScalarFieldContainer[str]
     employeeIn: _containers.RepeatedScalarFieldContainer[str]
     weaponIn: _containers.RepeatedScalarFieldContainer[str]
     ammoIn: _containers.RepeatedScalarFieldContainer[str]
     dutyPostMin: str
     dutyPostMax: str
-    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., employeeIn: _Optional[_Iterable[str]] = ..., weaponIn: _Optional[_Iterable[str]] = ..., ammoIn: _Optional[_Iterable[str]] = ..., dutyPostMin: _Optional[str] = ..., dutyPostMax: _Optional[str] = ...) -> None: ...
+    ammoCountMin: int
+    ammoCountMax: int
+    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., employeeIn: _Optional[_Iterable[str]] = ..., weaponIn: _Optional[_Iterable[str]] = ..., ammoIn: _Optional[_Iterable[str]] = ..., dutyPostMin: _Optional[str] = ..., dutyPostMax: _Optional[str] = ..., ammoCountMin: _Optional[int] = ..., ammoCountMax: _Optional[int] = ...) -> None: ...
 
 class AssignmentCursor(_message.Message):
     __slots__ = ("id", "filters", "sort")
@@ -1045,18 +1069,20 @@ class AssignmentCursor(_message.Message):
     def __init__(self, id: _Optional[str] = ..., filters: _Optional[_Union[AssignmentFilters, _Mapping]] = ..., sort: _Optional[_Union[AssignmentSort, str]] = ...) -> None: ...
 
 class Assignment(_message.Message):
-    __slots__ = ("id", "employee", "weapon", "ammo", "dutyPost")
+    __slots__ = ("id", "employee", "weapon", "ammo", "dutyPost", "ammoCount")
     ID_FIELD_NUMBER: _ClassVar[int]
     EMPLOYEE_FIELD_NUMBER: _ClassVar[int]
     WEAPON_FIELD_NUMBER: _ClassVar[int]
     AMMO_FIELD_NUMBER: _ClassVar[int]
     DUTYPOST_FIELD_NUMBER: _ClassVar[int]
+    AMMOCOUNT_FIELD_NUMBER: _ClassVar[int]
     id: str
     employee: AssignmentEmployee
     weapon: AssignmentWeapon
     ammo: AssignmentAmmo
     dutyPost: str
-    def __init__(self, id: _Optional[str] = ..., employee: _Optional[_Union[AssignmentEmployee, _Mapping]] = ..., weapon: _Optional[_Union[AssignmentWeapon, _Mapping]] = ..., ammo: _Optional[_Union[AssignmentAmmo, _Mapping]] = ..., dutyPost: _Optional[str] = ...) -> None: ...
+    ammoCount: int
+    def __init__(self, id: _Optional[str] = ..., employee: _Optional[_Union[AssignmentEmployee, _Mapping]] = ..., weapon: _Optional[_Union[AssignmentWeapon, _Mapping]] = ..., ammo: _Optional[_Union[AssignmentAmmo, _Mapping]] = ..., dutyPost: _Optional[str] = ..., ammoCount: _Optional[int] = ...) -> None: ...
 
 class ScheduleReadResponseAssignments(_message.Message):
     __slots__ = ("id", "employee", "dutyPost")
@@ -1125,16 +1151,14 @@ class CommonInfoUpdateRequestAcknowledgedBy(_message.Message):
     def __init__(self, id: _Optional[str] = ...) -> None: ...
 
 class CommonInfoFilters(_message.Message):
-    __slots__ = ("idIn", "timeMin", "timeMax", "acknowledgedByIn")
+    __slots__ = ("idIn", "timeMin", "timeMax")
     IDIN_FIELD_NUMBER: _ClassVar[int]
     TIMEMIN_FIELD_NUMBER: _ClassVar[int]
     TIMEMAX_FIELD_NUMBER: _ClassVar[int]
-    ACKNOWLEDGEDBYIN_FIELD_NUMBER: _ClassVar[int]
     idIn: _containers.RepeatedScalarFieldContainer[str]
     timeMin: _timestamp_pb2.Timestamp
     timeMax: _timestamp_pb2.Timestamp
-    acknowledgedByIn: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., timeMin: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., timeMax: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., acknowledgedByIn: _Optional[_Iterable[str]] = ...) -> None: ...
+    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., timeMin: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., timeMax: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class CommonInfoCursor(_message.Message):
     __slots__ = ("id", "filters", "sort")
@@ -1179,20 +1203,18 @@ class AmmoInfoUpdateRequestAcknowledgedBy(_message.Message):
     def __init__(self, id: _Optional[str] = ...) -> None: ...
 
 class AmmoInfoFilters(_message.Message):
-    __slots__ = ("idIn", "timeMin", "timeMax", "acknowledgedByIn", "countMin", "countMax")
+    __slots__ = ("idIn", "timeMin", "timeMax", "countMin", "countMax")
     IDIN_FIELD_NUMBER: _ClassVar[int]
     TIMEMIN_FIELD_NUMBER: _ClassVar[int]
     TIMEMAX_FIELD_NUMBER: _ClassVar[int]
-    ACKNOWLEDGEDBYIN_FIELD_NUMBER: _ClassVar[int]
     COUNTMIN_FIELD_NUMBER: _ClassVar[int]
     COUNTMAX_FIELD_NUMBER: _ClassVar[int]
     idIn: _containers.RepeatedScalarFieldContainer[str]
     timeMin: _timestamp_pb2.Timestamp
     timeMax: _timestamp_pb2.Timestamp
-    acknowledgedByIn: _containers.RepeatedScalarFieldContainer[str]
     countMin: int
     countMax: int
-    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., timeMin: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., timeMax: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., acknowledgedByIn: _Optional[_Iterable[str]] = ..., countMin: _Optional[int] = ..., countMax: _Optional[int] = ...) -> None: ...
+    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., timeMin: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., timeMax: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., countMin: _Optional[int] = ..., countMax: _Optional[int] = ...) -> None: ...
 
 class AmmoInfoCursor(_message.Message):
     __slots__ = ("id", "filters", "sort")
@@ -1289,10 +1311,20 @@ class FlowsCreateRequestWeaponExit(_message.Message):
     def __init__(self, time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., acknowledgedBy: _Optional[_Union[FlowsCreateRequestWeaponExitAcknowledgedBy, _Mapping]] = ..., remarks: _Optional[str] = ...) -> None: ...
 
 class FlowsReadResponseAssignment(_message.Message):
-    __slots__ = ("id",)
+    __slots__ = ("id", "employee", "weapon", "ammo", "dutyPost", "ammoCount")
     ID_FIELD_NUMBER: _ClassVar[int]
+    EMPLOYEE_FIELD_NUMBER: _ClassVar[int]
+    WEAPON_FIELD_NUMBER: _ClassVar[int]
+    AMMO_FIELD_NUMBER: _ClassVar[int]
+    DUTYPOST_FIELD_NUMBER: _ClassVar[int]
+    AMMOCOUNT_FIELD_NUMBER: _ClassVar[int]
     id: str
-    def __init__(self, id: _Optional[str] = ...) -> None: ...
+    employee: FlowsReadResponseAssignmentEmployee
+    weapon: FlowsReadResponseAssignmentWeapon
+    ammo: FlowsReadResponseAssignmentAmmo
+    dutyPost: str
+    ammoCount: int
+    def __init__(self, id: _Optional[str] = ..., employee: _Optional[_Union[FlowsReadResponseAssignmentEmployee, _Mapping]] = ..., weapon: _Optional[_Union[FlowsReadResponseAssignmentWeapon, _Mapping]] = ..., ammo: _Optional[_Union[FlowsReadResponseAssignmentAmmo, _Mapping]] = ..., dutyPost: _Optional[str] = ..., ammoCount: _Optional[int] = ...) -> None: ...
 
 class FlowsReadResponseWeaponEntry(_message.Message):
     __slots__ = ("id", "time", "acknowledgedBy", "remarks")
@@ -1490,6 +1522,12 @@ class Flows(_message.Message):
     weaponExit: FlowsWeaponExit
     def __init__(self, id: _Optional[str] = ..., assignment: _Optional[_Union[FlowsAssignment, _Mapping]] = ..., weaponEntry: _Optional[_Union[FlowsWeaponEntry, _Mapping]] = ..., clearingEntry: _Optional[_Union[FlowsClearingEntry, _Mapping]] = ..., ammoEntry: _Optional[_Union[FlowsAmmoEntry, _Mapping]] = ..., ammoExit: _Optional[_Union[FlowsAmmoExit, _Mapping]] = ..., clearingExit: _Optional[_Union[FlowsClearingExit, _Mapping]] = ..., weaponExit: _Optional[_Union[FlowsWeaponExit, _Mapping]] = ...) -> None: ...
 
+class AlertCreateRequestEmployee(_message.Message):
+    __slots__ = ("id",)
+    ID_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    def __init__(self, id: _Optional[str] = ...) -> None: ...
+
 class AlertReadResponseEmployee(_message.Message):
     __slots__ = ("id", "name")
     ID_FIELD_NUMBER: _ClassVar[int]
@@ -1498,29 +1536,19 @@ class AlertReadResponseEmployee(_message.Message):
     name: str
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
 
-class AlertReadResponseAcknowledgedBy(_message.Message):
-    __slots__ = ("id", "name")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    name: str
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
-
 class AlertFilters(_message.Message):
-    __slots__ = ("idIn", "employeeIn", "typeIn", "timeMin", "timeMax", "acknowledgedByIn")
+    __slots__ = ("idIn", "employeeIn", "typeIn", "timeMin", "timeMax")
     IDIN_FIELD_NUMBER: _ClassVar[int]
     EMPLOYEEIN_FIELD_NUMBER: _ClassVar[int]
     TYPEIN_FIELD_NUMBER: _ClassVar[int]
     TIMEMIN_FIELD_NUMBER: _ClassVar[int]
     TIMEMAX_FIELD_NUMBER: _ClassVar[int]
-    ACKNOWLEDGEDBYIN_FIELD_NUMBER: _ClassVar[int]
     idIn: _containers.RepeatedScalarFieldContainer[str]
     employeeIn: _containers.RepeatedScalarFieldContainer[str]
     typeIn: _containers.RepeatedScalarFieldContainer[AlertType]
     timeMin: _timestamp_pb2.Timestamp
     timeMax: _timestamp_pb2.Timestamp
-    acknowledgedByIn: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., employeeIn: _Optional[_Iterable[str]] = ..., typeIn: _Optional[_Iterable[_Union[AlertType, str]]] = ..., timeMin: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., timeMax: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., acknowledgedByIn: _Optional[_Iterable[str]] = ...) -> None: ...
+    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., employeeIn: _Optional[_Iterable[str]] = ..., typeIn: _Optional[_Iterable[_Union[AlertType, str]]] = ..., timeMin: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., timeMax: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class AlertCursor(_message.Message):
     __slots__ = ("id", "filters", "sort")
@@ -1533,20 +1561,18 @@ class AlertCursor(_message.Message):
     def __init__(self, id: _Optional[str] = ..., filters: _Optional[_Union[AlertFilters, _Mapping]] = ..., sort: _Optional[_Union[AlertSort, str]] = ...) -> None: ...
 
 class Alert(_message.Message):
-    __slots__ = ("id", "employee", "type", "time", "acknowledgedBy", "remarks")
+    __slots__ = ("id", "employee", "type", "time", "remarks")
     ID_FIELD_NUMBER: _ClassVar[int]
     EMPLOYEE_FIELD_NUMBER: _ClassVar[int]
     TYPE_FIELD_NUMBER: _ClassVar[int]
     TIME_FIELD_NUMBER: _ClassVar[int]
-    ACKNOWLEDGEDBY_FIELD_NUMBER: _ClassVar[int]
     REMARKS_FIELD_NUMBER: _ClassVar[int]
     id: str
     employee: AlertEmployee
     type: AlertType
     time: _timestamp_pb2.Timestamp
-    acknowledgedBy: AlertAcknowledgedBy
     remarks: str
-    def __init__(self, id: _Optional[str] = ..., employee: _Optional[_Union[AlertEmployee, _Mapping]] = ..., type: _Optional[_Union[AlertType, str]] = ..., time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., acknowledgedBy: _Optional[_Union[AlertAcknowledgedBy, _Mapping]] = ..., remarks: _Optional[str] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., employee: _Optional[_Union[AlertEmployee, _Mapping]] = ..., type: _Optional[_Union[AlertType, str]] = ..., time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., remarks: _Optional[str] = ...) -> None: ...
 
 class FileObjectFilters(_message.Message):
     __slots__ = ("idIn", "nameMin", "nameMax", "typeIn")
@@ -1687,6 +1713,36 @@ class FlowsCreateRequestWeaponExitAcknowledgedBy(_message.Message):
     ID_FIELD_NUMBER: _ClassVar[int]
     id: str
     def __init__(self, id: _Optional[str] = ...) -> None: ...
+
+class FlowsReadResponseAssignmentEmployee(_message.Message):
+    __slots__ = ("id", "name", "photo")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    PHOTO_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    name: str
+    photo: FileObject
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., photo: _Optional[_Union[FileObject, _Mapping]] = ...) -> None: ...
+
+class FlowsReadResponseAssignmentWeapon(_message.Message):
+    __slots__ = ("id", "name", "photo")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    PHOTO_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    name: str
+    photo: FileObject
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., photo: _Optional[_Union[FileObject, _Mapping]] = ...) -> None: ...
+
+class FlowsReadResponseAssignmentAmmo(_message.Message):
+    __slots__ = ("id", "name", "photo")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    PHOTO_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    name: str
+    photo: FileObject
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., photo: _Optional[_Union[FileObject, _Mapping]] = ...) -> None: ...
 
 class FlowsReadResponseWeaponEntryAcknowledgedBy(_message.Message):
     __slots__ = ("id", "name")
@@ -1855,14 +1911,6 @@ class FlowsWeaponExit(_message.Message):
     def __init__(self, id: _Optional[str] = ..., time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., acknowledgedBy: _Optional[_Union[FlowsWeaponExitAcknowledgedBy, _Mapping]] = ..., remarks: _Optional[str] = ...) -> None: ...
 
 class AlertEmployee(_message.Message):
-    __slots__ = ("id", "name")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    name: str
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
-
-class AlertAcknowledgedBy(_message.Message):
     __slots__ = ("id", "name")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]

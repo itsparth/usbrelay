@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+from diskcache import Cache
 import grpc
 
 from root.message_pb2 import Position
@@ -29,3 +30,20 @@ DefaultDuration: float = 1
 GrpcServerAddress: str = "localhost:50051"
 
 GrpcChannel = grpc.insecure_channel(GrpcServerAddress)
+
+DeviceIp: str = "192.168.22.55"
+
+PositionPortMap: dict[Position, int] = {
+    Position.Position_weapon: 5000,
+    Position.Position_ammo: 5001,
+    Position.Position_clearing: 5002,
+}
+
+
+PositionCacheMap: dict[Position, Cache] = {
+    Position.Position_weapon: Cache("weapon"),
+    Position.Position_ammo: Cache("ammo"),
+    Position.Position_clearing: Cache("clearing"),
+}
+
+MaxEventsFetch = 100

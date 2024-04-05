@@ -62,6 +62,7 @@ service FlowsService {
   rpc flowsListen (OkMessage) returns (stream FlowsReadResponse);
 }
 service AlertService {
+  rpc alertCreate (AlertCreateRequest) returns (IdMessage);
   rpc alertRead (IdMessage) returns (AlertReadResponse);
   rpc alertList (AlertListRequest) returns (AlertListResponse);
 }
