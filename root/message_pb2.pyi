@@ -10,8 +10,8 @@ DESCRIPTOR: _descriptor.FileDescriptor
 class EmployeeSort(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     employeeSort_unspecified: _ClassVar[EmployeeSort]
-    employeeSort_matrixIdAsc: _ClassVar[EmployeeSort]
-    employeeSort_matrixIdDesc: _ClassVar[EmployeeSort]
+    employeeSort_biometricsIdAsc: _ClassVar[EmployeeSort]
+    employeeSort_biometricsIdDesc: _ClassVar[EmployeeSort]
     employeeSort_nameAsc: _ClassVar[EmployeeSort]
     employeeSort_nameDesc: _ClassVar[EmployeeSort]
     employeeSort_rankAsc: _ClassVar[EmployeeSort]
@@ -70,30 +70,13 @@ class Position(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     Position_clearing: _ClassVar[Position]
     Position_ammo: _ClassVar[Position]
 
-class AlertType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = ()
-    alertType_unspecified: _ClassVar[AlertType]
-    alertType_skipWeaponEntry: _ClassVar[AlertType]
-    alertType_skipClearingEntry: _ClassVar[AlertType]
-    alertType_skipAmmoEntry: _ClassVar[AlertType]
-    alertType_skipAmmoExit: _ClassVar[AlertType]
-    alertType_skipClearingExit: _ClassVar[AlertType]
-    alertType_skipWeaponExit: _ClassVar[AlertType]
-
 class AlertSort(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     alertSort_unspecified: _ClassVar[AlertSort]
+    alertSort_alertTypeAsc: _ClassVar[AlertSort]
+    alertSort_alertTypeDesc: _ClassVar[AlertSort]
     alertSort_timeAsc: _ClassVar[AlertSort]
     alertSort_timeDesc: _ClassVar[AlertSort]
-
-class FileType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = ()
-    fileType_unspecified: _ClassVar[FileType]
-    fileType_image: _ClassVar[FileType]
-    fileType_pdf: _ClassVar[FileType]
-    fileType_video: _ClassVar[FileType]
-    fileType_audio: _ClassVar[FileType]
-    fileType_text: _ClassVar[FileType]
 
 class FileObjectSort(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -101,8 +84,8 @@ class FileObjectSort(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     fileObjectSort_nameAsc: _ClassVar[FileObjectSort]
     fileObjectSort_nameDesc: _ClassVar[FileObjectSort]
 employeeSort_unspecified: EmployeeSort
-employeeSort_matrixIdAsc: EmployeeSort
-employeeSort_matrixIdDesc: EmployeeSort
+employeeSort_biometricsIdAsc: EmployeeSort
+employeeSort_biometricsIdDesc: EmployeeSort
 employeeSort_nameAsc: EmployeeSort
 employeeSort_nameDesc: EmployeeSort
 employeeSort_rankAsc: EmployeeSort
@@ -136,37 +119,26 @@ Position_unspecified: Position
 Position_weapon: Position
 Position_clearing: Position
 Position_ammo: Position
-alertType_unspecified: AlertType
-alertType_skipWeaponEntry: AlertType
-alertType_skipClearingEntry: AlertType
-alertType_skipAmmoEntry: AlertType
-alertType_skipAmmoExit: AlertType
-alertType_skipClearingExit: AlertType
-alertType_skipWeaponExit: AlertType
 alertSort_unspecified: AlertSort
+alertSort_alertTypeAsc: AlertSort
+alertSort_alertTypeDesc: AlertSort
 alertSort_timeAsc: AlertSort
 alertSort_timeDesc: AlertSort
-fileType_unspecified: FileType
-fileType_image: FileType
-fileType_pdf: FileType
-fileType_video: FileType
-fileType_audio: FileType
-fileType_text: FileType
 fileObjectSort_unspecified: FileObjectSort
 fileObjectSort_nameAsc: FileObjectSort
 fileObjectSort_nameDesc: FileObjectSort
 
 class EmployeeCreateRequest(_message.Message):
-    __slots__ = ("matrixId", "name", "rank", "photo")
-    MATRIXID_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("biometricsId", "name", "rank", "photo")
+    BIOMETRICSID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     RANK_FIELD_NUMBER: _ClassVar[int]
     PHOTO_FIELD_NUMBER: _ClassVar[int]
-    matrixId: int
+    biometricsId: int
     name: str
     rank: str
     photo: EmployeeCreateRequestPhoto
-    def __init__(self, matrixId: _Optional[int] = ..., name: _Optional[str] = ..., rank: _Optional[str] = ..., photo: _Optional[_Union[EmployeeCreateRequestPhoto, _Mapping]] = ...) -> None: ...
+    def __init__(self, biometricsId: _Optional[int] = ..., name: _Optional[str] = ..., rank: _Optional[str] = ..., photo: _Optional[_Union[EmployeeCreateRequestPhoto, _Mapping]] = ...) -> None: ...
 
 class IdMessage(_message.Message):
     __slots__ = ("id",)
@@ -175,32 +147,32 @@ class IdMessage(_message.Message):
     def __init__(self, id: _Optional[str] = ...) -> None: ...
 
 class EmployeeReadResponse(_message.Message):
-    __slots__ = ("id", "matrixId", "name", "rank", "photo")
+    __slots__ = ("id", "biometricsId", "name", "rank", "photo")
     ID_FIELD_NUMBER: _ClassVar[int]
-    MATRIXID_FIELD_NUMBER: _ClassVar[int]
+    BIOMETRICSID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     RANK_FIELD_NUMBER: _ClassVar[int]
     PHOTO_FIELD_NUMBER: _ClassVar[int]
     id: str
-    matrixId: int
+    biometricsId: int
     name: str
     rank: str
     photo: EmployeeReadResponsePhoto
-    def __init__(self, id: _Optional[str] = ..., matrixId: _Optional[int] = ..., name: _Optional[str] = ..., rank: _Optional[str] = ..., photo: _Optional[_Union[EmployeeReadResponsePhoto, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., biometricsId: _Optional[int] = ..., name: _Optional[str] = ..., rank: _Optional[str] = ..., photo: _Optional[_Union[EmployeeReadResponsePhoto, _Mapping]] = ...) -> None: ...
 
 class EmployeeUpdateRequest(_message.Message):
-    __slots__ = ("id", "matrixId", "name", "rank", "photo")
+    __slots__ = ("id", "biometricsId", "name", "rank", "photo")
     ID_FIELD_NUMBER: _ClassVar[int]
-    MATRIXID_FIELD_NUMBER: _ClassVar[int]
+    BIOMETRICSID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     RANK_FIELD_NUMBER: _ClassVar[int]
     PHOTO_FIELD_NUMBER: _ClassVar[int]
     id: str
-    matrixId: int
+    biometricsId: int
     name: str
     rank: str
     photo: EmployeeUpdateRequestPhoto
-    def __init__(self, id: _Optional[str] = ..., matrixId: _Optional[int] = ..., name: _Optional[str] = ..., rank: _Optional[str] = ..., photo: _Optional[_Union[EmployeeUpdateRequestPhoto, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., biometricsId: _Optional[int] = ..., name: _Optional[str] = ..., rank: _Optional[str] = ..., photo: _Optional[_Union[EmployeeUpdateRequestPhoto, _Mapping]] = ...) -> None: ...
 
 class OkMessage(_message.Message):
     __slots__ = ()
@@ -679,12 +651,12 @@ class FlowsListResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[Flows, _Mapping]]] = ..., cursor: _Optional[_Union[FlowsCursor, _Mapping]] = ...) -> None: ...
 
 class FlowsOnScanRequest(_message.Message):
-    __slots__ = ("matrixId", "position")
-    MATRIXID_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("biometricsId", "position")
+    BIOMETRICSID_FIELD_NUMBER: _ClassVar[int]
     POSITION_FIELD_NUMBER: _ClassVar[int]
-    matrixId: int
+    biometricsId: int
     position: Position
-    def __init__(self, matrixId: _Optional[int] = ..., position: _Optional[_Union[Position, str]] = ...) -> None: ...
+    def __init__(self, biometricsId: _Optional[int] = ..., position: _Optional[_Union[Position, str]] = ...) -> None: ...
 
 class FlowsOnScanResponse(_message.Message):
     __slots__ = ("position", "red", "green", "buzzer")
@@ -699,30 +671,30 @@ class FlowsOnScanResponse(_message.Message):
     def __init__(self, position: _Optional[_Union[Position, str]] = ..., red: bool = ..., green: bool = ..., buzzer: bool = ...) -> None: ...
 
 class AlertCreateRequest(_message.Message):
-    __slots__ = ("employee", "type", "time", "remarks")
+    __slots__ = ("employee", "alertType", "time", "remarks")
     EMPLOYEE_FIELD_NUMBER: _ClassVar[int]
-    TYPE_FIELD_NUMBER: _ClassVar[int]
+    ALERTTYPE_FIELD_NUMBER: _ClassVar[int]
     TIME_FIELD_NUMBER: _ClassVar[int]
     REMARKS_FIELD_NUMBER: _ClassVar[int]
     employee: AlertCreateRequestEmployee
-    type: AlertType
+    alertType: str
     time: _timestamp_pb2.Timestamp
     remarks: str
-    def __init__(self, employee: _Optional[_Union[AlertCreateRequestEmployee, _Mapping]] = ..., type: _Optional[_Union[AlertType, str]] = ..., time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., remarks: _Optional[str] = ...) -> None: ...
+    def __init__(self, employee: _Optional[_Union[AlertCreateRequestEmployee, _Mapping]] = ..., alertType: _Optional[str] = ..., time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., remarks: _Optional[str] = ...) -> None: ...
 
 class AlertReadResponse(_message.Message):
-    __slots__ = ("id", "employee", "type", "time", "remarks")
+    __slots__ = ("id", "employee", "alertType", "time", "remarks")
     ID_FIELD_NUMBER: _ClassVar[int]
     EMPLOYEE_FIELD_NUMBER: _ClassVar[int]
-    TYPE_FIELD_NUMBER: _ClassVar[int]
+    ALERTTYPE_FIELD_NUMBER: _ClassVar[int]
     TIME_FIELD_NUMBER: _ClassVar[int]
     REMARKS_FIELD_NUMBER: _ClassVar[int]
     id: str
     employee: AlertReadResponseEmployee
-    type: AlertType
+    alertType: str
     time: _timestamp_pb2.Timestamp
     remarks: str
-    def __init__(self, id: _Optional[str] = ..., employee: _Optional[_Union[AlertReadResponseEmployee, _Mapping]] = ..., type: _Optional[_Union[AlertType, str]] = ..., time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., remarks: _Optional[str] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., employee: _Optional[_Union[AlertReadResponseEmployee, _Mapping]] = ..., alertType: _Optional[str] = ..., time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., remarks: _Optional[str] = ...) -> None: ...
 
 class AlertListRequest(_message.Message):
     __slots__ = ("filters", "search", "sort", "cursor", "limit")
@@ -761,32 +733,26 @@ class SignInResponse(_message.Message):
     def __init__(self, token: _Optional[str] = ...) -> None: ...
 
 class FileObjectCreateRequest(_message.Message):
-    __slots__ = ("name", "type")
+    __slots__ = ("name",)
     NAME_FIELD_NUMBER: _ClassVar[int]
-    TYPE_FIELD_NUMBER: _ClassVar[int]
     name: str
-    type: FileType
-    def __init__(self, name: _Optional[str] = ..., type: _Optional[_Union[FileType, str]] = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ...) -> None: ...
 
 class FileObjectReadResponse(_message.Message):
-    __slots__ = ("id", "name", "type")
+    __slots__ = ("id", "name")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
-    TYPE_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
-    type: FileType
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., type: _Optional[_Union[FileType, str]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
 
 class FileObjectUpdateRequest(_message.Message):
-    __slots__ = ("id", "name", "type")
+    __slots__ = ("id", "name")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
-    TYPE_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
-    type: FileType
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., type: _Optional[_Union[FileType, str]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
 
 class FileObjectListRequest(_message.Message):
     __slots__ = ("filters", "search", "sort", "cursor", "limit")
@@ -831,24 +797,22 @@ class EmployeeUpdateRequestPhoto(_message.Message):
     def __init__(self, id: _Optional[str] = ...) -> None: ...
 
 class EmployeeFilters(_message.Message):
-    __slots__ = ("idIn", "matrixIdMin", "matrixIdMax", "nameMin", "nameMax", "rankMin", "rankMax", "photoIn")
+    __slots__ = ("idIn", "biometricsIdMin", "biometricsIdMax", "nameMin", "nameMax", "rankMin", "rankMax")
     IDIN_FIELD_NUMBER: _ClassVar[int]
-    MATRIXIDMIN_FIELD_NUMBER: _ClassVar[int]
-    MATRIXIDMAX_FIELD_NUMBER: _ClassVar[int]
+    BIOMETRICSIDMIN_FIELD_NUMBER: _ClassVar[int]
+    BIOMETRICSIDMAX_FIELD_NUMBER: _ClassVar[int]
     NAMEMIN_FIELD_NUMBER: _ClassVar[int]
     NAMEMAX_FIELD_NUMBER: _ClassVar[int]
     RANKMIN_FIELD_NUMBER: _ClassVar[int]
     RANKMAX_FIELD_NUMBER: _ClassVar[int]
-    PHOTOIN_FIELD_NUMBER: _ClassVar[int]
     idIn: _containers.RepeatedScalarFieldContainer[str]
-    matrixIdMin: int
-    matrixIdMax: int
+    biometricsIdMin: int
+    biometricsIdMax: int
     nameMin: str
     nameMax: str
     rankMin: str
     rankMax: str
-    photoIn: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., matrixIdMin: _Optional[int] = ..., matrixIdMax: _Optional[int] = ..., nameMin: _Optional[str] = ..., nameMax: _Optional[str] = ..., rankMin: _Optional[str] = ..., rankMax: _Optional[str] = ..., photoIn: _Optional[_Iterable[str]] = ...) -> None: ...
+    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., biometricsIdMin: _Optional[int] = ..., biometricsIdMax: _Optional[int] = ..., nameMin: _Optional[str] = ..., nameMax: _Optional[str] = ..., rankMin: _Optional[str] = ..., rankMax: _Optional[str] = ...) -> None: ...
 
 class EmployeeCursor(_message.Message):
     __slots__ = ("id", "filters", "sort")
@@ -861,18 +825,18 @@ class EmployeeCursor(_message.Message):
     def __init__(self, id: _Optional[str] = ..., filters: _Optional[_Union[EmployeeFilters, _Mapping]] = ..., sort: _Optional[_Union[EmployeeSort, str]] = ...) -> None: ...
 
 class Employee(_message.Message):
-    __slots__ = ("id", "matrixId", "name", "rank", "photo")
+    __slots__ = ("id", "biometricsId", "name", "rank", "photo")
     ID_FIELD_NUMBER: _ClassVar[int]
-    MATRIXID_FIELD_NUMBER: _ClassVar[int]
+    BIOMETRICSID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     RANK_FIELD_NUMBER: _ClassVar[int]
     PHOTO_FIELD_NUMBER: _ClassVar[int]
     id: str
-    matrixId: int
+    biometricsId: int
     name: str
     rank: str
     photo: EmployeePhoto
-    def __init__(self, id: _Optional[str] = ..., matrixId: _Optional[int] = ..., name: _Optional[str] = ..., rank: _Optional[str] = ..., photo: _Optional[_Union[EmployeePhoto, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., biometricsId: _Optional[int] = ..., name: _Optional[str] = ..., rank: _Optional[str] = ..., photo: _Optional[_Union[EmployeePhoto, _Mapping]] = ...) -> None: ...
 
 class WeaponCreateRequestPhoto(_message.Message):
     __slots__ = ("id",)
@@ -895,16 +859,14 @@ class WeaponUpdateRequestPhoto(_message.Message):
     def __init__(self, id: _Optional[str] = ...) -> None: ...
 
 class WeaponFilters(_message.Message):
-    __slots__ = ("idIn", "nameMin", "nameMax", "photoIn")
+    __slots__ = ("idIn", "nameMin", "nameMax")
     IDIN_FIELD_NUMBER: _ClassVar[int]
     NAMEMIN_FIELD_NUMBER: _ClassVar[int]
     NAMEMAX_FIELD_NUMBER: _ClassVar[int]
-    PHOTOIN_FIELD_NUMBER: _ClassVar[int]
     idIn: _containers.RepeatedScalarFieldContainer[str]
     nameMin: str
     nameMax: str
-    photoIn: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., nameMin: _Optional[str] = ..., nameMax: _Optional[str] = ..., photoIn: _Optional[_Iterable[str]] = ...) -> None: ...
+    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., nameMin: _Optional[str] = ..., nameMax: _Optional[str] = ...) -> None: ...
 
 class WeaponCursor(_message.Message):
     __slots__ = ("id", "filters", "sort")
@@ -947,16 +909,14 @@ class AmmoUpdateRequestPhoto(_message.Message):
     def __init__(self, id: _Optional[str] = ...) -> None: ...
 
 class AmmoFilters(_message.Message):
-    __slots__ = ("idIn", "nameMin", "nameMax", "photoIn")
+    __slots__ = ("idIn", "nameMin", "nameMax")
     IDIN_FIELD_NUMBER: _ClassVar[int]
     NAMEMIN_FIELD_NUMBER: _ClassVar[int]
     NAMEMAX_FIELD_NUMBER: _ClassVar[int]
-    PHOTOIN_FIELD_NUMBER: _ClassVar[int]
     idIn: _containers.RepeatedScalarFieldContainer[str]
     nameMin: str
     nameMax: str
-    photoIn: _containers.RepeatedScalarFieldContainer[str]
-    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., nameMin: _Optional[str] = ..., nameMax: _Optional[str] = ..., photoIn: _Optional[_Iterable[str]] = ...) -> None: ...
+    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., nameMin: _Optional[str] = ..., nameMax: _Optional[str] = ...) -> None: ...
 
 class AmmoCursor(_message.Message):
     __slots__ = ("id", "filters", "sort")
@@ -1537,18 +1497,20 @@ class AlertReadResponseEmployee(_message.Message):
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
 
 class AlertFilters(_message.Message):
-    __slots__ = ("idIn", "employeeIn", "typeIn", "timeMin", "timeMax")
+    __slots__ = ("idIn", "employeeIn", "alertTypeMin", "alertTypeMax", "timeMin", "timeMax")
     IDIN_FIELD_NUMBER: _ClassVar[int]
     EMPLOYEEIN_FIELD_NUMBER: _ClassVar[int]
-    TYPEIN_FIELD_NUMBER: _ClassVar[int]
+    ALERTTYPEMIN_FIELD_NUMBER: _ClassVar[int]
+    ALERTTYPEMAX_FIELD_NUMBER: _ClassVar[int]
     TIMEMIN_FIELD_NUMBER: _ClassVar[int]
     TIMEMAX_FIELD_NUMBER: _ClassVar[int]
     idIn: _containers.RepeatedScalarFieldContainer[str]
     employeeIn: _containers.RepeatedScalarFieldContainer[str]
-    typeIn: _containers.RepeatedScalarFieldContainer[AlertType]
+    alertTypeMin: str
+    alertTypeMax: str
     timeMin: _timestamp_pb2.Timestamp
     timeMax: _timestamp_pb2.Timestamp
-    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., employeeIn: _Optional[_Iterable[str]] = ..., typeIn: _Optional[_Iterable[_Union[AlertType, str]]] = ..., timeMin: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., timeMax: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
+    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., employeeIn: _Optional[_Iterable[str]] = ..., alertTypeMin: _Optional[str] = ..., alertTypeMax: _Optional[str] = ..., timeMin: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., timeMax: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class AlertCursor(_message.Message):
     __slots__ = ("id", "filters", "sort")
@@ -1561,30 +1523,28 @@ class AlertCursor(_message.Message):
     def __init__(self, id: _Optional[str] = ..., filters: _Optional[_Union[AlertFilters, _Mapping]] = ..., sort: _Optional[_Union[AlertSort, str]] = ...) -> None: ...
 
 class Alert(_message.Message):
-    __slots__ = ("id", "employee", "type", "time", "remarks")
+    __slots__ = ("id", "employee", "alertType", "time", "remarks")
     ID_FIELD_NUMBER: _ClassVar[int]
     EMPLOYEE_FIELD_NUMBER: _ClassVar[int]
-    TYPE_FIELD_NUMBER: _ClassVar[int]
+    ALERTTYPE_FIELD_NUMBER: _ClassVar[int]
     TIME_FIELD_NUMBER: _ClassVar[int]
     REMARKS_FIELD_NUMBER: _ClassVar[int]
     id: str
     employee: AlertEmployee
-    type: AlertType
+    alertType: str
     time: _timestamp_pb2.Timestamp
     remarks: str
-    def __init__(self, id: _Optional[str] = ..., employee: _Optional[_Union[AlertEmployee, _Mapping]] = ..., type: _Optional[_Union[AlertType, str]] = ..., time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., remarks: _Optional[str] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., employee: _Optional[_Union[AlertEmployee, _Mapping]] = ..., alertType: _Optional[str] = ..., time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., remarks: _Optional[str] = ...) -> None: ...
 
 class FileObjectFilters(_message.Message):
-    __slots__ = ("idIn", "nameMin", "nameMax", "typeIn")
+    __slots__ = ("idIn", "nameMin", "nameMax")
     IDIN_FIELD_NUMBER: _ClassVar[int]
     NAMEMIN_FIELD_NUMBER: _ClassVar[int]
     NAMEMAX_FIELD_NUMBER: _ClassVar[int]
-    TYPEIN_FIELD_NUMBER: _ClassVar[int]
     idIn: _containers.RepeatedScalarFieldContainer[str]
     nameMin: str
     nameMax: str
-    typeIn: _containers.RepeatedScalarFieldContainer[FileType]
-    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., nameMin: _Optional[str] = ..., nameMax: _Optional[str] = ..., typeIn: _Optional[_Iterable[_Union[FileType, str]]] = ...) -> None: ...
+    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., nameMin: _Optional[str] = ..., nameMax: _Optional[str] = ...) -> None: ...
 
 class FileObjectCursor(_message.Message):
     __slots__ = ("id", "filters", "sort")
@@ -1597,14 +1557,12 @@ class FileObjectCursor(_message.Message):
     def __init__(self, id: _Optional[str] = ..., filters: _Optional[_Union[FileObjectFilters, _Mapping]] = ..., sort: _Optional[_Union[FileObjectSort, str]] = ...) -> None: ...
 
 class FileObject(_message.Message):
-    __slots__ = ("id", "name", "type")
+    __slots__ = ("id", "name")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
-    TYPE_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
-    type: FileType
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., type: _Optional[_Union[FileType, str]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
 
 class EmployeePhoto(_message.Message):
     __slots__ = ("id", "name")

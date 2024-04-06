@@ -2,27 +2,27 @@ syntax = "proto3";
 import "google/protobuf/timestamp.proto";
 
 message EmployeeCreateRequest {
-  int32 matrixId = 1;
+  int32 biometricsId = 1;
   string name = 2;
   string rank = 3;
-  EmployeeCreateRequestPhoto photo = 4;
+  optional EmployeeCreateRequestPhoto photo = 4;
 }
 message IdMessage {
   string id = 1;
 }
 message EmployeeReadResponse {
   string id = 1;
-  int32 matrixId = 2;
+  int32 biometricsId = 2;
   string name = 3;
   string rank = 4;
-  EmployeeReadResponsePhoto photo = 5;
+  optional EmployeeReadResponsePhoto photo = 5;
 }
 message EmployeeUpdateRequest {
   string id = 1;
-  int32 matrixId = 2;
+  int32 biometricsId = 2;
   string name = 3;
   string rank = 4;
-  EmployeeUpdateRequestPhoto photo = 5;
+  optional EmployeeUpdateRequestPhoto photo = 5;
 }
 message OkMessage {
 }
@@ -39,17 +39,17 @@ message EmployeeListResponse {
 }
 message WeaponCreateRequest {
   string name = 1;
-  WeaponCreateRequestPhoto photo = 2;
+  optional WeaponCreateRequestPhoto photo = 2;
 }
 message WeaponReadResponse {
   string id = 1;
   string name = 2;
-  WeaponReadResponsePhoto photo = 3;
+  optional WeaponReadResponsePhoto photo = 3;
 }
 message WeaponUpdateRequest {
   string id = 1;
   string name = 2;
-  WeaponUpdateRequestPhoto photo = 3;
+  optional WeaponUpdateRequestPhoto photo = 3;
 }
 message WeaponListRequest {
   optional WeaponFilters filters = 1;
@@ -64,17 +64,17 @@ message WeaponListResponse {
 }
 message AmmoCreateRequest {
   string name = 1;
-  AmmoCreateRequestPhoto photo = 2;
+  optional AmmoCreateRequestPhoto photo = 2;
 }
 message AmmoReadResponse {
   string id = 1;
   string name = 2;
-  AmmoReadResponsePhoto photo = 3;
+  optional AmmoReadResponsePhoto photo = 3;
 }
 message AmmoUpdateRequest {
   string id = 1;
   string name = 2;
-  AmmoUpdateRequestPhoto photo = 3;
+  optional AmmoUpdateRequestPhoto photo = 3;
 }
 message AmmoListRequest {
   optional AmmoFilters filters = 1;
@@ -263,7 +263,7 @@ message FlowsListResponse {
   FlowsCursor cursor = 2;
 }
 message FlowsOnScanRequest {
-  int32 matrixId = 1;
+  int32 biometricsId = 1;
   Position position = 2;
 }
 message FlowsOnScanResponse {
@@ -274,14 +274,14 @@ message FlowsOnScanResponse {
 }
 message AlertCreateRequest {
   AlertCreateRequestEmployee employee = 1;
-  AlertType type = 2;
+  string alertType = 2;
   google.protobuf.Timestamp time = 3;
   optional string remarks = 4;
 }
 message AlertReadResponse {
   string id = 1;
   AlertReadResponseEmployee employee = 2;
-  AlertType type = 3;
+  string alertType = 3;
   google.protobuf.Timestamp time = 4;
   optional string remarks = 5;
 }
@@ -305,17 +305,14 @@ message SignInResponse {
 }
 message FileObjectCreateRequest {
   string name = 1;
-  FileType type = 2;
 }
 message FileObjectReadResponse {
   string id = 1;
   string name = 2;
-  FileType type = 3;
 }
 message FileObjectUpdateRequest {
   string id = 1;
   string name = 2;
-  FileType type = 3;
 }
 message FileObjectListRequest {
   optional FileObjectFilters filters = 1;
@@ -340,13 +337,12 @@ message EmployeeUpdateRequestPhoto {
 }
 message EmployeeFilters {
   repeated string idIn = 1;
-  optional int32 matrixIdMin = 2;
-  optional int32 matrixIdMax = 3;
+  optional int32 biometricsIdMin = 2;
+  optional int32 biometricsIdMax = 3;
   optional string nameMin = 4;
   optional string nameMax = 5;
   optional string rankMin = 6;
   optional string rankMax = 7;
-  repeated string photoIn = 8;
 }
 message EmployeeCursor {
   string id = 1;
@@ -355,10 +351,10 @@ message EmployeeCursor {
 }
 message Employee {
   string id = 1;
-  int32 matrixId = 2;
+  int32 biometricsId = 2;
   string name = 3;
   string rank = 4;
-  EmployeePhoto photo = 5;
+  optional EmployeePhoto photo = 5;
 }
 message WeaponCreateRequestPhoto {
   string id = 1;
@@ -374,7 +370,6 @@ message WeaponFilters {
   repeated string idIn = 1;
   optional string nameMin = 2;
   optional string nameMax = 3;
-  repeated string photoIn = 4;
 }
 message WeaponCursor {
   string id = 1;
@@ -384,7 +379,7 @@ message WeaponCursor {
 message Weapon {
   string id = 1;
   string name = 2;
-  WeaponPhoto photo = 3;
+  optional WeaponPhoto photo = 3;
 }
 message AmmoCreateRequestPhoto {
   string id = 1;
@@ -400,7 +395,6 @@ message AmmoFilters {
   repeated string idIn = 1;
   optional string nameMin = 2;
   optional string nameMax = 3;
-  repeated string photoIn = 4;
 }
 message AmmoCursor {
   string id = 1;
@@ -410,7 +404,7 @@ message AmmoCursor {
 message Ammo {
   string id = 1;
   string name = 2;
-  AmmoPhoto photo = 3;
+  optional AmmoPhoto photo = 3;
 }
 message AssignmentCreateRequestEmployee {
   string id = 1;
@@ -694,9 +688,10 @@ message AlertReadResponseEmployee {
 message AlertFilters {
   repeated string idIn = 1;
   repeated string employeeIn = 2;
-  repeated AlertType typeIn = 3;
-  optional google.protobuf.Timestamp timeMin = 4;
-  optional google.protobuf.Timestamp timeMax = 5;
+  optional string alertTypeMin = 3;
+  optional string alertTypeMax = 4;
+  optional google.protobuf.Timestamp timeMin = 5;
+  optional google.protobuf.Timestamp timeMax = 6;
 }
 message AlertCursor {
   string id = 1;
@@ -706,7 +701,7 @@ message AlertCursor {
 message Alert {
   string id = 1;
   AlertEmployee employee = 2;
-  AlertType type = 3;
+  string alertType = 3;
   google.protobuf.Timestamp time = 4;
   optional string remarks = 5;
 }
@@ -714,7 +709,6 @@ message FileObjectFilters {
   repeated string idIn = 1;
   optional string nameMin = 2;
   optional string nameMax = 3;
-  repeated FileType typeIn = 4;
 }
 message FileObjectCursor {
   string id = 1;
@@ -724,7 +718,6 @@ message FileObjectCursor {
 message FileObject {
   string id = 1;
   string name = 2;
-  FileType type = 3;
 }
 message EmployeePhoto {
   string id = 1;
@@ -783,17 +776,17 @@ message FlowsCreateRequestWeaponExitAcknowledgedBy {
 message FlowsReadResponseAssignmentEmployee {
   string id = 1;
   string name = 2;
-  FileObject photo = 3;
+  optional FileObject photo = 3;
 }
 message FlowsReadResponseAssignmentWeapon {
   string id = 1;
   string name = 2;
-  FileObject photo = 3;
+  optional FileObject photo = 3;
 }
 message FlowsReadResponseAssignmentAmmo {
   string id = 1;
   string name = 2;
-  FileObject photo = 3;
+  optional FileObject photo = 3;
 }
 message FlowsReadResponseWeaponEntryAcknowledgedBy {
   string id = 1;
@@ -908,8 +901,8 @@ message FlowsWeaponExitAcknowledgedBy {
 }
 enum EmployeeSort {
   employeeSort_unspecified = 0;
-  employeeSort_matrixIdAsc = 1;
-  employeeSort_matrixIdDesc = 2;
+  employeeSort_biometricsIdAsc = 1;
+  employeeSort_biometricsIdDesc = 2;
   employeeSort_nameAsc = 3;
   employeeSort_nameDesc = 4;
   employeeSort_rankAsc = 5;
@@ -960,27 +953,12 @@ enum Position {
   Position_clearing = 2;
   Position_ammo = 3;
 }
-enum AlertType {
-  alertType_unspecified = 0;
-  alertType_skipWeaponEntry = 1;
-  alertType_skipClearingEntry = 2;
-  alertType_skipAmmoEntry = 3;
-  alertType_skipAmmoExit = 4;
-  alertType_skipClearingExit = 5;
-  alertType_skipWeaponExit = 6;
-}
 enum AlertSort {
   alertSort_unspecified = 0;
-  alertSort_timeAsc = 1;
-  alertSort_timeDesc = 2;
-}
-enum FileType {
-  fileType_unspecified = 0;
-  fileType_image = 1;
-  fileType_pdf = 2;
-  fileType_video = 3;
-  fileType_audio = 4;
-  fileType_text = 5;
+  alertSort_alertTypeAsc = 1;
+  alertSort_alertTypeDesc = 2;
+  alertSort_timeAsc = 3;
+  alertSort_timeDesc = 4;
 }
 enum FileObjectSort {
   fileObjectSort_unspecified = 0;

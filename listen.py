@@ -1,7 +1,7 @@
 import signal
 import threading
 import time
-from typing import List
+from typing import Dict, List
 
 import requests
 from config import (
@@ -83,6 +83,9 @@ def pollPosition(position: Position, ev: threading.Event):
     if not ev.is_set():
         print(f"Polling for position: {position} from {lastROC}:{lastSeqNo}")
     # Start polling
+
+    lastCallCache: Dict[int, time.time] = {}
+
     while not ev.is_set():
         try:
             pollUri = f"{pollUriBase}&roll-over-count={lastROC}&seq-number={lastSeqNo}"
@@ -90,9 +93,9 @@ def pollPosition(position: Position, ev: threading.Event):
             events = parseEvents(resp.text)
 
             if len(events) > 0:
-                print(f"{position} Events: {len(events)}")
+                print(f"\n{position} Events: {len(events)}", end="")
                 for event in events:
-                    print(f"{position} Details: {event.details}")
+                    print(f"\n{position} Details: {event.details}", end="")
             else:
                 print(f".", end="")
                 time.sleep(SleepInterval)
@@ -104,7 +107,14 @@ def pollPosition(position: Position, ev: threading.Event):
             cache["lastSeqNo"] = lastSeqNo
 
             for event in events:
-                onMatrixScan(int(event.detail1), position)
+                matrixId = int(event.detail1)
+                if (
+                    matrixId in lastCallCache
+                    and time.time() - lastCallCache[matrixId] < 0.5
+                ):
+                    continue
+                lastCallCache[matrixId] = time.time()
+                onMatrixScan(matrixId, position)
 
             time.sleep(SleepInterval)
 
