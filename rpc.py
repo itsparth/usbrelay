@@ -6,7 +6,7 @@ from root.service_pb2_grpc import FlowsServiceStub
 
 def onFlowsScan(matrixId: int, position: Position) -> FlowsOnScanResponse:
     return FlowsServiceStub(GrpcChannel).flowsOnScan(
-        FlowsOnScanRequest(matrixId=matrixId, position=position.grpc)
+        FlowsOnScanRequest(biometricsId=matrixId, position=position.grpc)
     )
 
 
