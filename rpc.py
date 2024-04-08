@@ -15,9 +15,10 @@ def onMatrixScan(matrixId: int, position: Position):
     resp = onFlowsScan(matrixId, position)
     pinMap = PositionPinMap[position]
 
+    if resp.green:
+        turnOnForAsync(pinMap.green, DefaultDuration)
+        return
     if resp.buzzer:
         turnOnForAsync(pinMap.buzzer, DefaultDuration)
     if resp.red:
         turnOnForAsync(pinMap.red, DefaultDuration)
-    if resp.green:
-        turnOnForAsync(pinMap.green, DefaultDuration)
