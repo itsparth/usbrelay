@@ -18,7 +18,7 @@ def turnOn(index: int):
 def turnOff(index: int):
     board = boards[0]
     result = usbrelay_py.board_control(board[0], index, 0)
-    print(f"Turn on: {index} result {result}")
+    print(f"Turn off: {index} result {result}")
 
 
 def turnOnFor(index: int, duration: float):
