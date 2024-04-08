@@ -31,8 +31,8 @@ class Position(enum.Enum):
 
 PositionPinMap: Dict[Position, PinMap] = {
     Position.Position_weapon: PinMap(buzzer=1, red=2, green=3),
-    Position.Position_ammo: PinMap(buzzer=4, red=5, green=6),
-    Position.Position_clearing: PinMap(buzzer=7, red=8, green=9),
+    Position.Position_ammo: PinMap(buzzer=8, red=7, green=6),
+    Position.Position_clearing: PinMap(buzzer=4, red=4, green=5),
 }
 
 PositionUriMap: Dict[Position, str] = {
