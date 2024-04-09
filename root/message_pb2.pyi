@@ -22,12 +22,16 @@ class WeaponSort(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     weaponSort_unspecified: _ClassVar[WeaponSort]
     weaponSort_nameAsc: _ClassVar[WeaponSort]
     weaponSort_nameDesc: _ClassVar[WeaponSort]
+    weaponSort_countAsc: _ClassVar[WeaponSort]
+    weaponSort_countDesc: _ClassVar[WeaponSort]
 
 class AmmoSort(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     ammoSort_unspecified: _ClassVar[AmmoSort]
     ammoSort_nameAsc: _ClassVar[AmmoSort]
     ammoSort_nameDesc: _ClassVar[AmmoSort]
+    ammoSort_countAsc: _ClassVar[AmmoSort]
+    ammoSort_countDesc: _ClassVar[AmmoSort]
 
 class AssignmentSort(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -50,12 +54,16 @@ class CommonInfoSort(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     commonInfoSort_unspecified: _ClassVar[CommonInfoSort]
     commonInfoSort_timeAsc: _ClassVar[CommonInfoSort]
     commonInfoSort_timeDesc: _ClassVar[CommonInfoSort]
+    commonInfoSort_remarksAsc: _ClassVar[CommonInfoSort]
+    commonInfoSort_remarksDesc: _ClassVar[CommonInfoSort]
 
 class AmmoInfoSort(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     ammoInfoSort_unspecified: _ClassVar[AmmoInfoSort]
     ammoInfoSort_timeAsc: _ClassVar[AmmoInfoSort]
     ammoInfoSort_timeDesc: _ClassVar[AmmoInfoSort]
+    ammoInfoSort_remarksAsc: _ClassVar[AmmoInfoSort]
+    ammoInfoSort_remarksDesc: _ClassVar[AmmoInfoSort]
     ammoInfoSort_countAsc: _ClassVar[AmmoInfoSort]
     ammoInfoSort_countDesc: _ClassVar[AmmoInfoSort]
 
@@ -93,9 +101,13 @@ employeeSort_rankDesc: EmployeeSort
 weaponSort_unspecified: WeaponSort
 weaponSort_nameAsc: WeaponSort
 weaponSort_nameDesc: WeaponSort
+weaponSort_countAsc: WeaponSort
+weaponSort_countDesc: WeaponSort
 ammoSort_unspecified: AmmoSort
 ammoSort_nameAsc: AmmoSort
 ammoSort_nameDesc: AmmoSort
+ammoSort_countAsc: AmmoSort
+ammoSort_countDesc: AmmoSort
 assignmentSort_unspecified: AssignmentSort
 assignmentSort_dutyPostAsc: AssignmentSort
 assignmentSort_dutyPostDesc: AssignmentSort
@@ -109,9 +121,13 @@ scheduleSort_endTimeDesc: ScheduleSort
 commonInfoSort_unspecified: CommonInfoSort
 commonInfoSort_timeAsc: CommonInfoSort
 commonInfoSort_timeDesc: CommonInfoSort
+commonInfoSort_remarksAsc: CommonInfoSort
+commonInfoSort_remarksDesc: CommonInfoSort
 ammoInfoSort_unspecified: AmmoInfoSort
 ammoInfoSort_timeAsc: AmmoInfoSort
 ammoInfoSort_timeDesc: AmmoInfoSort
+ammoInfoSort_remarksAsc: AmmoInfoSort
+ammoInfoSort_remarksDesc: AmmoInfoSort
 ammoInfoSort_countAsc: AmmoInfoSort
 ammoInfoSort_countDesc: AmmoInfoSort
 flowsSort_unspecified: FlowsSort
@@ -201,32 +217,38 @@ class EmployeeListResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[Employee, _Mapping]]] = ..., cursor: _Optional[_Union[EmployeeCursor, _Mapping]] = ...) -> None: ...
 
 class WeaponCreateRequest(_message.Message):
-    __slots__ = ("name", "photo")
+    __slots__ = ("name", "count", "photo")
     NAME_FIELD_NUMBER: _ClassVar[int]
+    COUNT_FIELD_NUMBER: _ClassVar[int]
     PHOTO_FIELD_NUMBER: _ClassVar[int]
     name: str
+    count: int
     photo: WeaponCreateRequestPhoto
-    def __init__(self, name: _Optional[str] = ..., photo: _Optional[_Union[WeaponCreateRequestPhoto, _Mapping]] = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ..., count: _Optional[int] = ..., photo: _Optional[_Union[WeaponCreateRequestPhoto, _Mapping]] = ...) -> None: ...
 
 class WeaponReadResponse(_message.Message):
-    __slots__ = ("id", "name", "photo")
+    __slots__ = ("id", "name", "count", "photo")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
+    COUNT_FIELD_NUMBER: _ClassVar[int]
     PHOTO_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
+    count: int
     photo: WeaponReadResponsePhoto
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., photo: _Optional[_Union[WeaponReadResponsePhoto, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., count: _Optional[int] = ..., photo: _Optional[_Union[WeaponReadResponsePhoto, _Mapping]] = ...) -> None: ...
 
 class WeaponUpdateRequest(_message.Message):
-    __slots__ = ("id", "name", "photo")
+    __slots__ = ("id", "name", "count", "photo")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
+    COUNT_FIELD_NUMBER: _ClassVar[int]
     PHOTO_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
+    count: int
     photo: WeaponUpdateRequestPhoto
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., photo: _Optional[_Union[WeaponUpdateRequestPhoto, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., count: _Optional[int] = ..., photo: _Optional[_Union[WeaponUpdateRequestPhoto, _Mapping]] = ...) -> None: ...
 
 class WeaponListRequest(_message.Message):
     __slots__ = ("filters", "search", "sort", "cursor", "limit")
@@ -251,32 +273,38 @@ class WeaponListResponse(_message.Message):
     def __init__(self, items: _Optional[_Iterable[_Union[Weapon, _Mapping]]] = ..., cursor: _Optional[_Union[WeaponCursor, _Mapping]] = ...) -> None: ...
 
 class AmmoCreateRequest(_message.Message):
-    __slots__ = ("name", "photo")
+    __slots__ = ("name", "count", "photo")
     NAME_FIELD_NUMBER: _ClassVar[int]
+    COUNT_FIELD_NUMBER: _ClassVar[int]
     PHOTO_FIELD_NUMBER: _ClassVar[int]
     name: str
+    count: int
     photo: AmmoCreateRequestPhoto
-    def __init__(self, name: _Optional[str] = ..., photo: _Optional[_Union[AmmoCreateRequestPhoto, _Mapping]] = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ..., count: _Optional[int] = ..., photo: _Optional[_Union[AmmoCreateRequestPhoto, _Mapping]] = ...) -> None: ...
 
 class AmmoReadResponse(_message.Message):
-    __slots__ = ("id", "name", "photo")
+    __slots__ = ("id", "name", "count", "photo")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
+    COUNT_FIELD_NUMBER: _ClassVar[int]
     PHOTO_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
+    count: int
     photo: AmmoReadResponsePhoto
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., photo: _Optional[_Union[AmmoReadResponsePhoto, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., count: _Optional[int] = ..., photo: _Optional[_Union[AmmoReadResponsePhoto, _Mapping]] = ...) -> None: ...
 
 class AmmoUpdateRequest(_message.Message):
-    __slots__ = ("id", "name", "photo")
+    __slots__ = ("id", "name", "count", "photo")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
+    COUNT_FIELD_NUMBER: _ClassVar[int]
     PHOTO_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
+    count: int
     photo: AmmoUpdateRequestPhoto
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., photo: _Optional[_Union[AmmoUpdateRequestPhoto, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., count: _Optional[int] = ..., photo: _Optional[_Union[AmmoUpdateRequestPhoto, _Mapping]] = ...) -> None: ...
 
 class AmmoListRequest(_message.Message):
     __slots__ = ("filters", "search", "sort", "cursor", "limit")
@@ -451,6 +479,16 @@ class ScheduleListResponse(_message.Message):
     items: _containers.RepeatedCompositeFieldContainer[Schedule]
     cursor: ScheduleCursor
     def __init__(self, items: _Optional[_Iterable[_Union[Schedule, _Mapping]]] = ..., cursor: _Optional[_Union[ScheduleCursor, _Mapping]] = ...) -> None: ...
+
+class ScheduleReportResponse(_message.Message):
+    __slots__ = ("startTime", "endTime", "assignments")
+    STARTTIME_FIELD_NUMBER: _ClassVar[int]
+    ENDTIME_FIELD_NUMBER: _ClassVar[int]
+    ASSIGNMENTS_FIELD_NUMBER: _ClassVar[int]
+    startTime: _timestamp_pb2.Timestamp
+    endTime: _timestamp_pb2.Timestamp
+    assignments: _containers.RepeatedCompositeFieldContainer[ReportAssignments]
+    def __init__(self, startTime: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., endTime: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., assignments: _Optional[_Iterable[_Union[ReportAssignments, _Mapping]]] = ...) -> None: ...
 
 class CommonInfoCreateRequest(_message.Message):
     __slots__ = ("time", "acknowledgedBy", "remarks")
@@ -859,14 +897,18 @@ class WeaponUpdateRequestPhoto(_message.Message):
     def __init__(self, id: _Optional[str] = ...) -> None: ...
 
 class WeaponFilters(_message.Message):
-    __slots__ = ("idIn", "nameMin", "nameMax")
+    __slots__ = ("idIn", "nameMin", "nameMax", "countMin", "countMax")
     IDIN_FIELD_NUMBER: _ClassVar[int]
     NAMEMIN_FIELD_NUMBER: _ClassVar[int]
     NAMEMAX_FIELD_NUMBER: _ClassVar[int]
+    COUNTMIN_FIELD_NUMBER: _ClassVar[int]
+    COUNTMAX_FIELD_NUMBER: _ClassVar[int]
     idIn: _containers.RepeatedScalarFieldContainer[str]
     nameMin: str
     nameMax: str
-    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., nameMin: _Optional[str] = ..., nameMax: _Optional[str] = ...) -> None: ...
+    countMin: int
+    countMax: int
+    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., nameMin: _Optional[str] = ..., nameMax: _Optional[str] = ..., countMin: _Optional[int] = ..., countMax: _Optional[int] = ...) -> None: ...
 
 class WeaponCursor(_message.Message):
     __slots__ = ("id", "filters", "sort")
@@ -879,14 +921,16 @@ class WeaponCursor(_message.Message):
     def __init__(self, id: _Optional[str] = ..., filters: _Optional[_Union[WeaponFilters, _Mapping]] = ..., sort: _Optional[_Union[WeaponSort, str]] = ...) -> None: ...
 
 class Weapon(_message.Message):
-    __slots__ = ("id", "name", "photo")
+    __slots__ = ("id", "name", "count", "photo")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
+    COUNT_FIELD_NUMBER: _ClassVar[int]
     PHOTO_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
+    count: int
     photo: WeaponPhoto
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., photo: _Optional[_Union[WeaponPhoto, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., count: _Optional[int] = ..., photo: _Optional[_Union[WeaponPhoto, _Mapping]] = ...) -> None: ...
 
 class AmmoCreateRequestPhoto(_message.Message):
     __slots__ = ("id",)
@@ -909,14 +953,18 @@ class AmmoUpdateRequestPhoto(_message.Message):
     def __init__(self, id: _Optional[str] = ...) -> None: ...
 
 class AmmoFilters(_message.Message):
-    __slots__ = ("idIn", "nameMin", "nameMax")
+    __slots__ = ("idIn", "nameMin", "nameMax", "countMin", "countMax")
     IDIN_FIELD_NUMBER: _ClassVar[int]
     NAMEMIN_FIELD_NUMBER: _ClassVar[int]
     NAMEMAX_FIELD_NUMBER: _ClassVar[int]
+    COUNTMIN_FIELD_NUMBER: _ClassVar[int]
+    COUNTMAX_FIELD_NUMBER: _ClassVar[int]
     idIn: _containers.RepeatedScalarFieldContainer[str]
     nameMin: str
     nameMax: str
-    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., nameMin: _Optional[str] = ..., nameMax: _Optional[str] = ...) -> None: ...
+    countMin: int
+    countMax: int
+    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., nameMin: _Optional[str] = ..., nameMax: _Optional[str] = ..., countMin: _Optional[int] = ..., countMax: _Optional[int] = ...) -> None: ...
 
 class AmmoCursor(_message.Message):
     __slots__ = ("id", "filters", "sort")
@@ -929,14 +977,16 @@ class AmmoCursor(_message.Message):
     def __init__(self, id: _Optional[str] = ..., filters: _Optional[_Union[AmmoFilters, _Mapping]] = ..., sort: _Optional[_Union[AmmoSort, str]] = ...) -> None: ...
 
 class Ammo(_message.Message):
-    __slots__ = ("id", "name", "photo")
+    __slots__ = ("id", "name", "count", "photo")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
+    COUNT_FIELD_NUMBER: _ClassVar[int]
     PHOTO_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
+    count: int
     photo: AmmoPhoto
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., photo: _Optional[_Union[AmmoPhoto, _Mapping]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., count: _Optional[int] = ..., photo: _Optional[_Union[AmmoPhoto, _Mapping]] = ...) -> None: ...
 
 class AssignmentCreateRequestEmployee(_message.Message):
     __slots__ = ("id",)
@@ -1090,6 +1140,24 @@ class Schedule(_message.Message):
     endTime: _timestamp_pb2.Timestamp
     def __init__(self, id: _Optional[str] = ..., startTime: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., endTime: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
+class ReportAssignments(_message.Message):
+    __slots__ = ("id", "employee", "weapon", "ammo", "dutyPost", "ammoCount", "flows")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    EMPLOYEE_FIELD_NUMBER: _ClassVar[int]
+    WEAPON_FIELD_NUMBER: _ClassVar[int]
+    AMMO_FIELD_NUMBER: _ClassVar[int]
+    DUTYPOST_FIELD_NUMBER: _ClassVar[int]
+    AMMOCOUNT_FIELD_NUMBER: _ClassVar[int]
+    FLOWS_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    employee: Employee
+    weapon: Weapon
+    ammo: Ammo
+    dutyPost: str
+    ammoCount: int
+    flows: Flows
+    def __init__(self, id: _Optional[str] = ..., employee: _Optional[_Union[Employee, _Mapping]] = ..., weapon: _Optional[_Union[Weapon, _Mapping]] = ..., ammo: _Optional[_Union[Ammo, _Mapping]] = ..., dutyPost: _Optional[str] = ..., ammoCount: _Optional[int] = ..., flows: _Optional[_Union[Flows, _Mapping]] = ...) -> None: ...
+
 class CommonInfoCreateRequestAcknowledgedBy(_message.Message):
     __slots__ = ("id",)
     ID_FIELD_NUMBER: _ClassVar[int]
@@ -1111,14 +1179,18 @@ class CommonInfoUpdateRequestAcknowledgedBy(_message.Message):
     def __init__(self, id: _Optional[str] = ...) -> None: ...
 
 class CommonInfoFilters(_message.Message):
-    __slots__ = ("idIn", "timeMin", "timeMax")
+    __slots__ = ("idIn", "timeMin", "timeMax", "remarksMin", "remarksMax")
     IDIN_FIELD_NUMBER: _ClassVar[int]
     TIMEMIN_FIELD_NUMBER: _ClassVar[int]
     TIMEMAX_FIELD_NUMBER: _ClassVar[int]
+    REMARKSMIN_FIELD_NUMBER: _ClassVar[int]
+    REMARKSMAX_FIELD_NUMBER: _ClassVar[int]
     idIn: _containers.RepeatedScalarFieldContainer[str]
     timeMin: _timestamp_pb2.Timestamp
     timeMax: _timestamp_pb2.Timestamp
-    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., timeMin: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., timeMax: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
+    remarksMin: str
+    remarksMax: str
+    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., timeMin: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., timeMax: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., remarksMin: _Optional[str] = ..., remarksMax: _Optional[str] = ...) -> None: ...
 
 class CommonInfoCursor(_message.Message):
     __slots__ = ("id", "filters", "sort")
@@ -1163,18 +1235,22 @@ class AmmoInfoUpdateRequestAcknowledgedBy(_message.Message):
     def __init__(self, id: _Optional[str] = ...) -> None: ...
 
 class AmmoInfoFilters(_message.Message):
-    __slots__ = ("idIn", "timeMin", "timeMax", "countMin", "countMax")
+    __slots__ = ("idIn", "timeMin", "timeMax", "remarksMin", "remarksMax", "countMin", "countMax")
     IDIN_FIELD_NUMBER: _ClassVar[int]
     TIMEMIN_FIELD_NUMBER: _ClassVar[int]
     TIMEMAX_FIELD_NUMBER: _ClassVar[int]
+    REMARKSMIN_FIELD_NUMBER: _ClassVar[int]
+    REMARKSMAX_FIELD_NUMBER: _ClassVar[int]
     COUNTMIN_FIELD_NUMBER: _ClassVar[int]
     COUNTMAX_FIELD_NUMBER: _ClassVar[int]
     idIn: _containers.RepeatedScalarFieldContainer[str]
     timeMin: _timestamp_pb2.Timestamp
     timeMax: _timestamp_pb2.Timestamp
+    remarksMin: str
+    remarksMax: str
     countMin: int
     countMax: int
-    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., timeMin: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., timeMax: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., countMin: _Optional[int] = ..., countMax: _Optional[int] = ...) -> None: ...
+    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., timeMin: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., timeMax: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., remarksMin: _Optional[str] = ..., remarksMax: _Optional[str] = ..., countMin: _Optional[int] = ..., countMax: _Optional[int] = ...) -> None: ...
 
 class AmmoInfoCursor(_message.Message):
     __slots__ = ("id", "filters", "sort")

@@ -821,6 +821,11 @@ class ScheduleServiceStub(object):
                 request_serializer=root_dot_message__pb2.ScheduleListRequest.SerializeToString,
                 response_deserializer=root_dot_message__pb2.ScheduleListResponse.FromString,
                 )
+        self.scheduleReport = channel.unary_unary(
+                '/ScheduleService/scheduleReport',
+                request_serializer=root_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=root_dot_message__pb2.ScheduleReportResponse.FromString,
+                )
 
 
 class ScheduleServiceServicer(object):
@@ -868,6 +873,12 @@ class ScheduleServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def scheduleReport(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_ScheduleServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -905,6 +916,11 @@ def add_ScheduleServiceServicer_to_server(servicer, server):
                     servicer.scheduleList,
                     request_deserializer=root_dot_message__pb2.ScheduleListRequest.FromString,
                     response_serializer=root_dot_message__pb2.ScheduleListResponse.SerializeToString,
+            ),
+            'scheduleReport': grpc.unary_unary_rpc_method_handler(
+                    servicer.scheduleReport,
+                    request_deserializer=root_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=root_dot_message__pb2.ScheduleReportResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1032,6 +1048,23 @@ class ScheduleService(object):
         return grpc.experimental.unary_unary(request, target, '/ScheduleService/scheduleList',
             root_dot_message__pb2.ScheduleListRequest.SerializeToString,
             root_dot_message__pb2.ScheduleListResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def scheduleReport(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ScheduleService/scheduleReport',
+            root_dot_message__pb2.IdMessage.SerializeToString,
+            root_dot_message__pb2.ScheduleReportResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

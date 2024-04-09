@@ -37,6 +37,7 @@ service ScheduleService {
   rpc scheduleUpdate (ScheduleUpdateRequest) returns (IdMessage);
   rpc scheduleDelete (IdMessage) returns (OkMessage);
   rpc scheduleList (ScheduleListRequest) returns (ScheduleListResponse);
+  rpc scheduleReport (IdMessage) returns (ScheduleReportResponse);
 }
 service CommonInfoService {
   rpc commonInfoCreate (CommonInfoCreateRequest) returns (IdMessage);
