@@ -1,7 +1,7 @@
 from config import DefaultDuration, GrpcChannel, Position, PositionPinMap
 from relay import turnOnForAsync
-from root.message_pb2 import FlowsOnScanRequest, FlowsOnScanResponse
-from root.service_pb2_grpc import FlowsServiceStub
+from krypton.airport.message_pb2 import FlowsOnScanRequest, FlowsOnScanResponse
+from krypton.airport.service_pb2_grpc import FlowsServiceStub
 
 
 def onFlowsScan(matrixId: int, position: Position) -> FlowsOnScanResponse:
