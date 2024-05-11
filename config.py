@@ -43,7 +43,7 @@ PositionUriMap: Dict[Position, str] = {
 
 DefaultDuration: float = 1
 
-GrpcServerAddress: str = "localhost:8080"
+GrpcServerAddress: str = "localhost:8081"
 
 GrpcChannel = grpc.insecure_channel(GrpcServerAddress)
 
