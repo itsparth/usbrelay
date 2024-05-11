@@ -108,7 +108,7 @@ def pollPosition(position: Position, ev: threading.Event):
             cache["lastSeqNo"] = lastSeqNo
 
             for event in events:
-                matrixId = int(event.detail1)
+                matrixId = str(event.detail1)
                 if (
                     matrixId in lastCallCache
                     and time.time() - lastCallCache[matrixId] < 0.5
