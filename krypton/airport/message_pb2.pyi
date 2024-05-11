@@ -4348,12 +4348,10 @@ class AccessControlCreateRequestTags(_message.Message):
     def __init__(self, id: _Optional[str] = ...) -> None: ...
 
 class AccessControlReadResponseAuth(_message.Message):
-    __slots__ = ("id", "authName")
+    __slots__ = ("id",)
     ID_FIELD_NUMBER: _ClassVar[int]
-    AUTHNAME_FIELD_NUMBER: _ClassVar[int]
     id: str
-    authName: str
-    def __init__(self, id: _Optional[str] = ..., authName: _Optional[str] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ...) -> None: ...
 
 class AccessControlReadResponseTags(_message.Message):
     __slots__ = ("id", "name")
