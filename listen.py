@@ -121,7 +121,7 @@ def pollPosition(position: Position, ev: threading.Event):
 
         except Exception as e:
             print(f"{position} Error: {e}")
-            traceback.print_exception(*e)
+            traceback.print_exc()
             time.sleep(ErrorSleepInterval)
 
 
