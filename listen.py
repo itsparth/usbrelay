@@ -2,6 +2,7 @@ import signal
 import threading
 import time
 from typing import Dict, List
+import traceback
 
 import requests
 from config import (
@@ -120,6 +121,7 @@ def pollPosition(position: Position, ev: threading.Event):
 
         except Exception as e:
             print(f"{position} Error: {e}")
+            traceback.print_exception(*e)
             time.sleep(ErrorSleepInterval)
 
 
