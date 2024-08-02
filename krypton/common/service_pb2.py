@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 from krypton.common import message_pb2 as krypton_dot_common_dot_message__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1ckrypton/common/service.proto\x1a\x1ckrypton/common/message.proto2\xc2\x01\n\x0b\x41uthService\x12/\n\x08\x61uthList\x12\x10.AuthListRequest\x1a\x11.AuthListResponse\x12)\n\x06signIn\x12\x0e.SignInRequest\x1a\x0f.SignInResponse\x12!\n\x07signOut\x12\n.OkMessage\x1a\n.OkMessage\x12\x34\n\x0e\x63hangePassword\x12\x16.ChangePasswordRequest\x1a\n.OkMessage2Z\n\x12\x41uthSessionService\x12\x44\n\x0f\x61uthSessionList\x12\x17.AuthSessionListRequest\x1a\x18.AuthSessionListResponse2\x91\x03\n\x11\x46ileObjectService\x12\x38\n\x10\x66ileObjectCreate\x12\x18.FileObjectCreateRequest\x1a\n.IdMessage\x12\x35\n\x0e\x66ileObjectRead\x12\n.IdMessage\x1a\x17.FileObjectReadResponse\x12\x38\n\x10\x66ileObjectUpdate\x12\x18.FileObjectUpdateRequest\x1a\n.IdMessage\x12*\n\x10\x66ileObjectDelete\x12\n.IdMessage\x1a\n.OkMessage\x12\x41\n\x0e\x66ileObjectList\x12\x16.FileObjectListRequest\x1a\x17.FileObjectListResponse\x12\x62\n\x19\x66ileObjectActivityLogList\x12!.FileObjectActivityLogListRequest\x1a\".FileObjectActivityLogListResponse2\xbd\x02\n\x0bTagsService\x12,\n\ntagsCreate\x12\x12.TagsCreateRequest\x1a\n.IdMessage\x12)\n\x08tagsRead\x12\n.IdMessage\x1a\x11.TagsReadResponse\x12,\n\ntagsUpdate\x12\x12.TagsUpdateRequest\x1a\n.IdMessage\x12$\n\ntagsDelete\x12\n.IdMessage\x1a\n.OkMessage\x12/\n\x08tagsList\x12\x10.TagsListRequest\x1a\x11.TagsListResponse\x12P\n\x13tagsActivityLogList\x12\x1b.TagsActivityLogListRequest\x1a\x1c.TagsActivityLogListResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1ckrypton/common/service.proto\x1a\x1ckrypton/common/message.proto2\xc2\x01\n\x0b\x41uthService\x12/\n\x08\x61uthList\x12\x10.AuthListRequest\x1a\x11.AuthListResponse\x12)\n\x06signIn\x12\x0e.SignInRequest\x1a\x0f.SignInResponse\x12!\n\x07signOut\x12\n.OkMessage\x1a\n.OkMessage\x12\x34\n\x0e\x63hangePassword\x12\x16.ChangePasswordRequest\x1a\n.OkMessage2Z\n\x12\x41uthSessionService\x12\x44\n\x0f\x61uthSessionList\x12\x17.AuthSessionListRequest\x1a\x18.AuthSessionListResponse2\xf0\x02\n\x11\x46ileObjectService\x12\x38\n\x10\x66ileObjectCreate\x12\x18.FileObjectCreateRequest\x1a\n.IdMessage\x12\x35\n\x0e\x66ileObjectRead\x12\n.IdMessage\x1a\x17.FileObjectReadResponse\x12\x38\n\x10\x66ileObjectUpdate\x12\x18.FileObjectUpdateRequest\x1a\n.IdMessage\x12\x41\n\x14\x66ileObjectUpdateRead\x12\n.IdMessage\x1a\x1d.FileObjectUpdateReadResponse\x12*\n\x10\x66ileObjectDelete\x12\n.IdMessage\x1a\n.OkMessage\x12\x41\n\x0e\x66ileObjectList\x12\x16.FileObjectListRequest\x1a\x17.FileObjectListResponse2\xd2\x01\n\x0cPointService\x12.\n\x0bpointUpdate\x12\x13.PointUpdateRequest\x1a\n.IdMessage\x12\x37\n\x0fpointUpdateRead\x12\n.IdMessage\x1a\x18.PointUpdateReadResponse\x12%\n\x0bpointDelete\x12\n.IdMessage\x1a\n.OkMessage\x12\x32\n\tpointList\x12\x11.PointListRequest\x1a\x12.PointListResponse2\xa2\x02\n\x0bTagsService\x12,\n\ntagsCreate\x12\x12.TagsCreateRequest\x1a\n.IdMessage\x12)\n\x08tagsRead\x12\n.IdMessage\x1a\x11.TagsReadResponse\x12,\n\ntagsUpdate\x12\x12.TagsUpdateRequest\x1a\n.IdMessage\x12\x35\n\x0etagsUpdateRead\x12\n.IdMessage\x1a\x17.TagsUpdateReadResponse\x12$\n\ntagsDelete\x12\n.IdMessage\x1a\n.OkMessage\x12/\n\x08tagsList\x12\x10.TagsListRequest\x1a\x11.TagsListResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -27,7 +27,9 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_AUTHSESSIONSERVICE']._serialized_start=259
   _globals['_AUTHSESSIONSERVICE']._serialized_end=349
   _globals['_FILEOBJECTSERVICE']._serialized_start=352
-  _globals['_FILEOBJECTSERVICE']._serialized_end=753
-  _globals['_TAGSSERVICE']._serialized_start=756
-  _globals['_TAGSSERVICE']._serialized_end=1073
+  _globals['_FILEOBJECTSERVICE']._serialized_end=720
+  _globals['_POINTSERVICE']._serialized_start=723
+  _globals['_POINTSERVICE']._serialized_end=933
+  _globals['_TAGSSERVICE']._serialized_start=936
+  _globals['_TAGSSERVICE']._serialized_end=1226
 # @@protoc_insertion_point(module_scope)

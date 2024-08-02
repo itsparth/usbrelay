@@ -5,7 +5,7 @@ from typing import Dict, Tuple
 from diskcache import Cache
 import grpc
 
-from krypton.airport.message_pb2 import Position as GrpcPosition
+from krypton.cisf.message_pb2 import Position as GrpcPosition
 
 
 @dataclass

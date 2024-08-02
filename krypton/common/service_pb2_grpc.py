@@ -250,6 +250,11 @@ class FileObjectServiceStub(object):
                 request_serializer=krypton_dot_common_dot_message__pb2.FileObjectUpdateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                 )
+        self.fileObjectUpdateRead = channel.unary_unary(
+                '/FileObjectService/fileObjectUpdateRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_common_dot_message__pb2.FileObjectUpdateReadResponse.FromString,
+                )
         self.fileObjectDelete = channel.unary_unary(
                 '/FileObjectService/fileObjectDelete',
                 request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
@@ -259,11 +264,6 @@ class FileObjectServiceStub(object):
                 '/FileObjectService/fileObjectList',
                 request_serializer=krypton_dot_common_dot_message__pb2.FileObjectListRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.FileObjectListResponse.FromString,
-                )
-        self.fileObjectActivityLogList = channel.unary_unary(
-                '/FileObjectService/fileObjectActivityLogList',
-                request_serializer=krypton_dot_common_dot_message__pb2.FileObjectActivityLogListRequest.SerializeToString,
-                response_deserializer=krypton_dot_common_dot_message__pb2.FileObjectActivityLogListResponse.FromString,
                 )
 
 
@@ -288,6 +288,12 @@ class FileObjectServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def fileObjectUpdateRead(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def fileObjectDelete(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -295,12 +301,6 @@ class FileObjectServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def fileObjectList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def fileObjectActivityLogList(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -324,6 +324,11 @@ def add_FileObjectServiceServicer_to_server(servicer, server):
                     request_deserializer=krypton_dot_common_dot_message__pb2.FileObjectUpdateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
             ),
+            'fileObjectUpdateRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.fileObjectUpdateRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_common_dot_message__pb2.FileObjectUpdateReadResponse.SerializeToString,
+            ),
             'fileObjectDelete': grpc.unary_unary_rpc_method_handler(
                     servicer.fileObjectDelete,
                     request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
@@ -333,11 +338,6 @@ def add_FileObjectServiceServicer_to_server(servicer, server):
                     servicer.fileObjectList,
                     request_deserializer=krypton_dot_common_dot_message__pb2.FileObjectListRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.FileObjectListResponse.SerializeToString,
-            ),
-            'fileObjectActivityLogList': grpc.unary_unary_rpc_method_handler(
-                    servicer.fileObjectActivityLogList,
-                    request_deserializer=krypton_dot_common_dot_message__pb2.FileObjectActivityLogListRequest.FromString,
-                    response_serializer=krypton_dot_common_dot_message__pb2.FileObjectActivityLogListResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -401,6 +401,23 @@ class FileObjectService(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def fileObjectUpdateRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/FileObjectService/fileObjectUpdateRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_common_dot_message__pb2.FileObjectUpdateReadResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def fileObjectDelete(request,
             target,
             options=(),
@@ -434,8 +451,100 @@ class FileObjectService(object):
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
+
+class PointServiceStub(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.pointUpdate = channel.unary_unary(
+                '/PointService/pointUpdate',
+                request_serializer=krypton_dot_common_dot_message__pb2.PointUpdateRequest.SerializeToString,
+                response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                )
+        self.pointUpdateRead = channel.unary_unary(
+                '/PointService/pointUpdateRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_common_dot_message__pb2.PointUpdateReadResponse.FromString,
+                )
+        self.pointDelete = channel.unary_unary(
+                '/PointService/pointDelete',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_common_dot_message__pb2.OkMessage.FromString,
+                )
+        self.pointList = channel.unary_unary(
+                '/PointService/pointList',
+                request_serializer=krypton_dot_common_dot_message__pb2.PointListRequest.SerializeToString,
+                response_deserializer=krypton_dot_common_dot_message__pb2.PointListResponse.FromString,
+                )
+
+
+class PointServiceServicer(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def pointUpdate(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def pointUpdateRead(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def pointDelete(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def pointList(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_PointServiceServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'pointUpdate': grpc.unary_unary_rpc_method_handler(
+                    servicer.pointUpdate,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.PointUpdateRequest.FromString,
+                    response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            ),
+            'pointUpdateRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.pointUpdateRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_common_dot_message__pb2.PointUpdateReadResponse.SerializeToString,
+            ),
+            'pointDelete': grpc.unary_unary_rpc_method_handler(
+                    servicer.pointDelete,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_common_dot_message__pb2.OkMessage.SerializeToString,
+            ),
+            'pointList': grpc.unary_unary_rpc_method_handler(
+                    servicer.pointList,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.PointListRequest.FromString,
+                    response_serializer=krypton_dot_common_dot_message__pb2.PointListResponse.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'PointService', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class PointService(object):
+    """Missing associated documentation comment in .proto file."""
+
     @staticmethod
-    def fileObjectActivityLogList(request,
+    def pointUpdate(request,
             target,
             options=(),
             channel_credentials=None,
@@ -445,9 +554,60 @@ class FileObjectService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/FileObjectService/fileObjectActivityLogList',
-            krypton_dot_common_dot_message__pb2.FileObjectActivityLogListRequest.SerializeToString,
-            krypton_dot_common_dot_message__pb2.FileObjectActivityLogListResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/PointService/pointUpdate',
+            krypton_dot_common_dot_message__pb2.PointUpdateRequest.SerializeToString,
+            krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def pointUpdateRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/PointService/pointUpdateRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_common_dot_message__pb2.PointUpdateReadResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def pointDelete(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/PointService/pointDelete',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_common_dot_message__pb2.OkMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def pointList(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/PointService/pointList',
+            krypton_dot_common_dot_message__pb2.PointListRequest.SerializeToString,
+            krypton_dot_common_dot_message__pb2.PointListResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -476,6 +636,11 @@ class TagsServiceStub(object):
                 request_serializer=krypton_dot_common_dot_message__pb2.TagsUpdateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                 )
+        self.tagsUpdateRead = channel.unary_unary(
+                '/TagsService/tagsUpdateRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_common_dot_message__pb2.TagsUpdateReadResponse.FromString,
+                )
         self.tagsDelete = channel.unary_unary(
                 '/TagsService/tagsDelete',
                 request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
@@ -485,11 +650,6 @@ class TagsServiceStub(object):
                 '/TagsService/tagsList',
                 request_serializer=krypton_dot_common_dot_message__pb2.TagsListRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.TagsListResponse.FromString,
-                )
-        self.tagsActivityLogList = channel.unary_unary(
-                '/TagsService/tagsActivityLogList',
-                request_serializer=krypton_dot_common_dot_message__pb2.TagsActivityLogListRequest.SerializeToString,
-                response_deserializer=krypton_dot_common_dot_message__pb2.TagsActivityLogListResponse.FromString,
                 )
 
 
@@ -514,6 +674,12 @@ class TagsServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def tagsUpdateRead(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def tagsDelete(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -521,12 +687,6 @@ class TagsServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def tagsList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def tagsActivityLogList(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -550,6 +710,11 @@ def add_TagsServiceServicer_to_server(servicer, server):
                     request_deserializer=krypton_dot_common_dot_message__pb2.TagsUpdateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
             ),
+            'tagsUpdateRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.tagsUpdateRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_common_dot_message__pb2.TagsUpdateReadResponse.SerializeToString,
+            ),
             'tagsDelete': grpc.unary_unary_rpc_method_handler(
                     servicer.tagsDelete,
                     request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
@@ -559,11 +724,6 @@ def add_TagsServiceServicer_to_server(servicer, server):
                     servicer.tagsList,
                     request_deserializer=krypton_dot_common_dot_message__pb2.TagsListRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.TagsListResponse.SerializeToString,
-            ),
-            'tagsActivityLogList': grpc.unary_unary_rpc_method_handler(
-                    servicer.tagsActivityLogList,
-                    request_deserializer=krypton_dot_common_dot_message__pb2.TagsActivityLogListRequest.FromString,
-                    response_serializer=krypton_dot_common_dot_message__pb2.TagsActivityLogListResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -627,6 +787,23 @@ class TagsService(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def tagsUpdateRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/TagsService/tagsUpdateRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_common_dot_message__pb2.TagsUpdateReadResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def tagsDelete(request,
             target,
             options=(),
@@ -657,22 +834,5 @@ class TagsService(object):
         return grpc.experimental.unary_unary(request, target, '/TagsService/tagsList',
             krypton_dot_common_dot_message__pb2.TagsListRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.TagsListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def tagsActivityLogList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/TagsService/tagsActivityLogList',
-            krypton_dot_common_dot_message__pb2.TagsActivityLogListRequest.SerializeToString,
-            krypton_dot_common_dot_message__pb2.TagsActivityLogListResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

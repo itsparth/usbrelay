@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from krypton.airport import message_pb2 as krypton_dot_airport_dot_message__pb2
+from krypton.cisf import message_pb2 as krypton_dot_cisf_dot_message__pb2
 from krypton.common import message_pb2 as krypton_dot_common_dot_message__pb2
 
 
@@ -17,18 +17,23 @@ class EmployeeServiceStub(object):
         """
         self.employeeCreate = channel.unary_unary(
                 '/EmployeeService/employeeCreate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.EmployeeCreateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.EmployeeCreateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                 )
         self.employeeRead = channel.unary_unary(
                 '/EmployeeService/employeeRead',
                 request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.EmployeeReadResponse.FromString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.EmployeeReadResponse.FromString,
                 )
         self.employeeUpdate = channel.unary_unary(
                 '/EmployeeService/employeeUpdate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.EmployeeUpdateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.EmployeeUpdateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                )
+        self.employeeUpdateRead = channel.unary_unary(
+                '/EmployeeService/employeeUpdateRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.EmployeeUpdateReadResponse.FromString,
                 )
         self.employeeDelete = channel.unary_unary(
                 '/EmployeeService/employeeDelete',
@@ -37,13 +42,8 @@ class EmployeeServiceStub(object):
                 )
         self.employeeList = channel.unary_unary(
                 '/EmployeeService/employeeList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.EmployeeListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.EmployeeListResponse.FromString,
-                )
-        self.employeeActivityLogList = channel.unary_unary(
-                '/EmployeeService/employeeActivityLogList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.EmployeeActivityLogListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.EmployeeActivityLogListResponse.FromString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.EmployeeListRequest.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.EmployeeListResponse.FromString,
                 )
 
 
@@ -68,6 +68,12 @@ class EmployeeServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def employeeUpdateRead(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def employeeDelete(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -80,29 +86,28 @@ class EmployeeServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def employeeActivityLogList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_EmployeeServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'employeeCreate': grpc.unary_unary_rpc_method_handler(
                     servicer.employeeCreate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.EmployeeCreateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.EmployeeCreateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
             ),
             'employeeRead': grpc.unary_unary_rpc_method_handler(
                     servicer.employeeRead,
                     request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.EmployeeReadResponse.SerializeToString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.EmployeeReadResponse.SerializeToString,
             ),
             'employeeUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.employeeUpdate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.EmployeeUpdateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.EmployeeUpdateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            ),
+            'employeeUpdateRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.employeeUpdateRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.EmployeeUpdateReadResponse.SerializeToString,
             ),
             'employeeDelete': grpc.unary_unary_rpc_method_handler(
                     servicer.employeeDelete,
@@ -111,13 +116,8 @@ def add_EmployeeServiceServicer_to_server(servicer, server):
             ),
             'employeeList': grpc.unary_unary_rpc_method_handler(
                     servicer.employeeList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.EmployeeListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.EmployeeListResponse.SerializeToString,
-            ),
-            'employeeActivityLogList': grpc.unary_unary_rpc_method_handler(
-                    servicer.employeeActivityLogList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.EmployeeActivityLogListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.EmployeeActivityLogListResponse.SerializeToString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.EmployeeListRequest.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.EmployeeListResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -141,7 +141,7 @@ class EmployeeService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/EmployeeService/employeeCreate',
-            krypton_dot_airport_dot_message__pb2.EmployeeCreateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.EmployeeCreateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -159,7 +159,7 @@ class EmployeeService(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/EmployeeService/employeeRead',
             krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.EmployeeReadResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.EmployeeReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -175,8 +175,25 @@ class EmployeeService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/EmployeeService/employeeUpdate',
-            krypton_dot_airport_dot_message__pb2.EmployeeUpdateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.EmployeeUpdateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def employeeUpdateRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/EmployeeService/employeeUpdateRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.EmployeeUpdateReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -209,25 +226,8 @@ class EmployeeService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/EmployeeService/employeeList',
-            krypton_dot_airport_dot_message__pb2.EmployeeListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.EmployeeListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def employeeActivityLogList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/EmployeeService/employeeActivityLogList',
-            krypton_dot_airport_dot_message__pb2.EmployeeActivityLogListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.EmployeeActivityLogListResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.EmployeeListRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.EmployeeListResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -243,18 +243,23 @@ class DutyPostServiceStub(object):
         """
         self.dutyPostCreate = channel.unary_unary(
                 '/DutyPostService/dutyPostCreate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.DutyPostCreateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.DutyPostCreateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                 )
         self.dutyPostRead = channel.unary_unary(
                 '/DutyPostService/dutyPostRead',
                 request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.DutyPostReadResponse.FromString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.DutyPostReadResponse.FromString,
                 )
         self.dutyPostUpdate = channel.unary_unary(
                 '/DutyPostService/dutyPostUpdate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.DutyPostUpdateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.DutyPostUpdateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                )
+        self.dutyPostUpdateRead = channel.unary_unary(
+                '/DutyPostService/dutyPostUpdateRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.DutyPostUpdateReadResponse.FromString,
                 )
         self.dutyPostDelete = channel.unary_unary(
                 '/DutyPostService/dutyPostDelete',
@@ -263,13 +268,8 @@ class DutyPostServiceStub(object):
                 )
         self.dutyPostList = channel.unary_unary(
                 '/DutyPostService/dutyPostList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.DutyPostListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.DutyPostListResponse.FromString,
-                )
-        self.dutyPostActivityLogList = channel.unary_unary(
-                '/DutyPostService/dutyPostActivityLogList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.DutyPostActivityLogListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.DutyPostActivityLogListResponse.FromString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.DutyPostListRequest.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.DutyPostListResponse.FromString,
                 )
 
 
@@ -294,6 +294,12 @@ class DutyPostServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def dutyPostUpdateRead(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def dutyPostDelete(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -306,29 +312,28 @@ class DutyPostServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def dutyPostActivityLogList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_DutyPostServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'dutyPostCreate': grpc.unary_unary_rpc_method_handler(
                     servicer.dutyPostCreate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.DutyPostCreateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.DutyPostCreateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
             ),
             'dutyPostRead': grpc.unary_unary_rpc_method_handler(
                     servicer.dutyPostRead,
                     request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.DutyPostReadResponse.SerializeToString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.DutyPostReadResponse.SerializeToString,
             ),
             'dutyPostUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.dutyPostUpdate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.DutyPostUpdateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.DutyPostUpdateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            ),
+            'dutyPostUpdateRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.dutyPostUpdateRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.DutyPostUpdateReadResponse.SerializeToString,
             ),
             'dutyPostDelete': grpc.unary_unary_rpc_method_handler(
                     servicer.dutyPostDelete,
@@ -337,13 +342,8 @@ def add_DutyPostServiceServicer_to_server(servicer, server):
             ),
             'dutyPostList': grpc.unary_unary_rpc_method_handler(
                     servicer.dutyPostList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.DutyPostListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.DutyPostListResponse.SerializeToString,
-            ),
-            'dutyPostActivityLogList': grpc.unary_unary_rpc_method_handler(
-                    servicer.dutyPostActivityLogList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.DutyPostActivityLogListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.DutyPostActivityLogListResponse.SerializeToString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.DutyPostListRequest.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.DutyPostListResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -367,7 +367,7 @@ class DutyPostService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/DutyPostService/dutyPostCreate',
-            krypton_dot_airport_dot_message__pb2.DutyPostCreateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.DutyPostCreateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -385,7 +385,7 @@ class DutyPostService(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/DutyPostService/dutyPostRead',
             krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.DutyPostReadResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.DutyPostReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -401,8 +401,25 @@ class DutyPostService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/DutyPostService/dutyPostUpdate',
-            krypton_dot_airport_dot_message__pb2.DutyPostUpdateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.DutyPostUpdateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def dutyPostUpdateRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/DutyPostService/dutyPostUpdateRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.DutyPostUpdateReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -435,25 +452,8 @@ class DutyPostService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/DutyPostService/dutyPostList',
-            krypton_dot_airport_dot_message__pb2.DutyPostListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.DutyPostListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def dutyPostActivityLogList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/DutyPostService/dutyPostActivityLogList',
-            krypton_dot_airport_dot_message__pb2.DutyPostActivityLogListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.DutyPostActivityLogListResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.DutyPostListRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.DutyPostListResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -469,18 +469,23 @@ class WeaponServiceStub(object):
         """
         self.weaponCreate = channel.unary_unary(
                 '/WeaponService/weaponCreate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.WeaponCreateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.WeaponCreateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                 )
         self.weaponRead = channel.unary_unary(
                 '/WeaponService/weaponRead',
                 request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.WeaponReadResponse.FromString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.WeaponReadResponse.FromString,
                 )
         self.weaponUpdate = channel.unary_unary(
                 '/WeaponService/weaponUpdate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.WeaponUpdateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.WeaponUpdateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                )
+        self.weaponUpdateRead = channel.unary_unary(
+                '/WeaponService/weaponUpdateRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.WeaponUpdateReadResponse.FromString,
                 )
         self.weaponDelete = channel.unary_unary(
                 '/WeaponService/weaponDelete',
@@ -489,13 +494,8 @@ class WeaponServiceStub(object):
                 )
         self.weaponList = channel.unary_unary(
                 '/WeaponService/weaponList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.WeaponListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.WeaponListResponse.FromString,
-                )
-        self.weaponActivityLogList = channel.unary_unary(
-                '/WeaponService/weaponActivityLogList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.WeaponActivityLogListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.WeaponActivityLogListResponse.FromString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.WeaponListRequest.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.WeaponListResponse.FromString,
                 )
 
 
@@ -520,6 +520,12 @@ class WeaponServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def weaponUpdateRead(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def weaponDelete(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -532,29 +538,28 @@ class WeaponServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def weaponActivityLogList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_WeaponServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'weaponCreate': grpc.unary_unary_rpc_method_handler(
                     servicer.weaponCreate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.WeaponCreateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.WeaponCreateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
             ),
             'weaponRead': grpc.unary_unary_rpc_method_handler(
                     servicer.weaponRead,
                     request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.WeaponReadResponse.SerializeToString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.WeaponReadResponse.SerializeToString,
             ),
             'weaponUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.weaponUpdate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.WeaponUpdateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.WeaponUpdateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            ),
+            'weaponUpdateRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.weaponUpdateRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.WeaponUpdateReadResponse.SerializeToString,
             ),
             'weaponDelete': grpc.unary_unary_rpc_method_handler(
                     servicer.weaponDelete,
@@ -563,13 +568,8 @@ def add_WeaponServiceServicer_to_server(servicer, server):
             ),
             'weaponList': grpc.unary_unary_rpc_method_handler(
                     servicer.weaponList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.WeaponListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.WeaponListResponse.SerializeToString,
-            ),
-            'weaponActivityLogList': grpc.unary_unary_rpc_method_handler(
-                    servicer.weaponActivityLogList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.WeaponActivityLogListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.WeaponActivityLogListResponse.SerializeToString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.WeaponListRequest.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.WeaponListResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -593,7 +593,7 @@ class WeaponService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/WeaponService/weaponCreate',
-            krypton_dot_airport_dot_message__pb2.WeaponCreateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.WeaponCreateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -611,7 +611,7 @@ class WeaponService(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/WeaponService/weaponRead',
             krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.WeaponReadResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.WeaponReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -627,8 +627,25 @@ class WeaponService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/WeaponService/weaponUpdate',
-            krypton_dot_airport_dot_message__pb2.WeaponUpdateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.WeaponUpdateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def weaponUpdateRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/WeaponService/weaponUpdateRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.WeaponUpdateReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -661,25 +678,8 @@ class WeaponService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/WeaponService/weaponList',
-            krypton_dot_airport_dot_message__pb2.WeaponListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.WeaponListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def weaponActivityLogList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/WeaponService/weaponActivityLogList',
-            krypton_dot_airport_dot_message__pb2.WeaponActivityLogListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.WeaponActivityLogListResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.WeaponListRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.WeaponListResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -695,18 +695,23 @@ class AmmoServiceStub(object):
         """
         self.ammoCreate = channel.unary_unary(
                 '/AmmoService/ammoCreate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.AmmoCreateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.AmmoCreateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                 )
         self.ammoRead = channel.unary_unary(
                 '/AmmoService/ammoRead',
                 request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.AmmoReadResponse.FromString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.AmmoReadResponse.FromString,
                 )
         self.ammoUpdate = channel.unary_unary(
                 '/AmmoService/ammoUpdate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.AmmoUpdateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.AmmoUpdateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                )
+        self.ammoUpdateRead = channel.unary_unary(
+                '/AmmoService/ammoUpdateRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.AmmoUpdateReadResponse.FromString,
                 )
         self.ammoDelete = channel.unary_unary(
                 '/AmmoService/ammoDelete',
@@ -715,13 +720,8 @@ class AmmoServiceStub(object):
                 )
         self.ammoList = channel.unary_unary(
                 '/AmmoService/ammoList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.AmmoListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.AmmoListResponse.FromString,
-                )
-        self.ammoActivityLogList = channel.unary_unary(
-                '/AmmoService/ammoActivityLogList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.AmmoActivityLogListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.AmmoActivityLogListResponse.FromString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.AmmoListRequest.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.AmmoListResponse.FromString,
                 )
 
 
@@ -746,6 +746,12 @@ class AmmoServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ammoUpdateRead(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ammoDelete(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -758,29 +764,28 @@ class AmmoServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ammoActivityLogList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_AmmoServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'ammoCreate': grpc.unary_unary_rpc_method_handler(
                     servicer.ammoCreate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.AmmoCreateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.AmmoCreateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
             ),
             'ammoRead': grpc.unary_unary_rpc_method_handler(
                     servicer.ammoRead,
                     request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.AmmoReadResponse.SerializeToString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.AmmoReadResponse.SerializeToString,
             ),
             'ammoUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.ammoUpdate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.AmmoUpdateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.AmmoUpdateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            ),
+            'ammoUpdateRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.ammoUpdateRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.AmmoUpdateReadResponse.SerializeToString,
             ),
             'ammoDelete': grpc.unary_unary_rpc_method_handler(
                     servicer.ammoDelete,
@@ -789,13 +794,8 @@ def add_AmmoServiceServicer_to_server(servicer, server):
             ),
             'ammoList': grpc.unary_unary_rpc_method_handler(
                     servicer.ammoList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.AmmoListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.AmmoListResponse.SerializeToString,
-            ),
-            'ammoActivityLogList': grpc.unary_unary_rpc_method_handler(
-                    servicer.ammoActivityLogList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.AmmoActivityLogListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.AmmoActivityLogListResponse.SerializeToString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.AmmoListRequest.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.AmmoListResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -819,7 +819,7 @@ class AmmoService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/AmmoService/ammoCreate',
-            krypton_dot_airport_dot_message__pb2.AmmoCreateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.AmmoCreateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -837,7 +837,7 @@ class AmmoService(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/AmmoService/ammoRead',
             krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.AmmoReadResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.AmmoReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -853,8 +853,25 @@ class AmmoService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/AmmoService/ammoUpdate',
-            krypton_dot_airport_dot_message__pb2.AmmoUpdateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.AmmoUpdateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ammoUpdateRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/AmmoService/ammoUpdateRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.AmmoUpdateReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -887,25 +904,8 @@ class AmmoService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/AmmoService/ammoList',
-            krypton_dot_airport_dot_message__pb2.AmmoListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.AmmoListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ammoActivityLogList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AmmoService/ammoActivityLogList',
-            krypton_dot_airport_dot_message__pb2.AmmoActivityLogListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.AmmoActivityLogListResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.AmmoListRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.AmmoListResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -921,18 +921,23 @@ class OtherItemsServiceStub(object):
         """
         self.otherItemsCreate = channel.unary_unary(
                 '/OtherItemsService/otherItemsCreate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.OtherItemsCreateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.OtherItemsCreateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                 )
         self.otherItemsRead = channel.unary_unary(
                 '/OtherItemsService/otherItemsRead',
                 request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.OtherItemsReadResponse.FromString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.OtherItemsReadResponse.FromString,
                 )
         self.otherItemsUpdate = channel.unary_unary(
                 '/OtherItemsService/otherItemsUpdate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.OtherItemsUpdateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.OtherItemsUpdateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                )
+        self.otherItemsUpdateRead = channel.unary_unary(
+                '/OtherItemsService/otherItemsUpdateRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.OtherItemsUpdateReadResponse.FromString,
                 )
         self.otherItemsDelete = channel.unary_unary(
                 '/OtherItemsService/otherItemsDelete',
@@ -941,13 +946,8 @@ class OtherItemsServiceStub(object):
                 )
         self.otherItemsList = channel.unary_unary(
                 '/OtherItemsService/otherItemsList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.OtherItemsListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.OtherItemsListResponse.FromString,
-                )
-        self.otherItemsActivityLogList = channel.unary_unary(
-                '/OtherItemsService/otherItemsActivityLogList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.OtherItemsActivityLogListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.OtherItemsActivityLogListResponse.FromString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.OtherItemsListRequest.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.OtherItemsListResponse.FromString,
                 )
 
 
@@ -972,6 +972,12 @@ class OtherItemsServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def otherItemsUpdateRead(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def otherItemsDelete(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -984,29 +990,28 @@ class OtherItemsServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def otherItemsActivityLogList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_OtherItemsServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'otherItemsCreate': grpc.unary_unary_rpc_method_handler(
                     servicer.otherItemsCreate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.OtherItemsCreateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.OtherItemsCreateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
             ),
             'otherItemsRead': grpc.unary_unary_rpc_method_handler(
                     servicer.otherItemsRead,
                     request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.OtherItemsReadResponse.SerializeToString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.OtherItemsReadResponse.SerializeToString,
             ),
             'otherItemsUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.otherItemsUpdate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.OtherItemsUpdateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.OtherItemsUpdateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            ),
+            'otherItemsUpdateRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.otherItemsUpdateRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.OtherItemsUpdateReadResponse.SerializeToString,
             ),
             'otherItemsDelete': grpc.unary_unary_rpc_method_handler(
                     servicer.otherItemsDelete,
@@ -1015,13 +1020,8 @@ def add_OtherItemsServiceServicer_to_server(servicer, server):
             ),
             'otherItemsList': grpc.unary_unary_rpc_method_handler(
                     servicer.otherItemsList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.OtherItemsListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.OtherItemsListResponse.SerializeToString,
-            ),
-            'otherItemsActivityLogList': grpc.unary_unary_rpc_method_handler(
-                    servicer.otherItemsActivityLogList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.OtherItemsActivityLogListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.OtherItemsActivityLogListResponse.SerializeToString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.OtherItemsListRequest.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.OtherItemsListResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1045,7 +1045,7 @@ class OtherItemsService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/OtherItemsService/otherItemsCreate',
-            krypton_dot_airport_dot_message__pb2.OtherItemsCreateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.OtherItemsCreateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -1063,7 +1063,7 @@ class OtherItemsService(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/OtherItemsService/otherItemsRead',
             krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.OtherItemsReadResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.OtherItemsReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1079,8 +1079,25 @@ class OtherItemsService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/OtherItemsService/otherItemsUpdate',
-            krypton_dot_airport_dot_message__pb2.OtherItemsUpdateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.OtherItemsUpdateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def otherItemsUpdateRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/OtherItemsService/otherItemsUpdateRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.OtherItemsUpdateReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1113,25 +1130,8 @@ class OtherItemsService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/OtherItemsService/otherItemsList',
-            krypton_dot_airport_dot_message__pb2.OtherItemsListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.OtherItemsListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def otherItemsActivityLogList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/OtherItemsService/otherItemsActivityLogList',
-            krypton_dot_airport_dot_message__pb2.OtherItemsActivityLogListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.OtherItemsActivityLogListResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.OtherItemsListRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.OtherItemsListResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1145,54 +1145,33 @@ class AssignmentServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.assignmentCreate = channel.unary_unary(
-                '/AssignmentService/assignmentCreate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.AssignmentCreateRequest.SerializeToString,
-                response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                )
-        self.assignmentRead = channel.unary_unary(
-                '/AssignmentService/assignmentRead',
-                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.AssignmentReadResponse.FromString,
-                )
         self.assignmentUpdate = channel.unary_unary(
                 '/AssignmentService/assignmentUpdate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.AssignmentUpdateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.AssignmentUpdateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                )
+        self.assignmentUpdateRead = channel.unary_unary(
+                '/AssignmentService/assignmentUpdateRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.AssignmentUpdateReadResponse.FromString,
                 )
         self.assignmentDelete = channel.unary_unary(
                 '/AssignmentService/assignmentDelete',
                 request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.OkMessage.FromString,
                 )
-        self.assignmentList = channel.unary_unary(
-                '/AssignmentService/assignmentList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.AssignmentListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.AssignmentListResponse.FromString,
-                )
-        self.assignmentActivityLogList = channel.unary_unary(
-                '/AssignmentService/assignmentActivityLogList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.AssignmentActivityLogListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.AssignmentActivityLogListResponse.FromString,
-                )
 
 
 class AssignmentServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def assignmentCreate(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def assignmentRead(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def assignmentUpdate(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def assignmentUpdateRead(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1204,50 +1183,23 @@ class AssignmentServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def assignmentList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def assignmentActivityLogList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_AssignmentServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'assignmentCreate': grpc.unary_unary_rpc_method_handler(
-                    servicer.assignmentCreate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.AssignmentCreateRequest.FromString,
-                    response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            ),
-            'assignmentRead': grpc.unary_unary_rpc_method_handler(
-                    servicer.assignmentRead,
-                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.AssignmentReadResponse.SerializeToString,
-            ),
             'assignmentUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.assignmentUpdate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.AssignmentUpdateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.AssignmentUpdateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            ),
+            'assignmentUpdateRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.assignmentUpdateRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.AssignmentUpdateReadResponse.SerializeToString,
             ),
             'assignmentDelete': grpc.unary_unary_rpc_method_handler(
                     servicer.assignmentDelete,
                     request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.OkMessage.SerializeToString,
-            ),
-            'assignmentList': grpc.unary_unary_rpc_method_handler(
-                    servicer.assignmentList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.AssignmentListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.AssignmentListResponse.SerializeToString,
-            ),
-            'assignmentActivityLogList': grpc.unary_unary_rpc_method_handler(
-                    servicer.assignmentActivityLogList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.AssignmentActivityLogListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.AssignmentActivityLogListResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1258,40 +1210,6 @@ def add_AssignmentServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class AssignmentService(object):
     """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def assignmentCreate(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AssignmentService/assignmentCreate',
-            krypton_dot_airport_dot_message__pb2.AssignmentCreateRequest.SerializeToString,
-            krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def assignmentRead(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AssignmentService/assignmentRead',
-            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.AssignmentReadResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def assignmentUpdate(request,
@@ -1305,8 +1223,25 @@ class AssignmentService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/AssignmentService/assignmentUpdate',
-            krypton_dot_airport_dot_message__pb2.AssignmentUpdateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.AssignmentUpdateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def assignmentUpdateRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/AssignmentService/assignmentUpdateRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.AssignmentUpdateReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1327,40 +1262,6 @@ class AssignmentService(object):
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
-    @staticmethod
-    def assignmentList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AssignmentService/assignmentList',
-            krypton_dot_airport_dot_message__pb2.AssignmentListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.AssignmentListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def assignmentActivityLogList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AssignmentService/assignmentActivityLogList',
-            krypton_dot_airport_dot_message__pb2.AssignmentActivityLogListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.AssignmentActivityLogListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
 
 class ScheduleServiceStub(object):
     """Missing associated documentation comment in .proto file."""
@@ -1373,33 +1274,38 @@ class ScheduleServiceStub(object):
         """
         self.scheduleAssignmentsAdd = channel.unary_unary(
                 '/ScheduleService/scheduleAssignmentsAdd',
-                request_serializer=krypton_dot_airport_dot_message__pb2.ScheduleAssignmentsAddRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.ScheduleAssignmentsAddRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                 )
         self.scheduleAssignmentsList = channel.unary_unary(
                 '/ScheduleService/scheduleAssignmentsList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.ScheduleAssignmentsListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.ScheduleAssignmentsListResponse.FromString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.ScheduleAssignmentsListRequest.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.ScheduleAssignmentsListResponse.FromString,
                 )
         self.shiftReport = channel.unary_unary(
                 '/ScheduleService/shiftReport',
-                request_serializer=krypton_dot_airport_dot_message__pb2.ShiftReportItemListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.ShiftReportItemListResponse.FromString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.ShiftReportItemListRequest.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.ShiftReportItemListResponse.FromString,
                 )
         self.scheduleCreate = channel.unary_unary(
                 '/ScheduleService/scheduleCreate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.ScheduleCreateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.ScheduleCreateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                 )
         self.scheduleRead = channel.unary_unary(
                 '/ScheduleService/scheduleRead',
                 request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.ScheduleReadResponse.FromString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.ScheduleReadResponse.FromString,
                 )
         self.scheduleUpdate = channel.unary_unary(
                 '/ScheduleService/scheduleUpdate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.ScheduleUpdateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.ScheduleUpdateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                )
+        self.scheduleUpdateRead = channel.unary_unary(
+                '/ScheduleService/scheduleUpdateRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.ScheduleUpdateReadResponse.FromString,
                 )
         self.scheduleDelete = channel.unary_unary(
                 '/ScheduleService/scheduleDelete',
@@ -1408,13 +1314,8 @@ class ScheduleServiceStub(object):
                 )
         self.scheduleList = channel.unary_unary(
                 '/ScheduleService/scheduleList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.ScheduleListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.ScheduleListResponse.FromString,
-                )
-        self.scheduleActivityLogList = channel.unary_unary(
-                '/ScheduleService/scheduleActivityLogList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.ScheduleActivityLogListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.ScheduleActivityLogListResponse.FromString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.ScheduleListRequest.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.ScheduleListResponse.FromString,
                 )
 
 
@@ -1457,6 +1358,12 @@ class ScheduleServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def scheduleUpdateRead(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def scheduleDelete(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -1469,44 +1376,43 @@ class ScheduleServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def scheduleActivityLogList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_ScheduleServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'scheduleAssignmentsAdd': grpc.unary_unary_rpc_method_handler(
                     servicer.scheduleAssignmentsAdd,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.ScheduleAssignmentsAddRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.ScheduleAssignmentsAddRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
             ),
             'scheduleAssignmentsList': grpc.unary_unary_rpc_method_handler(
                     servicer.scheduleAssignmentsList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.ScheduleAssignmentsListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.ScheduleAssignmentsListResponse.SerializeToString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.ScheduleAssignmentsListRequest.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.ScheduleAssignmentsListResponse.SerializeToString,
             ),
             'shiftReport': grpc.unary_unary_rpc_method_handler(
                     servicer.shiftReport,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.ShiftReportItemListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.ShiftReportItemListResponse.SerializeToString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.ShiftReportItemListRequest.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.ShiftReportItemListResponse.SerializeToString,
             ),
             'scheduleCreate': grpc.unary_unary_rpc_method_handler(
                     servicer.scheduleCreate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.ScheduleCreateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.ScheduleCreateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
             ),
             'scheduleRead': grpc.unary_unary_rpc_method_handler(
                     servicer.scheduleRead,
                     request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.ScheduleReadResponse.SerializeToString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.ScheduleReadResponse.SerializeToString,
             ),
             'scheduleUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.scheduleUpdate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.ScheduleUpdateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.ScheduleUpdateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            ),
+            'scheduleUpdateRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.scheduleUpdateRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.ScheduleUpdateReadResponse.SerializeToString,
             ),
             'scheduleDelete': grpc.unary_unary_rpc_method_handler(
                     servicer.scheduleDelete,
@@ -1515,13 +1421,8 @@ def add_ScheduleServiceServicer_to_server(servicer, server):
             ),
             'scheduleList': grpc.unary_unary_rpc_method_handler(
                     servicer.scheduleList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.ScheduleListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.ScheduleListResponse.SerializeToString,
-            ),
-            'scheduleActivityLogList': grpc.unary_unary_rpc_method_handler(
-                    servicer.scheduleActivityLogList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.ScheduleActivityLogListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.ScheduleActivityLogListResponse.SerializeToString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.ScheduleListRequest.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.ScheduleListResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1545,7 +1446,7 @@ class ScheduleService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ScheduleService/scheduleAssignmentsAdd',
-            krypton_dot_airport_dot_message__pb2.ScheduleAssignmentsAddRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.ScheduleAssignmentsAddRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -1562,8 +1463,8 @@ class ScheduleService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ScheduleService/scheduleAssignmentsList',
-            krypton_dot_airport_dot_message__pb2.ScheduleAssignmentsListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.ScheduleAssignmentsListResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.ScheduleAssignmentsListRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.ScheduleAssignmentsListResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1579,8 +1480,8 @@ class ScheduleService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ScheduleService/shiftReport',
-            krypton_dot_airport_dot_message__pb2.ShiftReportItemListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.ShiftReportItemListResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.ShiftReportItemListRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.ShiftReportItemListResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1596,7 +1497,7 @@ class ScheduleService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ScheduleService/scheduleCreate',
-            krypton_dot_airport_dot_message__pb2.ScheduleCreateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.ScheduleCreateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -1614,7 +1515,7 @@ class ScheduleService(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ScheduleService/scheduleRead',
             krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.ScheduleReadResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.ScheduleReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1630,8 +1531,25 @@ class ScheduleService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ScheduleService/scheduleUpdate',
-            krypton_dot_airport_dot_message__pb2.ScheduleUpdateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.ScheduleUpdateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def scheduleUpdateRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ScheduleService/scheduleUpdateRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.ScheduleUpdateReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1664,25 +1582,8 @@ class ScheduleService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/ScheduleService/scheduleList',
-            krypton_dot_airport_dot_message__pb2.ScheduleListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.ScheduleListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def scheduleActivityLogList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/ScheduleService/scheduleActivityLogList',
-            krypton_dot_airport_dot_message__pb2.ScheduleActivityLogListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.ScheduleActivityLogListResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.ScheduleListRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.ScheduleListResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1696,54 +1597,33 @@ class WeaponAmmoServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.weaponAmmoCreate = channel.unary_unary(
-                '/WeaponAmmoService/weaponAmmoCreate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.WeaponAmmoCreateRequest.SerializeToString,
-                response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                )
-        self.weaponAmmoRead = channel.unary_unary(
-                '/WeaponAmmoService/weaponAmmoRead',
-                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.WeaponAmmoReadResponse.FromString,
-                )
         self.weaponAmmoUpdate = channel.unary_unary(
                 '/WeaponAmmoService/weaponAmmoUpdate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.WeaponAmmoUpdateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.WeaponAmmoUpdateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                )
+        self.weaponAmmoUpdateRead = channel.unary_unary(
+                '/WeaponAmmoService/weaponAmmoUpdateRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.WeaponAmmoUpdateReadResponse.FromString,
                 )
         self.weaponAmmoDelete = channel.unary_unary(
                 '/WeaponAmmoService/weaponAmmoDelete',
                 request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.OkMessage.FromString,
                 )
-        self.weaponAmmoList = channel.unary_unary(
-                '/WeaponAmmoService/weaponAmmoList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.WeaponAmmoListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.WeaponAmmoListResponse.FromString,
-                )
-        self.weaponAmmoActivityLogList = channel.unary_unary(
-                '/WeaponAmmoService/weaponAmmoActivityLogList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.WeaponAmmoActivityLogListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.WeaponAmmoActivityLogListResponse.FromString,
-                )
 
 
 class WeaponAmmoServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def weaponAmmoCreate(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def weaponAmmoRead(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def weaponAmmoUpdate(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def weaponAmmoUpdateRead(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1755,50 +1635,23 @@ class WeaponAmmoServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def weaponAmmoList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def weaponAmmoActivityLogList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_WeaponAmmoServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'weaponAmmoCreate': grpc.unary_unary_rpc_method_handler(
-                    servicer.weaponAmmoCreate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.WeaponAmmoCreateRequest.FromString,
-                    response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            ),
-            'weaponAmmoRead': grpc.unary_unary_rpc_method_handler(
-                    servicer.weaponAmmoRead,
-                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.WeaponAmmoReadResponse.SerializeToString,
-            ),
             'weaponAmmoUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.weaponAmmoUpdate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.WeaponAmmoUpdateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.WeaponAmmoUpdateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            ),
+            'weaponAmmoUpdateRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.weaponAmmoUpdateRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.WeaponAmmoUpdateReadResponse.SerializeToString,
             ),
             'weaponAmmoDelete': grpc.unary_unary_rpc_method_handler(
                     servicer.weaponAmmoDelete,
                     request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.OkMessage.SerializeToString,
-            ),
-            'weaponAmmoList': grpc.unary_unary_rpc_method_handler(
-                    servicer.weaponAmmoList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.WeaponAmmoListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.WeaponAmmoListResponse.SerializeToString,
-            ),
-            'weaponAmmoActivityLogList': grpc.unary_unary_rpc_method_handler(
-                    servicer.weaponAmmoActivityLogList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.WeaponAmmoActivityLogListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.WeaponAmmoActivityLogListResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1809,40 +1662,6 @@ def add_WeaponAmmoServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class WeaponAmmoService(object):
     """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def weaponAmmoCreate(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/WeaponAmmoService/weaponAmmoCreate',
-            krypton_dot_airport_dot_message__pb2.WeaponAmmoCreateRequest.SerializeToString,
-            krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def weaponAmmoRead(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/WeaponAmmoService/weaponAmmoRead',
-            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.WeaponAmmoReadResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def weaponAmmoUpdate(request,
@@ -1856,8 +1675,25 @@ class WeaponAmmoService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/WeaponAmmoService/weaponAmmoUpdate',
-            krypton_dot_airport_dot_message__pb2.WeaponAmmoUpdateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.WeaponAmmoUpdateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def weaponAmmoUpdateRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/WeaponAmmoService/weaponAmmoUpdateRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.WeaponAmmoUpdateReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -1878,40 +1714,6 @@ class WeaponAmmoService(object):
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
-    @staticmethod
-    def weaponAmmoList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/WeaponAmmoService/weaponAmmoList',
-            krypton_dot_airport_dot_message__pb2.WeaponAmmoListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.WeaponAmmoListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def weaponAmmoActivityLogList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/WeaponAmmoService/weaponAmmoActivityLogList',
-            krypton_dot_airport_dot_message__pb2.WeaponAmmoActivityLogListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.WeaponAmmoActivityLogListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
 
 class GlobalConfigServiceStub(object):
     """Missing associated documentation comment in .proto file."""
@@ -1924,18 +1726,23 @@ class GlobalConfigServiceStub(object):
         """
         self.globalConfigCreate = channel.unary_unary(
                 '/GlobalConfigService/globalConfigCreate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.GlobalConfigCreateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.GlobalConfigCreateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                 )
         self.globalConfigRead = channel.unary_unary(
                 '/GlobalConfigService/globalConfigRead',
                 request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.GlobalConfigReadResponse.FromString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.GlobalConfigReadResponse.FromString,
                 )
         self.globalConfigUpdate = channel.unary_unary(
                 '/GlobalConfigService/globalConfigUpdate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.GlobalConfigUpdateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.GlobalConfigUpdateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                )
+        self.globalConfigUpdateRead = channel.unary_unary(
+                '/GlobalConfigService/globalConfigUpdateRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.GlobalConfigUpdateReadResponse.FromString,
                 )
         self.globalConfigDelete = channel.unary_unary(
                 '/GlobalConfigService/globalConfigDelete',
@@ -1944,13 +1751,8 @@ class GlobalConfigServiceStub(object):
                 )
         self.globalConfigList = channel.unary_unary(
                 '/GlobalConfigService/globalConfigList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.GlobalConfigListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.GlobalConfigListResponse.FromString,
-                )
-        self.globalConfigActivityLogList = channel.unary_unary(
-                '/GlobalConfigService/globalConfigActivityLogList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.GlobalConfigActivityLogListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.GlobalConfigActivityLogListResponse.FromString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.GlobalConfigListRequest.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.GlobalConfigListResponse.FromString,
                 )
 
 
@@ -1975,6 +1777,12 @@ class GlobalConfigServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def globalConfigUpdateRead(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def globalConfigDelete(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -1987,29 +1795,28 @@ class GlobalConfigServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def globalConfigActivityLogList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_GlobalConfigServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'globalConfigCreate': grpc.unary_unary_rpc_method_handler(
                     servicer.globalConfigCreate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.GlobalConfigCreateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.GlobalConfigCreateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
             ),
             'globalConfigRead': grpc.unary_unary_rpc_method_handler(
                     servicer.globalConfigRead,
                     request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.GlobalConfigReadResponse.SerializeToString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.GlobalConfigReadResponse.SerializeToString,
             ),
             'globalConfigUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.globalConfigUpdate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.GlobalConfigUpdateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.GlobalConfigUpdateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            ),
+            'globalConfigUpdateRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.globalConfigUpdateRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.GlobalConfigUpdateReadResponse.SerializeToString,
             ),
             'globalConfigDelete': grpc.unary_unary_rpc_method_handler(
                     servicer.globalConfigDelete,
@@ -2018,13 +1825,8 @@ def add_GlobalConfigServiceServicer_to_server(servicer, server):
             ),
             'globalConfigList': grpc.unary_unary_rpc_method_handler(
                     servicer.globalConfigList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.GlobalConfigListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.GlobalConfigListResponse.SerializeToString,
-            ),
-            'globalConfigActivityLogList': grpc.unary_unary_rpc_method_handler(
-                    servicer.globalConfigActivityLogList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.GlobalConfigActivityLogListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.GlobalConfigActivityLogListResponse.SerializeToString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.GlobalConfigListRequest.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.GlobalConfigListResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -2048,7 +1850,7 @@ class GlobalConfigService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/GlobalConfigService/globalConfigCreate',
-            krypton_dot_airport_dot_message__pb2.GlobalConfigCreateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.GlobalConfigCreateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -2066,7 +1868,7 @@ class GlobalConfigService(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/GlobalConfigService/globalConfigRead',
             krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.GlobalConfigReadResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.GlobalConfigReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2082,8 +1884,25 @@ class GlobalConfigService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/GlobalConfigService/globalConfigUpdate',
-            krypton_dot_airport_dot_message__pb2.GlobalConfigUpdateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.GlobalConfigUpdateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def globalConfigUpdateRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/GlobalConfigService/globalConfigUpdateRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.GlobalConfigUpdateReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2116,25 +1935,8 @@ class GlobalConfigService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/GlobalConfigService/globalConfigList',
-            krypton_dot_airport_dot_message__pb2.GlobalConfigListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.GlobalConfigListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def globalConfigActivityLogList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/GlobalConfigService/globalConfigActivityLogList',
-            krypton_dot_airport_dot_message__pb2.GlobalConfigActivityLogListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.GlobalConfigActivityLogListResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.GlobalConfigListRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.GlobalConfigListResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2148,54 +1950,33 @@ class FlowAlertsServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.flowAlertsCreate = channel.unary_unary(
-                '/FlowAlertsService/flowAlertsCreate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.FlowAlertsCreateRequest.SerializeToString,
-                response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                )
-        self.flowAlertsRead = channel.unary_unary(
-                '/FlowAlertsService/flowAlertsRead',
-                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.FlowAlertsReadResponse.FromString,
-                )
         self.flowAlertsUpdate = channel.unary_unary(
                 '/FlowAlertsService/flowAlertsUpdate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.FlowAlertsUpdateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.FlowAlertsUpdateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                )
+        self.flowAlertsUpdateRead = channel.unary_unary(
+                '/FlowAlertsService/flowAlertsUpdateRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.FlowAlertsUpdateReadResponse.FromString,
                 )
         self.flowAlertsDelete = channel.unary_unary(
                 '/FlowAlertsService/flowAlertsDelete',
                 request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.OkMessage.FromString,
                 )
-        self.flowAlertsList = channel.unary_unary(
-                '/FlowAlertsService/flowAlertsList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.FlowAlertsListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.FlowAlertsListResponse.FromString,
-                )
-        self.flowAlertsActivityLogList = channel.unary_unary(
-                '/FlowAlertsService/flowAlertsActivityLogList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.FlowAlertsActivityLogListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.FlowAlertsActivityLogListResponse.FromString,
-                )
 
 
 class FlowAlertsServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def flowAlertsCreate(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def flowAlertsRead(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def flowAlertsUpdate(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def flowAlertsUpdateRead(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2207,50 +1988,23 @@ class FlowAlertsServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def flowAlertsList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def flowAlertsActivityLogList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_FlowAlertsServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'flowAlertsCreate': grpc.unary_unary_rpc_method_handler(
-                    servicer.flowAlertsCreate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.FlowAlertsCreateRequest.FromString,
-                    response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            ),
-            'flowAlertsRead': grpc.unary_unary_rpc_method_handler(
-                    servicer.flowAlertsRead,
-                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.FlowAlertsReadResponse.SerializeToString,
-            ),
             'flowAlertsUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.flowAlertsUpdate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.FlowAlertsUpdateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.FlowAlertsUpdateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            ),
+            'flowAlertsUpdateRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.flowAlertsUpdateRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.FlowAlertsUpdateReadResponse.SerializeToString,
             ),
             'flowAlertsDelete': grpc.unary_unary_rpc_method_handler(
                     servicer.flowAlertsDelete,
                     request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.OkMessage.SerializeToString,
-            ),
-            'flowAlertsList': grpc.unary_unary_rpc_method_handler(
-                    servicer.flowAlertsList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.FlowAlertsListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.FlowAlertsListResponse.SerializeToString,
-            ),
-            'flowAlertsActivityLogList': grpc.unary_unary_rpc_method_handler(
-                    servicer.flowAlertsActivityLogList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.FlowAlertsActivityLogListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.FlowAlertsActivityLogListResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -2261,40 +2015,6 @@ def add_FlowAlertsServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class FlowAlertsService(object):
     """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def flowAlertsCreate(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/FlowAlertsService/flowAlertsCreate',
-            krypton_dot_airport_dot_message__pb2.FlowAlertsCreateRequest.SerializeToString,
-            krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def flowAlertsRead(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/FlowAlertsService/flowAlertsRead',
-            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.FlowAlertsReadResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def flowAlertsUpdate(request,
@@ -2308,8 +2028,25 @@ class FlowAlertsService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/FlowAlertsService/flowAlertsUpdate',
-            krypton_dot_airport_dot_message__pb2.FlowAlertsUpdateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.FlowAlertsUpdateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def flowAlertsUpdateRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/FlowAlertsService/flowAlertsUpdateRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.FlowAlertsUpdateReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2330,40 +2067,6 @@ class FlowAlertsService(object):
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
-    @staticmethod
-    def flowAlertsList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/FlowAlertsService/flowAlertsList',
-            krypton_dot_airport_dot_message__pb2.FlowAlertsListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.FlowAlertsListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def flowAlertsActivityLogList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/FlowAlertsService/flowAlertsActivityLogList',
-            krypton_dot_airport_dot_message__pb2.FlowAlertsActivityLogListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.FlowAlertsActivityLogListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
 
 class CommonInfoServiceStub(object):
     """Missing associated documentation comment in .proto file."""
@@ -2374,54 +2077,33 @@ class CommonInfoServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.commonInfoCreate = channel.unary_unary(
-                '/CommonInfoService/commonInfoCreate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.CommonInfoCreateRequest.SerializeToString,
-                response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                )
-        self.commonInfoRead = channel.unary_unary(
-                '/CommonInfoService/commonInfoRead',
-                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.CommonInfoReadResponse.FromString,
-                )
         self.commonInfoUpdate = channel.unary_unary(
                 '/CommonInfoService/commonInfoUpdate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.CommonInfoUpdateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.CommonInfoUpdateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                )
+        self.commonInfoUpdateRead = channel.unary_unary(
+                '/CommonInfoService/commonInfoUpdateRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.CommonInfoUpdateReadResponse.FromString,
                 )
         self.commonInfoDelete = channel.unary_unary(
                 '/CommonInfoService/commonInfoDelete',
                 request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.OkMessage.FromString,
                 )
-        self.commonInfoList = channel.unary_unary(
-                '/CommonInfoService/commonInfoList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.CommonInfoListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.CommonInfoListResponse.FromString,
-                )
-        self.commonInfoActivityLogList = channel.unary_unary(
-                '/CommonInfoService/commonInfoActivityLogList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.CommonInfoActivityLogListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.CommonInfoActivityLogListResponse.FromString,
-                )
 
 
 class CommonInfoServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def commonInfoCreate(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def commonInfoRead(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def commonInfoUpdate(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def commonInfoUpdateRead(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2433,50 +2115,23 @@ class CommonInfoServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def commonInfoList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def commonInfoActivityLogList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_CommonInfoServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'commonInfoCreate': grpc.unary_unary_rpc_method_handler(
-                    servicer.commonInfoCreate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.CommonInfoCreateRequest.FromString,
-                    response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            ),
-            'commonInfoRead': grpc.unary_unary_rpc_method_handler(
-                    servicer.commonInfoRead,
-                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.CommonInfoReadResponse.SerializeToString,
-            ),
             'commonInfoUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.commonInfoUpdate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.CommonInfoUpdateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.CommonInfoUpdateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            ),
+            'commonInfoUpdateRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.commonInfoUpdateRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.CommonInfoUpdateReadResponse.SerializeToString,
             ),
             'commonInfoDelete': grpc.unary_unary_rpc_method_handler(
                     servicer.commonInfoDelete,
                     request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.OkMessage.SerializeToString,
-            ),
-            'commonInfoList': grpc.unary_unary_rpc_method_handler(
-                    servicer.commonInfoList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.CommonInfoListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.CommonInfoListResponse.SerializeToString,
-            ),
-            'commonInfoActivityLogList': grpc.unary_unary_rpc_method_handler(
-                    servicer.commonInfoActivityLogList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.CommonInfoActivityLogListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.CommonInfoActivityLogListResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -2487,40 +2142,6 @@ def add_CommonInfoServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class CommonInfoService(object):
     """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def commonInfoCreate(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/CommonInfoService/commonInfoCreate',
-            krypton_dot_airport_dot_message__pb2.CommonInfoCreateRequest.SerializeToString,
-            krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def commonInfoRead(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/CommonInfoService/commonInfoRead',
-            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.CommonInfoReadResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def commonInfoUpdate(request,
@@ -2534,8 +2155,25 @@ class CommonInfoService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/CommonInfoService/commonInfoUpdate',
-            krypton_dot_airport_dot_message__pb2.CommonInfoUpdateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.CommonInfoUpdateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def commonInfoUpdateRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/CommonInfoService/commonInfoUpdateRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.CommonInfoUpdateReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2556,40 +2194,6 @@ class CommonInfoService(object):
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
-    @staticmethod
-    def commonInfoList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/CommonInfoService/commonInfoList',
-            krypton_dot_airport_dot_message__pb2.CommonInfoListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.CommonInfoListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def commonInfoActivityLogList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/CommonInfoService/commonInfoActivityLogList',
-            krypton_dot_airport_dot_message__pb2.CommonInfoActivityLogListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.CommonInfoActivityLogListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
 
 class AmmoInfoServiceStub(object):
     """Missing associated documentation comment in .proto file."""
@@ -2600,54 +2204,33 @@ class AmmoInfoServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.ammoInfoCreate = channel.unary_unary(
-                '/AmmoInfoService/ammoInfoCreate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.AmmoInfoCreateRequest.SerializeToString,
-                response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                )
-        self.ammoInfoRead = channel.unary_unary(
-                '/AmmoInfoService/ammoInfoRead',
-                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.AmmoInfoReadResponse.FromString,
-                )
         self.ammoInfoUpdate = channel.unary_unary(
                 '/AmmoInfoService/ammoInfoUpdate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.AmmoInfoUpdateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.AmmoInfoUpdateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                )
+        self.ammoInfoUpdateRead = channel.unary_unary(
+                '/AmmoInfoService/ammoInfoUpdateRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.AmmoInfoUpdateReadResponse.FromString,
                 )
         self.ammoInfoDelete = channel.unary_unary(
                 '/AmmoInfoService/ammoInfoDelete',
                 request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.OkMessage.FromString,
                 )
-        self.ammoInfoList = channel.unary_unary(
-                '/AmmoInfoService/ammoInfoList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.AmmoInfoListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.AmmoInfoListResponse.FromString,
-                )
-        self.ammoInfoActivityLogList = channel.unary_unary(
-                '/AmmoInfoService/ammoInfoActivityLogList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.AmmoInfoActivityLogListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.AmmoInfoActivityLogListResponse.FromString,
-                )
 
 
 class AmmoInfoServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def ammoInfoCreate(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ammoInfoRead(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def ammoInfoUpdate(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ammoInfoUpdateRead(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2659,50 +2242,23 @@ class AmmoInfoServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ammoInfoList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ammoInfoActivityLogList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_AmmoInfoServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'ammoInfoCreate': grpc.unary_unary_rpc_method_handler(
-                    servicer.ammoInfoCreate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.AmmoInfoCreateRequest.FromString,
-                    response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            ),
-            'ammoInfoRead': grpc.unary_unary_rpc_method_handler(
-                    servicer.ammoInfoRead,
-                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.AmmoInfoReadResponse.SerializeToString,
-            ),
             'ammoInfoUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.ammoInfoUpdate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.AmmoInfoUpdateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.AmmoInfoUpdateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            ),
+            'ammoInfoUpdateRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.ammoInfoUpdateRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.AmmoInfoUpdateReadResponse.SerializeToString,
             ),
             'ammoInfoDelete': grpc.unary_unary_rpc_method_handler(
                     servicer.ammoInfoDelete,
                     request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.OkMessage.SerializeToString,
-            ),
-            'ammoInfoList': grpc.unary_unary_rpc_method_handler(
-                    servicer.ammoInfoList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.AmmoInfoListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.AmmoInfoListResponse.SerializeToString,
-            ),
-            'ammoInfoActivityLogList': grpc.unary_unary_rpc_method_handler(
-                    servicer.ammoInfoActivityLogList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.AmmoInfoActivityLogListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.AmmoInfoActivityLogListResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -2713,40 +2269,6 @@ def add_AmmoInfoServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class AmmoInfoService(object):
     """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def ammoInfoCreate(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AmmoInfoService/ammoInfoCreate',
-            krypton_dot_airport_dot_message__pb2.AmmoInfoCreateRequest.SerializeToString,
-            krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ammoInfoRead(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AmmoInfoService/ammoInfoRead',
-            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.AmmoInfoReadResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ammoInfoUpdate(request,
@@ -2760,8 +2282,25 @@ class AmmoInfoService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/AmmoInfoService/ammoInfoUpdate',
-            krypton_dot_airport_dot_message__pb2.AmmoInfoUpdateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.AmmoInfoUpdateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ammoInfoUpdateRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/AmmoInfoService/ammoInfoUpdateRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.AmmoInfoUpdateReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -2782,40 +2321,6 @@ class AmmoInfoService(object):
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
-    @staticmethod
-    def ammoInfoList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AmmoInfoService/ammoInfoList',
-            krypton_dot_airport_dot_message__pb2.AmmoInfoListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.AmmoInfoListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ammoInfoActivityLogList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AmmoInfoService/ammoInfoActivityLogList',
-            krypton_dot_airport_dot_message__pb2.AmmoInfoActivityLogListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.AmmoInfoActivityLogListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
 
 class FlowsServiceStub(object):
     """Missing associated documentation comment in .proto file."""
@@ -2828,18 +2333,23 @@ class FlowsServiceStub(object):
         """
         self.flowsCreate = channel.unary_unary(
                 '/FlowsService/flowsCreate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.FlowsCreateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.FlowsCreateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                 )
         self.flowsRead = channel.unary_unary(
                 '/FlowsService/flowsRead',
                 request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.FlowsReadResponse.FromString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.FlowsReadResponse.FromString,
                 )
         self.flowsUpdate = channel.unary_unary(
                 '/FlowsService/flowsUpdate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.FlowsUpdateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.FlowsUpdateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                )
+        self.flowsUpdateRead = channel.unary_unary(
+                '/FlowsService/flowsUpdateRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.FlowsUpdateReadResponse.FromString,
                 )
         self.flowsDelete = channel.unary_unary(
                 '/FlowsService/flowsDelete',
@@ -2848,23 +2358,18 @@ class FlowsServiceStub(object):
                 )
         self.flowsList = channel.unary_unary(
                 '/FlowsService/flowsList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.FlowsListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.FlowsListResponse.FromString,
-                )
-        self.flowsActivityLogList = channel.unary_unary(
-                '/FlowsService/flowsActivityLogList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.FlowsActivityLogListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.FlowsActivityLogListResponse.FromString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.FlowsListRequest.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.FlowsListResponse.FromString,
                 )
         self.flowsOnScan = channel.unary_unary(
                 '/FlowsService/flowsOnScan',
-                request_serializer=krypton_dot_airport_dot_message__pb2.FlowsOnScanRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.FlowsOnScanResponse.FromString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.FlowsOnScanRequest.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.FlowsOnScanResponse.FromString,
                 )
         self.flowsListen = channel.unary_stream(
                 '/FlowsService/flowsListen',
                 request_serializer=krypton_dot_common_dot_message__pb2.OkMessage.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.FlowsReadResponse.FromString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.FlowsReadResponse.FromString,
                 )
 
 
@@ -2889,6 +2394,12 @@ class FlowsServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def flowsUpdateRead(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def flowsDelete(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -2896,12 +2407,6 @@ class FlowsServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def flowsList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def flowsActivityLogList(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2924,18 +2429,23 @@ def add_FlowsServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'flowsCreate': grpc.unary_unary_rpc_method_handler(
                     servicer.flowsCreate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.FlowsCreateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.FlowsCreateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
             ),
             'flowsRead': grpc.unary_unary_rpc_method_handler(
                     servicer.flowsRead,
                     request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.FlowsReadResponse.SerializeToString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.FlowsReadResponse.SerializeToString,
             ),
             'flowsUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.flowsUpdate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.FlowsUpdateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.FlowsUpdateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            ),
+            'flowsUpdateRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.flowsUpdateRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.FlowsUpdateReadResponse.SerializeToString,
             ),
             'flowsDelete': grpc.unary_unary_rpc_method_handler(
                     servicer.flowsDelete,
@@ -2944,23 +2454,18 @@ def add_FlowsServiceServicer_to_server(servicer, server):
             ),
             'flowsList': grpc.unary_unary_rpc_method_handler(
                     servicer.flowsList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.FlowsListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.FlowsListResponse.SerializeToString,
-            ),
-            'flowsActivityLogList': grpc.unary_unary_rpc_method_handler(
-                    servicer.flowsActivityLogList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.FlowsActivityLogListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.FlowsActivityLogListResponse.SerializeToString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.FlowsListRequest.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.FlowsListResponse.SerializeToString,
             ),
             'flowsOnScan': grpc.unary_unary_rpc_method_handler(
                     servicer.flowsOnScan,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.FlowsOnScanRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.FlowsOnScanResponse.SerializeToString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.FlowsOnScanRequest.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.FlowsOnScanResponse.SerializeToString,
             ),
             'flowsListen': grpc.unary_stream_rpc_method_handler(
                     servicer.flowsListen,
                     request_deserializer=krypton_dot_common_dot_message__pb2.OkMessage.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.FlowsReadResponse.SerializeToString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.FlowsReadResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -2984,7 +2489,7 @@ class FlowsService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/FlowsService/flowsCreate',
-            krypton_dot_airport_dot_message__pb2.FlowsCreateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.FlowsCreateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -3002,7 +2507,7 @@ class FlowsService(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/FlowsService/flowsRead',
             krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.FlowsReadResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.FlowsReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -3018,8 +2523,25 @@ class FlowsService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/FlowsService/flowsUpdate',
-            krypton_dot_airport_dot_message__pb2.FlowsUpdateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.FlowsUpdateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def flowsUpdateRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/FlowsService/flowsUpdateRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.FlowsUpdateReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -3052,25 +2574,8 @@ class FlowsService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/FlowsService/flowsList',
-            krypton_dot_airport_dot_message__pb2.FlowsListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.FlowsListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def flowsActivityLogList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/FlowsService/flowsActivityLogList',
-            krypton_dot_airport_dot_message__pb2.FlowsActivityLogListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.FlowsActivityLogListResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.FlowsListRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.FlowsListResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -3086,8 +2591,8 @@ class FlowsService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/FlowsService/flowsOnScan',
-            krypton_dot_airport_dot_message__pb2.FlowsOnScanRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.FlowsOnScanResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.FlowsOnScanRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.FlowsOnScanResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -3104,12 +2609,12 @@ class FlowsService(object):
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/FlowsService/flowsListen',
             krypton_dot_common_dot_message__pb2.OkMessage.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.FlowsReadResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.FlowsReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
 
-class AlertServiceStub(object):
+class AlertsServiceStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -3118,74 +2623,74 @@ class AlertServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.alertCreate = channel.unary_unary(
-                '/AlertService/alertCreate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.AlertCreateRequest.SerializeToString,
+        self.alertsCreate = channel.unary_unary(
+                '/AlertsService/alertsCreate',
+                request_serializer=krypton_dot_cisf_dot_message__pb2.AlertsCreateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                 )
-        self.alertRead = channel.unary_unary(
-                '/AlertService/alertRead',
+        self.alertsRead = channel.unary_unary(
+                '/AlertsService/alertsRead',
                 request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.AlertReadResponse.FromString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.AlertsReadResponse.FromString,
                 )
-        self.alertList = channel.unary_unary(
-                '/AlertService/alertList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.AlertListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.AlertListResponse.FromString,
+        self.alertsList = channel.unary_unary(
+                '/AlertsService/alertsList',
+                request_serializer=krypton_dot_cisf_dot_message__pb2.AlertsListRequest.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.AlertsListResponse.FromString,
                 )
 
 
-class AlertServiceServicer(object):
+class AlertsServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def alertCreate(self, request, context):
+    def alertsCreate(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def alertRead(self, request, context):
+    def alertsRead(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def alertList(self, request, context):
+    def alertsList(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_AlertServiceServicer_to_server(servicer, server):
+def add_AlertsServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'alertCreate': grpc.unary_unary_rpc_method_handler(
-                    servicer.alertCreate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.AlertCreateRequest.FromString,
+            'alertsCreate': grpc.unary_unary_rpc_method_handler(
+                    servicer.alertsCreate,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.AlertsCreateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
             ),
-            'alertRead': grpc.unary_unary_rpc_method_handler(
-                    servicer.alertRead,
+            'alertsRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.alertsRead,
                     request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.AlertReadResponse.SerializeToString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.AlertsReadResponse.SerializeToString,
             ),
-            'alertList': grpc.unary_unary_rpc_method_handler(
-                    servicer.alertList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.AlertListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.AlertListResponse.SerializeToString,
+            'alertsList': grpc.unary_unary_rpc_method_handler(
+                    servicer.alertsList,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.AlertsListRequest.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.AlertsListResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'AlertService', rpc_method_handlers)
+            'AlertsService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class AlertService(object):
+class AlertsService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def alertCreate(request,
+    def alertsCreate(request,
             target,
             options=(),
             channel_credentials=None,
@@ -3195,14 +2700,14 @@ class AlertService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AlertService/alertCreate',
-            krypton_dot_airport_dot_message__pb2.AlertCreateRequest.SerializeToString,
+        return grpc.experimental.unary_unary(request, target, '/AlertsService/alertsCreate',
+            krypton_dot_cisf_dot_message__pb2.AlertsCreateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def alertRead(request,
+    def alertsRead(request,
             target,
             options=(),
             channel_credentials=None,
@@ -3212,14 +2717,14 @@ class AlertService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AlertService/alertRead',
+        return grpc.experimental.unary_unary(request, target, '/AlertsService/alertsRead',
             krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.AlertReadResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.AlertsReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def alertList(request,
+    def alertsList(request,
             target,
             options=(),
             channel_credentials=None,
@@ -3229,9 +2734,9 @@ class AlertService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AlertService/alertList',
-            krypton_dot_airport_dot_message__pb2.AlertListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.AlertListResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/AlertsService/alertsList',
+            krypton_dot_cisf_dot_message__pb2.AlertsListRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.AlertsListResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -3247,18 +2752,23 @@ class UserServiceStub(object):
         """
         self.userCreate = channel.unary_unary(
                 '/UserService/userCreate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.UserCreateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.UserCreateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                 )
         self.userRead = channel.unary_unary(
                 '/UserService/userRead',
                 request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.UserReadResponse.FromString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.UserReadResponse.FromString,
                 )
         self.userUpdate = channel.unary_unary(
                 '/UserService/userUpdate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.UserUpdateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.UserUpdateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                )
+        self.userUpdateRead = channel.unary_unary(
+                '/UserService/userUpdateRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.UserUpdateReadResponse.FromString,
                 )
         self.userDelete = channel.unary_unary(
                 '/UserService/userDelete',
@@ -3267,17 +2777,12 @@ class UserServiceStub(object):
                 )
         self.userList = channel.unary_unary(
                 '/UserService/userList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.UserListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.UserListResponse.FromString,
-                )
-        self.userActivityLogList = channel.unary_unary(
-                '/UserService/userActivityLogList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.UserActivityLogListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.UserActivityLogListResponse.FromString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.UserListRequest.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.UserListResponse.FromString,
                 )
         self.userCreateSuper = channel.unary_unary(
                 '/UserService/userCreateSuper',
-                request_serializer=krypton_dot_airport_dot_message__pb2.UserCreateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.UserCreateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                 )
 
@@ -3303,6 +2808,12 @@ class UserServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def userUpdateRead(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def userDelete(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -3310,12 +2821,6 @@ class UserServiceServicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def userList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def userActivityLogList(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3332,18 +2837,23 @@ def add_UserServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'userCreate': grpc.unary_unary_rpc_method_handler(
                     servicer.userCreate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.UserCreateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.UserCreateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
             ),
             'userRead': grpc.unary_unary_rpc_method_handler(
                     servicer.userRead,
                     request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.UserReadResponse.SerializeToString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.UserReadResponse.SerializeToString,
             ),
             'userUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.userUpdate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.UserUpdateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.UserUpdateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            ),
+            'userUpdateRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.userUpdateRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.UserUpdateReadResponse.SerializeToString,
             ),
             'userDelete': grpc.unary_unary_rpc_method_handler(
                     servicer.userDelete,
@@ -3352,17 +2862,12 @@ def add_UserServiceServicer_to_server(servicer, server):
             ),
             'userList': grpc.unary_unary_rpc_method_handler(
                     servicer.userList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.UserListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.UserListResponse.SerializeToString,
-            ),
-            'userActivityLogList': grpc.unary_unary_rpc_method_handler(
-                    servicer.userActivityLogList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.UserActivityLogListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.UserActivityLogListResponse.SerializeToString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.UserListRequest.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.UserListResponse.SerializeToString,
             ),
             'userCreateSuper': grpc.unary_unary_rpc_method_handler(
                     servicer.userCreateSuper,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.UserCreateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.UserCreateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
             ),
     }
@@ -3387,7 +2892,7 @@ class UserService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/UserService/userCreate',
-            krypton_dot_airport_dot_message__pb2.UserCreateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.UserCreateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -3405,7 +2910,7 @@ class UserService(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/UserService/userRead',
             krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.UserReadResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.UserReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -3421,8 +2926,25 @@ class UserService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/UserService/userUpdate',
-            krypton_dot_airport_dot_message__pb2.UserUpdateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.UserUpdateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def userUpdateRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/UserService/userUpdateRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.UserUpdateReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -3455,25 +2977,8 @@ class UserService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/UserService/userList',
-            krypton_dot_airport_dot_message__pb2.UserListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.UserListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def userActivityLogList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/UserService/userActivityLogList',
-            krypton_dot_airport_dot_message__pb2.UserActivityLogListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.UserActivityLogListResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.UserListRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.UserListResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -3489,7 +2994,7 @@ class UserService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/UserService/userCreateSuper',
-            krypton_dot_airport_dot_message__pb2.UserCreateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.UserCreateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -3504,54 +3009,33 @@ class WeaponInfoServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.weaponInfoCreate = channel.unary_unary(
-                '/WeaponInfoService/weaponInfoCreate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.WeaponInfoCreateRequest.SerializeToString,
-                response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                )
-        self.weaponInfoRead = channel.unary_unary(
-                '/WeaponInfoService/weaponInfoRead',
-                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.WeaponInfoReadResponse.FromString,
-                )
         self.weaponInfoUpdate = channel.unary_unary(
                 '/WeaponInfoService/weaponInfoUpdate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.WeaponInfoUpdateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.WeaponInfoUpdateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                )
+        self.weaponInfoUpdateRead = channel.unary_unary(
+                '/WeaponInfoService/weaponInfoUpdateRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.WeaponInfoUpdateReadResponse.FromString,
                 )
         self.weaponInfoDelete = channel.unary_unary(
                 '/WeaponInfoService/weaponInfoDelete',
                 request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.OkMessage.FromString,
                 )
-        self.weaponInfoList = channel.unary_unary(
-                '/WeaponInfoService/weaponInfoList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.WeaponInfoListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.WeaponInfoListResponse.FromString,
-                )
-        self.weaponInfoActivityLogList = channel.unary_unary(
-                '/WeaponInfoService/weaponInfoActivityLogList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.WeaponInfoActivityLogListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.WeaponInfoActivityLogListResponse.FromString,
-                )
 
 
 class WeaponInfoServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def weaponInfoCreate(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def weaponInfoRead(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def weaponInfoUpdate(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def weaponInfoUpdateRead(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3563,50 +3047,23 @@ class WeaponInfoServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def weaponInfoList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def weaponInfoActivityLogList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_WeaponInfoServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'weaponInfoCreate': grpc.unary_unary_rpc_method_handler(
-                    servicer.weaponInfoCreate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.WeaponInfoCreateRequest.FromString,
-                    response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            ),
-            'weaponInfoRead': grpc.unary_unary_rpc_method_handler(
-                    servicer.weaponInfoRead,
-                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.WeaponInfoReadResponse.SerializeToString,
-            ),
             'weaponInfoUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.weaponInfoUpdate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.WeaponInfoUpdateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.WeaponInfoUpdateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            ),
+            'weaponInfoUpdateRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.weaponInfoUpdateRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.WeaponInfoUpdateReadResponse.SerializeToString,
             ),
             'weaponInfoDelete': grpc.unary_unary_rpc_method_handler(
                     servicer.weaponInfoDelete,
                     request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.OkMessage.SerializeToString,
-            ),
-            'weaponInfoList': grpc.unary_unary_rpc_method_handler(
-                    servicer.weaponInfoList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.WeaponInfoListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.WeaponInfoListResponse.SerializeToString,
-            ),
-            'weaponInfoActivityLogList': grpc.unary_unary_rpc_method_handler(
-                    servicer.weaponInfoActivityLogList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.WeaponInfoActivityLogListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.WeaponInfoActivityLogListResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -3617,40 +3074,6 @@ def add_WeaponInfoServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class WeaponInfoService(object):
     """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def weaponInfoCreate(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/WeaponInfoService/weaponInfoCreate',
-            krypton_dot_airport_dot_message__pb2.WeaponInfoCreateRequest.SerializeToString,
-            krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def weaponInfoRead(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/WeaponInfoService/weaponInfoRead',
-            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.WeaponInfoReadResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def weaponInfoUpdate(request,
@@ -3664,8 +3087,25 @@ class WeaponInfoService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/WeaponInfoService/weaponInfoUpdate',
-            krypton_dot_airport_dot_message__pb2.WeaponInfoUpdateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.WeaponInfoUpdateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def weaponInfoUpdateRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/WeaponInfoService/weaponInfoUpdateRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.WeaponInfoUpdateReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -3686,40 +3126,6 @@ class WeaponInfoService(object):
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
-    @staticmethod
-    def weaponInfoList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/WeaponInfoService/weaponInfoList',
-            krypton_dot_airport_dot_message__pb2.WeaponInfoListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.WeaponInfoListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def weaponInfoActivityLogList(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/WeaponInfoService/weaponInfoActivityLogList',
-            krypton_dot_airport_dot_message__pb2.WeaponInfoActivityLogListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.WeaponInfoActivityLogListResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
 
 class AccessControlServiceStub(object):
     """Missing associated documentation comment in .proto file."""
@@ -3732,18 +3138,23 @@ class AccessControlServiceStub(object):
         """
         self.accessControlCreate = channel.unary_unary(
                 '/AccessControlService/accessControlCreate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.AccessControlCreateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.AccessControlCreateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
                 )
         self.accessControlRead = channel.unary_unary(
                 '/AccessControlService/accessControlRead',
                 request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.AccessControlReadResponse.FromString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.AccessControlReadResponse.FromString,
                 )
         self.accessControlUpdate = channel.unary_unary(
                 '/AccessControlService/accessControlUpdate',
-                request_serializer=krypton_dot_airport_dot_message__pb2.AccessControlUpdateRequest.SerializeToString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.AccessControlUpdateRequest.SerializeToString,
                 response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                )
+        self.accessControlUpdateRead = channel.unary_unary(
+                '/AccessControlService/accessControlUpdateRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.AccessControlUpdateReadResponse.FromString,
                 )
         self.accessControlDelete = channel.unary_unary(
                 '/AccessControlService/accessControlDelete',
@@ -3752,13 +3163,8 @@ class AccessControlServiceStub(object):
                 )
         self.accessControlList = channel.unary_unary(
                 '/AccessControlService/accessControlList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.AccessControlListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.AccessControlListResponse.FromString,
-                )
-        self.accessControlActivityLogList = channel.unary_unary(
-                '/AccessControlService/accessControlActivityLogList',
-                request_serializer=krypton_dot_airport_dot_message__pb2.AccessControlActivityLogListRequest.SerializeToString,
-                response_deserializer=krypton_dot_airport_dot_message__pb2.AccessControlActivityLogListResponse.FromString,
+                request_serializer=krypton_dot_cisf_dot_message__pb2.AccessControlListRequest.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.AccessControlListResponse.FromString,
                 )
 
 
@@ -3783,6 +3189,12 @@ class AccessControlServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def accessControlUpdateRead(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def accessControlDelete(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -3795,29 +3207,28 @@ class AccessControlServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def accessControlActivityLogList(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_AccessControlServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'accessControlCreate': grpc.unary_unary_rpc_method_handler(
                     servicer.accessControlCreate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.AccessControlCreateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.AccessControlCreateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
             ),
             'accessControlRead': grpc.unary_unary_rpc_method_handler(
                     servicer.accessControlRead,
                     request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.AccessControlReadResponse.SerializeToString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.AccessControlReadResponse.SerializeToString,
             ),
             'accessControlUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.accessControlUpdate,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.AccessControlUpdateRequest.FromString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.AccessControlUpdateRequest.FromString,
                     response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            ),
+            'accessControlUpdateRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.accessControlUpdateRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.AccessControlUpdateReadResponse.SerializeToString,
             ),
             'accessControlDelete': grpc.unary_unary_rpc_method_handler(
                     servicer.accessControlDelete,
@@ -3826,13 +3237,8 @@ def add_AccessControlServiceServicer_to_server(servicer, server):
             ),
             'accessControlList': grpc.unary_unary_rpc_method_handler(
                     servicer.accessControlList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.AccessControlListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.AccessControlListResponse.SerializeToString,
-            ),
-            'accessControlActivityLogList': grpc.unary_unary_rpc_method_handler(
-                    servicer.accessControlActivityLogList,
-                    request_deserializer=krypton_dot_airport_dot_message__pb2.AccessControlActivityLogListRequest.FromString,
-                    response_serializer=krypton_dot_airport_dot_message__pb2.AccessControlActivityLogListResponse.SerializeToString,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.AccessControlListRequest.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.AccessControlListResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -3856,7 +3262,7 @@ class AccessControlService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/AccessControlService/accessControlCreate',
-            krypton_dot_airport_dot_message__pb2.AccessControlCreateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.AccessControlCreateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -3874,7 +3280,7 @@ class AccessControlService(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/AccessControlService/accessControlRead',
             krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.AccessControlReadResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.AccessControlReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -3890,8 +3296,25 @@ class AccessControlService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/AccessControlService/accessControlUpdate',
-            krypton_dot_airport_dot_message__pb2.AccessControlUpdateRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.AccessControlUpdateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def accessControlUpdateRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/AccessControlService/accessControlUpdateRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.AccessControlUpdateReadResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -3924,13 +3347,137 @@ class AccessControlService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/AccessControlService/accessControlList',
-            krypton_dot_airport_dot_message__pb2.AccessControlListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.AccessControlListResponse.FromString,
+            krypton_dot_cisf_dot_message__pb2.AccessControlListRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.AccessControlListResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
+
+class ResourceGroupServiceStub(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.resourceGroupCreate = channel.unary_unary(
+                '/ResourceGroupService/resourceGroupCreate',
+                request_serializer=krypton_dot_cisf_dot_message__pb2.ResourceGroupCreateRequest.SerializeToString,
+                response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                )
+        self.resourceGroupRead = channel.unary_unary(
+                '/ResourceGroupService/resourceGroupRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.ResourceGroupReadResponse.FromString,
+                )
+        self.resourceGroupUpdate = channel.unary_unary(
+                '/ResourceGroupService/resourceGroupUpdate',
+                request_serializer=krypton_dot_cisf_dot_message__pb2.ResourceGroupUpdateRequest.SerializeToString,
+                response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                )
+        self.resourceGroupUpdateRead = channel.unary_unary(
+                '/ResourceGroupService/resourceGroupUpdateRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.ResourceGroupUpdateReadResponse.FromString,
+                )
+        self.resourceGroupDelete = channel.unary_unary(
+                '/ResourceGroupService/resourceGroupDelete',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_common_dot_message__pb2.OkMessage.FromString,
+                )
+        self.resourceGroupList = channel.unary_unary(
+                '/ResourceGroupService/resourceGroupList',
+                request_serializer=krypton_dot_cisf_dot_message__pb2.ResourceGroupListRequest.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.ResourceGroupListResponse.FromString,
+                )
+
+
+class ResourceGroupServiceServicer(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def resourceGroupCreate(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def resourceGroupRead(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def resourceGroupUpdate(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def resourceGroupUpdateRead(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def resourceGroupDelete(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def resourceGroupList(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_ResourceGroupServiceServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'resourceGroupCreate': grpc.unary_unary_rpc_method_handler(
+                    servicer.resourceGroupCreate,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.ResourceGroupCreateRequest.FromString,
+                    response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            ),
+            'resourceGroupRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.resourceGroupRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.ResourceGroupReadResponse.SerializeToString,
+            ),
+            'resourceGroupUpdate': grpc.unary_unary_rpc_method_handler(
+                    servicer.resourceGroupUpdate,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.ResourceGroupUpdateRequest.FromString,
+                    response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            ),
+            'resourceGroupUpdateRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.resourceGroupUpdateRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.ResourceGroupUpdateReadResponse.SerializeToString,
+            ),
+            'resourceGroupDelete': grpc.unary_unary_rpc_method_handler(
+                    servicer.resourceGroupDelete,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_common_dot_message__pb2.OkMessage.SerializeToString,
+            ),
+            'resourceGroupList': grpc.unary_unary_rpc_method_handler(
+                    servicer.resourceGroupList,
+                    request_deserializer=krypton_dot_cisf_dot_message__pb2.ResourceGroupListRequest.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.ResourceGroupListResponse.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'ResourceGroupService', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class ResourceGroupService(object):
+    """Missing associated documentation comment in .proto file."""
+
     @staticmethod
-    def accessControlActivityLogList(request,
+    def resourceGroupCreate(request,
             target,
             options=(),
             channel_credentials=None,
@@ -3940,8 +3487,93 @@ class AccessControlService(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AccessControlService/accessControlActivityLogList',
-            krypton_dot_airport_dot_message__pb2.AccessControlActivityLogListRequest.SerializeToString,
-            krypton_dot_airport_dot_message__pb2.AccessControlActivityLogListResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/ResourceGroupService/resourceGroupCreate',
+            krypton_dot_cisf_dot_message__pb2.ResourceGroupCreateRequest.SerializeToString,
+            krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def resourceGroupRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ResourceGroupService/resourceGroupRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.ResourceGroupReadResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def resourceGroupUpdate(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ResourceGroupService/resourceGroupUpdate',
+            krypton_dot_cisf_dot_message__pb2.ResourceGroupUpdateRequest.SerializeToString,
+            krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def resourceGroupUpdateRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ResourceGroupService/resourceGroupUpdateRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.ResourceGroupUpdateReadResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def resourceGroupDelete(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ResourceGroupService/resourceGroupDelete',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_common_dot_message__pb2.OkMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def resourceGroupList(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/ResourceGroupService/resourceGroupList',
+            krypton_dot_cisf_dot_message__pb2.ResourceGroupListRequest.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.ResourceGroupListResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -7,6 +7,37 @@ from typing import ClassVar as _ClassVar, Iterable as _Iterable, Mapping as _Map
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
+class AlertRuleTrigger(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    alertRuleTrigger_unspecified: _ClassVar[AlertRuleTrigger]
+    alertRuleTrigger_onConditionChange: _ClassVar[AlertRuleTrigger]
+    alertRuleTrigger_onConditionMatch: _ClassVar[AlertRuleTrigger]
+
+class TicketSeverity(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    ticketSeverity_unspecified: _ClassVar[TicketSeverity]
+    ticketSeverity_sev1: _ClassVar[TicketSeverity]
+    ticketSeverity_sev2: _ClassVar[TicketSeverity]
+    ticketSeverity_sev3: _ClassVar[TicketSeverity]
+    ticketSeverity_sev4: _ClassVar[TicketSeverity]
+    ticketSeverity_sev5: _ClassVar[TicketSeverity]
+
+class TicketStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    ticketStatus_unspecified: _ClassVar[TicketStatus]
+    ticketStatus_open: _ClassVar[TicketStatus]
+    ticketStatus_acknowledged: _ClassVar[TicketStatus]
+    ticketStatus_mitigated: _ClassVar[TicketStatus]
+    ticketStatus_closed: _ClassVar[TicketStatus]
+
+class AlertNotification(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    alertNotification_unspecified: _ClassVar[AlertNotification]
+    alertNotification_push: _ClassVar[AlertNotification]
+    alertNotification_email: _ClassVar[AlertNotification]
+    alertNotification_sms: _ClassVar[AlertNotification]
+    alertNotification_whatsapp: _ClassVar[AlertNotification]
+
 class AuthSort(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     authSort_unspecified: _ClassVar[AuthSort]
@@ -25,34 +56,38 @@ class FileObjectSort(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     fileObjectSort_nameAsc: _ClassVar[FileObjectSort]
     fileObjectSort_nameDesc: _ClassVar[FileObjectSort]
 
-class FileObjectActivityLogSort(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+class PointSort(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
-    fileObjectActivityLogSort_unspecified: _ClassVar[FileObjectActivityLogSort]
-    fileObjectActivityLogSort_activityAtAsc: _ClassVar[FileObjectActivityLogSort]
-    fileObjectActivityLogSort_activityAtDesc: _ClassVar[FileObjectActivityLogSort]
-    fileObjectActivityLogSort_nameAsc: _ClassVar[FileObjectActivityLogSort]
-    fileObjectActivityLogSort_nameDesc: _ClassVar[FileObjectActivityLogSort]
+    pointSort_unspecified: _ClassVar[PointSort]
+    pointSort_lattitudeAsc: _ClassVar[PointSort]
+    pointSort_lattitudeDesc: _ClassVar[PointSort]
+    pointSort_longitudeAsc: _ClassVar[PointSort]
+    pointSort_longitudeDesc: _ClassVar[PointSort]
 
 class TagsSort(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     tagsSort_unspecified: _ClassVar[TagsSort]
     tagsSort_nameAsc: _ClassVar[TagsSort]
     tagsSort_nameDesc: _ClassVar[TagsSort]
-
-class TagsActivityLogSort(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = ()
-    tagsActivityLogSort_unspecified: _ClassVar[TagsActivityLogSort]
-    tagsActivityLogSort_activityAtAsc: _ClassVar[TagsActivityLogSort]
-    tagsActivityLogSort_activityAtDesc: _ClassVar[TagsActivityLogSort]
-    tagsActivityLogSort_nameAsc: _ClassVar[TagsActivityLogSort]
-    tagsActivityLogSort_nameDesc: _ClassVar[TagsActivityLogSort]
-
-class ActivityLogAction(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = ()
-    activityLogAction_unspecified: _ClassVar[ActivityLogAction]
-    activityLogAction_insertA: _ClassVar[ActivityLogAction]
-    activityLogAction_updateA: _ClassVar[ActivityLogAction]
-    activityLogAction_deleteA: _ClassVar[ActivityLogAction]
+alertRuleTrigger_unspecified: AlertRuleTrigger
+alertRuleTrigger_onConditionChange: AlertRuleTrigger
+alertRuleTrigger_onConditionMatch: AlertRuleTrigger
+ticketSeverity_unspecified: TicketSeverity
+ticketSeverity_sev1: TicketSeverity
+ticketSeverity_sev2: TicketSeverity
+ticketSeverity_sev3: TicketSeverity
+ticketSeverity_sev4: TicketSeverity
+ticketSeverity_sev5: TicketSeverity
+ticketStatus_unspecified: TicketStatus
+ticketStatus_open: TicketStatus
+ticketStatus_acknowledged: TicketStatus
+ticketStatus_mitigated: TicketStatus
+ticketStatus_closed: TicketStatus
+alertNotification_unspecified: AlertNotification
+alertNotification_push: AlertNotification
+alertNotification_email: AlertNotification
+alertNotification_sms: AlertNotification
+alertNotification_whatsapp: AlertNotification
 authSort_unspecified: AuthSort
 authSort_authNameAsc: AuthSort
 authSort_authNameDesc: AuthSort
@@ -62,23 +97,14 @@ authSessionSort_tokenHashDesc: AuthSessionSort
 fileObjectSort_unspecified: FileObjectSort
 fileObjectSort_nameAsc: FileObjectSort
 fileObjectSort_nameDesc: FileObjectSort
-fileObjectActivityLogSort_unspecified: FileObjectActivityLogSort
-fileObjectActivityLogSort_activityAtAsc: FileObjectActivityLogSort
-fileObjectActivityLogSort_activityAtDesc: FileObjectActivityLogSort
-fileObjectActivityLogSort_nameAsc: FileObjectActivityLogSort
-fileObjectActivityLogSort_nameDesc: FileObjectActivityLogSort
+pointSort_unspecified: PointSort
+pointSort_lattitudeAsc: PointSort
+pointSort_lattitudeDesc: PointSort
+pointSort_longitudeAsc: PointSort
+pointSort_longitudeDesc: PointSort
 tagsSort_unspecified: TagsSort
 tagsSort_nameAsc: TagsSort
 tagsSort_nameDesc: TagsSort
-tagsActivityLogSort_unspecified: TagsActivityLogSort
-tagsActivityLogSort_activityAtAsc: TagsActivityLogSort
-tagsActivityLogSort_activityAtDesc: TagsActivityLogSort
-tagsActivityLogSort_nameAsc: TagsActivityLogSort
-tagsActivityLogSort_nameDesc: TagsActivityLogSort
-activityLogAction_unspecified: ActivityLogAction
-activityLogAction_insertA: ActivityLogAction
-activityLogAction_updateA: ActivityLogAction
-activityLogAction_deleteA: ActivityLogAction
 
 class AuthListRequest(_message.Message):
     __slots__ = ("filters", "search", "sort", "cursor", "limit")
@@ -180,6 +206,14 @@ class FileObjectUpdateRequest(_message.Message):
     name: str
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
 
+class FileObjectUpdateReadResponse(_message.Message):
+    __slots__ = ("id", "name")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    name: str
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
+
 class FileObjectListRequest(_message.Message):
     __slots__ = ("filters", "search", "sort", "cursor", "limit")
     FILTERS_FIELD_NUMBER: _ClassVar[int]
@@ -202,27 +236,47 @@ class FileObjectListResponse(_message.Message):
     cursor: FileObjectCursor
     def __init__(self, items: _Optional[_Iterable[_Union[FileObject, _Mapping]]] = ..., cursor: _Optional[_Union[FileObjectCursor, _Mapping]] = ...) -> None: ...
 
-class FileObjectActivityLogListRequest(_message.Message):
+class PointUpdateRequest(_message.Message):
+    __slots__ = ("id", "lattitude", "longitude")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    LATTITUDE_FIELD_NUMBER: _ClassVar[int]
+    LONGITUDE_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    lattitude: float
+    longitude: float
+    def __init__(self, id: _Optional[str] = ..., lattitude: _Optional[float] = ..., longitude: _Optional[float] = ...) -> None: ...
+
+class PointUpdateReadResponse(_message.Message):
+    __slots__ = ("id", "lattitude", "longitude")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    LATTITUDE_FIELD_NUMBER: _ClassVar[int]
+    LONGITUDE_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    lattitude: float
+    longitude: float
+    def __init__(self, id: _Optional[str] = ..., lattitude: _Optional[float] = ..., longitude: _Optional[float] = ...) -> None: ...
+
+class PointListRequest(_message.Message):
     __slots__ = ("filters", "search", "sort", "cursor", "limit")
     FILTERS_FIELD_NUMBER: _ClassVar[int]
     SEARCH_FIELD_NUMBER: _ClassVar[int]
     SORT_FIELD_NUMBER: _ClassVar[int]
     CURSOR_FIELD_NUMBER: _ClassVar[int]
     LIMIT_FIELD_NUMBER: _ClassVar[int]
-    filters: FileObjectActivityLogFilters
+    filters: PointFilters
     search: str
-    sort: FileObjectActivityLogSort
-    cursor: FileObjectActivityLogCursor
+    sort: PointSort
+    cursor: PointCursor
     limit: int
-    def __init__(self, filters: _Optional[_Union[FileObjectActivityLogFilters, _Mapping]] = ..., search: _Optional[str] = ..., sort: _Optional[_Union[FileObjectActivityLogSort, str]] = ..., cursor: _Optional[_Union[FileObjectActivityLogCursor, _Mapping]] = ..., limit: _Optional[int] = ...) -> None: ...
+    def __init__(self, filters: _Optional[_Union[PointFilters, _Mapping]] = ..., search: _Optional[str] = ..., sort: _Optional[_Union[PointSort, str]] = ..., cursor: _Optional[_Union[PointCursor, _Mapping]] = ..., limit: _Optional[int] = ...) -> None: ...
 
-class FileObjectActivityLogListResponse(_message.Message):
+class PointListResponse(_message.Message):
     __slots__ = ("items", "cursor")
     ITEMS_FIELD_NUMBER: _ClassVar[int]
     CURSOR_FIELD_NUMBER: _ClassVar[int]
-    items: _containers.RepeatedCompositeFieldContainer[FileObjectActivityLog]
-    cursor: FileObjectActivityLogCursor
-    def __init__(self, items: _Optional[_Iterable[_Union[FileObjectActivityLog, _Mapping]]] = ..., cursor: _Optional[_Union[FileObjectActivityLogCursor, _Mapping]] = ...) -> None: ...
+    items: _containers.RepeatedCompositeFieldContainer[Point]
+    cursor: PointCursor
+    def __init__(self, items: _Optional[_Iterable[_Union[Point, _Mapping]]] = ..., cursor: _Optional[_Union[PointCursor, _Mapping]] = ...) -> None: ...
 
 class TagsCreateRequest(_message.Message):
     __slots__ = ("name", "description")
@@ -243,6 +297,16 @@ class TagsReadResponse(_message.Message):
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., description: _Optional[str] = ...) -> None: ...
 
 class TagsUpdateRequest(_message.Message):
+    __slots__ = ("id", "name", "description")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    name: str
+    description: str
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., description: _Optional[str] = ...) -> None: ...
+
+class TagsUpdateReadResponse(_message.Message):
     __slots__ = ("id", "name", "description")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
@@ -276,27 +340,25 @@ class TagsListResponse(_message.Message):
     count: int
     def __init__(self, items: _Optional[_Iterable[_Union[Tags, _Mapping]]] = ..., cursor: _Optional[_Union[TagsCursor, _Mapping]] = ..., count: _Optional[int] = ...) -> None: ...
 
-class TagsActivityLogListRequest(_message.Message):
-    __slots__ = ("filters", "search", "sort", "cursor", "limit")
-    FILTERS_FIELD_NUMBER: _ClassVar[int]
-    SEARCH_FIELD_NUMBER: _ClassVar[int]
-    SORT_FIELD_NUMBER: _ClassVar[int]
-    CURSOR_FIELD_NUMBER: _ClassVar[int]
-    LIMIT_FIELD_NUMBER: _ClassVar[int]
-    filters: TagsActivityLogFilters
-    search: str
-    sort: TagsActivityLogSort
-    cursor: TagsActivityLogCursor
-    limit: int
-    def __init__(self, filters: _Optional[_Union[TagsActivityLogFilters, _Mapping]] = ..., search: _Optional[str] = ..., sort: _Optional[_Union[TagsActivityLogSort, str]] = ..., cursor: _Optional[_Union[TagsActivityLogCursor, _Mapping]] = ..., limit: _Optional[int] = ...) -> None: ...
+class IntAlertCondition(_message.Message):
+    __slots__ = ("lessThan", "greaterThan", "equals")
+    LESSTHAN_FIELD_NUMBER: _ClassVar[int]
+    GREATERTHAN_FIELD_NUMBER: _ClassVar[int]
+    EQUALS_FIELD_NUMBER: _ClassVar[int]
+    lessThan: int
+    greaterThan: int
+    equals: int
+    def __init__(self, lessThan: _Optional[int] = ..., greaterThan: _Optional[int] = ..., equals: _Optional[int] = ...) -> None: ...
 
-class TagsActivityLogListResponse(_message.Message):
-    __slots__ = ("items", "cursor")
-    ITEMS_FIELD_NUMBER: _ClassVar[int]
-    CURSOR_FIELD_NUMBER: _ClassVar[int]
-    items: _containers.RepeatedCompositeFieldContainer[TagsActivityLog]
-    cursor: TagsActivityLogCursor
-    def __init__(self, items: _Optional[_Iterable[_Union[TagsActivityLog, _Mapping]]] = ..., cursor: _Optional[_Union[TagsActivityLogCursor, _Mapping]] = ...) -> None: ...
+class DoubleAlertCondition(_message.Message):
+    __slots__ = ("lessThan", "greaterThan", "equals")
+    LESSTHAN_FIELD_NUMBER: _ClassVar[int]
+    GREATERTHAN_FIELD_NUMBER: _ClassVar[int]
+    EQUALS_FIELD_NUMBER: _ClassVar[int]
+    lessThan: float
+    greaterThan: float
+    equals: float
+    def __init__(self, lessThan: _Optional[float] = ..., greaterThan: _Optional[float] = ..., equals: _Optional[float] = ...) -> None: ...
 
 class AuthFilters(_message.Message):
     __slots__ = ("idIn", "authNameMin", "authNameMax")
@@ -384,61 +446,51 @@ class FileObject(_message.Message):
     name: str
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
 
-class FileObjectActivityLogFilters(_message.Message):
-    __slots__ = ("idIn", "actionIn", "objectIdIn", "authIdIn", "activityAtMin", "activityAtMax", "nameMin", "nameMax")
+class PointFilters(_message.Message):
+    __slots__ = ("idIn", "lattitudeMin", "lattitudeMax", "longitudeMin", "longitudeMax")
     IDIN_FIELD_NUMBER: _ClassVar[int]
-    ACTIONIN_FIELD_NUMBER: _ClassVar[int]
-    OBJECTIDIN_FIELD_NUMBER: _ClassVar[int]
-    AUTHIDIN_FIELD_NUMBER: _ClassVar[int]
-    ACTIVITYATMIN_FIELD_NUMBER: _ClassVar[int]
-    ACTIVITYATMAX_FIELD_NUMBER: _ClassVar[int]
-    NAMEMIN_FIELD_NUMBER: _ClassVar[int]
-    NAMEMAX_FIELD_NUMBER: _ClassVar[int]
+    LATTITUDEMIN_FIELD_NUMBER: _ClassVar[int]
+    LATTITUDEMAX_FIELD_NUMBER: _ClassVar[int]
+    LONGITUDEMIN_FIELD_NUMBER: _ClassVar[int]
+    LONGITUDEMAX_FIELD_NUMBER: _ClassVar[int]
     idIn: _containers.RepeatedScalarFieldContainer[str]
-    actionIn: _containers.RepeatedScalarFieldContainer[ActivityLogAction]
-    objectIdIn: _containers.RepeatedScalarFieldContainer[str]
-    authIdIn: _containers.RepeatedScalarFieldContainer[str]
-    activityAtMin: _timestamp_pb2.Timestamp
-    activityAtMax: _timestamp_pb2.Timestamp
-    nameMin: str
-    nameMax: str
-    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., actionIn: _Optional[_Iterable[_Union[ActivityLogAction, str]]] = ..., objectIdIn: _Optional[_Iterable[str]] = ..., authIdIn: _Optional[_Iterable[str]] = ..., activityAtMin: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., activityAtMax: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., nameMin: _Optional[str] = ..., nameMax: _Optional[str] = ...) -> None: ...
+    lattitudeMin: float
+    lattitudeMax: float
+    longitudeMin: float
+    longitudeMax: float
+    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., lattitudeMin: _Optional[float] = ..., lattitudeMax: _Optional[float] = ..., longitudeMin: _Optional[float] = ..., longitudeMax: _Optional[float] = ...) -> None: ...
 
-class FileObjectActivityLogCursor(_message.Message):
+class PointCursor(_message.Message):
     __slots__ = ("id", "filters", "sort")
     ID_FIELD_NUMBER: _ClassVar[int]
     FILTERS_FIELD_NUMBER: _ClassVar[int]
     SORT_FIELD_NUMBER: _ClassVar[int]
     id: str
-    filters: FileObjectActivityLogFilters
-    sort: FileObjectActivityLogSort
-    def __init__(self, id: _Optional[str] = ..., filters: _Optional[_Union[FileObjectActivityLogFilters, _Mapping]] = ..., sort: _Optional[_Union[FileObjectActivityLogSort, str]] = ...) -> None: ...
+    filters: PointFilters
+    sort: PointSort
+    def __init__(self, id: _Optional[str] = ..., filters: _Optional[_Union[PointFilters, _Mapping]] = ..., sort: _Optional[_Union[PointSort, str]] = ...) -> None: ...
 
-class FileObjectActivityLog(_message.Message):
-    __slots__ = ("id", "action", "objectId", "authId", "activityAt", "name")
+class Point(_message.Message):
+    __slots__ = ("id", "lattitude", "longitude")
     ID_FIELD_NUMBER: _ClassVar[int]
-    ACTION_FIELD_NUMBER: _ClassVar[int]
-    OBJECTID_FIELD_NUMBER: _ClassVar[int]
-    AUTHID_FIELD_NUMBER: _ClassVar[int]
-    ACTIVITYAT_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
+    LATTITUDE_FIELD_NUMBER: _ClassVar[int]
+    LONGITUDE_FIELD_NUMBER: _ClassVar[int]
     id: str
-    action: ActivityLogAction
-    objectId: str
-    authId: str
-    activityAt: _timestamp_pb2.Timestamp
-    name: str
-    def __init__(self, id: _Optional[str] = ..., action: _Optional[_Union[ActivityLogAction, str]] = ..., objectId: _Optional[str] = ..., authId: _Optional[str] = ..., activityAt: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ...) -> None: ...
+    lattitude: float
+    longitude: float
+    def __init__(self, id: _Optional[str] = ..., lattitude: _Optional[float] = ..., longitude: _Optional[float] = ...) -> None: ...
 
 class TagsFilters(_message.Message):
-    __slots__ = ("idIn", "nameMin", "nameMax")
+    __slots__ = ("idIn", "idNotIn", "nameMin", "nameMax")
     IDIN_FIELD_NUMBER: _ClassVar[int]
+    IDNOTIN_FIELD_NUMBER: _ClassVar[int]
     NAMEMIN_FIELD_NUMBER: _ClassVar[int]
     NAMEMAX_FIELD_NUMBER: _ClassVar[int]
     idIn: _containers.RepeatedScalarFieldContainer[str]
+    idNotIn: _containers.RepeatedScalarFieldContainer[str]
     nameMin: str
     nameMax: str
-    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., nameMin: _Optional[str] = ..., nameMax: _Optional[str] = ...) -> None: ...
+    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., idNotIn: _Optional[_Iterable[str]] = ..., nameMin: _Optional[str] = ..., nameMax: _Optional[str] = ...) -> None: ...
 
 class TagsCursor(_message.Message):
     __slots__ = ("id", "filters", "sort")
@@ -460,56 +512,10 @@ class Tags(_message.Message):
     description: str
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., description: _Optional[str] = ...) -> None: ...
 
-class TagsActivityLogFilters(_message.Message):
-    __slots__ = ("idIn", "actionIn", "objectIdIn", "authIdIn", "activityAtMin", "activityAtMax", "nameMin", "nameMax")
-    IDIN_FIELD_NUMBER: _ClassVar[int]
-    ACTIONIN_FIELD_NUMBER: _ClassVar[int]
-    OBJECTIDIN_FIELD_NUMBER: _ClassVar[int]
-    AUTHIDIN_FIELD_NUMBER: _ClassVar[int]
-    ACTIVITYATMIN_FIELD_NUMBER: _ClassVar[int]
-    ACTIVITYATMAX_FIELD_NUMBER: _ClassVar[int]
-    NAMEMIN_FIELD_NUMBER: _ClassVar[int]
-    NAMEMAX_FIELD_NUMBER: _ClassVar[int]
-    idIn: _containers.RepeatedScalarFieldContainer[str]
-    actionIn: _containers.RepeatedScalarFieldContainer[ActivityLogAction]
-    objectIdIn: _containers.RepeatedScalarFieldContainer[str]
-    authIdIn: _containers.RepeatedScalarFieldContainer[str]
-    activityAtMin: _timestamp_pb2.Timestamp
-    activityAtMax: _timestamp_pb2.Timestamp
-    nameMin: str
-    nameMax: str
-    def __init__(self, idIn: _Optional[_Iterable[str]] = ..., actionIn: _Optional[_Iterable[_Union[ActivityLogAction, str]]] = ..., objectIdIn: _Optional[_Iterable[str]] = ..., authIdIn: _Optional[_Iterable[str]] = ..., activityAtMin: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., activityAtMax: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., nameMin: _Optional[str] = ..., nameMax: _Optional[str] = ...) -> None: ...
-
-class TagsActivityLogCursor(_message.Message):
-    __slots__ = ("id", "filters", "sort")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    FILTERS_FIELD_NUMBER: _ClassVar[int]
-    SORT_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    filters: TagsActivityLogFilters
-    sort: TagsActivityLogSort
-    def __init__(self, id: _Optional[str] = ..., filters: _Optional[_Union[TagsActivityLogFilters, _Mapping]] = ..., sort: _Optional[_Union[TagsActivityLogSort, str]] = ...) -> None: ...
-
-class TagsActivityLog(_message.Message):
-    __slots__ = ("id", "action", "objectId", "authId", "activityAt", "name", "description")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    ACTION_FIELD_NUMBER: _ClassVar[int]
-    OBJECTID_FIELD_NUMBER: _ClassVar[int]
-    AUTHID_FIELD_NUMBER: _ClassVar[int]
-    ACTIVITYAT_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
-    DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    action: ActivityLogAction
-    objectId: str
-    authId: str
-    activityAt: _timestamp_pb2.Timestamp
-    name: str
-    description: str
-    def __init__(self, id: _Optional[str] = ..., action: _Optional[_Union[ActivityLogAction, str]] = ..., objectId: _Optional[str] = ..., authId: _Optional[str] = ..., activityAt: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., name: _Optional[str] = ..., description: _Optional[str] = ...) -> None: ...
-
 class AuthSessionAuth(_message.Message):
-    __slots__ = ("id",)
+    __slots__ = ("id", "authName")
     ID_FIELD_NUMBER: _ClassVar[int]
+    AUTHNAME_FIELD_NUMBER: _ClassVar[int]
     id: str
-    def __init__(self, id: _Optional[str] = ...) -> None: ...
+    authName: str
+    def __init__(self, id: _Optional[str] = ..., authName: _Optional[str] = ...) -> None: ...

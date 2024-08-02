@@ -1,12 +1,12 @@
 from config import DefaultDuration, GrpcChannel, Position, PositionPinMap
 from relay import turnOnForAsync
-from krypton.airport.message_pb2 import FlowsOnScanRequest, FlowsOnScanResponse
-from krypton.airport.service_pb2_grpc import FlowsServiceStub
+from krypton.cisf.message_pb2 import FlowsOnScanRequest, FlowsOnScanResponse
+from krypton.cisf.service_pb2_grpc import FlowsServiceStub
 
 
 def onFlowsScan(matrixId: str, position: Position) -> FlowsOnScanResponse:
     return FlowsServiceStub(GrpcChannel).flowsOnScan(
-        FlowsOnScanRequest(biometricsId=matrixId, position=position.grpc)
+        FlowsOnScanRequest(biometricsId=int(matrixId), position=position.grpc)
     )
 
 
