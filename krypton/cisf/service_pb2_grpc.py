@@ -1145,6 +1145,11 @@ class AssignmentServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
+        self.assignmentRead = channel.unary_unary(
+                '/AssignmentService/assignmentRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.AssignmentReadResponse.FromString,
+                )
         self.assignmentUpdate = channel.unary_unary(
                 '/AssignmentService/assignmentUpdate',
                 request_serializer=krypton_dot_cisf_dot_message__pb2.AssignmentUpdateRequest.SerializeToString,
@@ -1164,6 +1169,12 @@ class AssignmentServiceStub(object):
 
 class AssignmentServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
+
+    def assignmentRead(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def assignmentUpdate(self, request, context):
         """Missing associated documentation comment in .proto file."""
@@ -1186,6 +1197,11 @@ class AssignmentServiceServicer(object):
 
 def add_AssignmentServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'assignmentRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.assignmentRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.AssignmentReadResponse.SerializeToString,
+            ),
             'assignmentUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.assignmentUpdate,
                     request_deserializer=krypton_dot_cisf_dot_message__pb2.AssignmentUpdateRequest.FromString,
@@ -1210,6 +1226,23 @@ def add_AssignmentServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class AssignmentService(object):
     """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def assignmentRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/AssignmentService/assignmentRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.AssignmentReadResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def assignmentUpdate(request,
@@ -1597,6 +1630,11 @@ class WeaponAmmoServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
+        self.weaponAmmoRead = channel.unary_unary(
+                '/WeaponAmmoService/weaponAmmoRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.WeaponAmmoReadResponse.FromString,
+                )
         self.weaponAmmoUpdate = channel.unary_unary(
                 '/WeaponAmmoService/weaponAmmoUpdate',
                 request_serializer=krypton_dot_cisf_dot_message__pb2.WeaponAmmoUpdateRequest.SerializeToString,
@@ -1616,6 +1654,12 @@ class WeaponAmmoServiceStub(object):
 
 class WeaponAmmoServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
+
+    def weaponAmmoRead(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def weaponAmmoUpdate(self, request, context):
         """Missing associated documentation comment in .proto file."""
@@ -1638,6 +1682,11 @@ class WeaponAmmoServiceServicer(object):
 
 def add_WeaponAmmoServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'weaponAmmoRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.weaponAmmoRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.WeaponAmmoReadResponse.SerializeToString,
+            ),
             'weaponAmmoUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.weaponAmmoUpdate,
                     request_deserializer=krypton_dot_cisf_dot_message__pb2.WeaponAmmoUpdateRequest.FromString,
@@ -1662,6 +1711,23 @@ def add_WeaponAmmoServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class WeaponAmmoService(object):
     """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def weaponAmmoRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/WeaponAmmoService/weaponAmmoRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.WeaponAmmoReadResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def weaponAmmoUpdate(request,
@@ -1950,6 +2016,11 @@ class FlowAlertsServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
+        self.flowAlertsRead = channel.unary_unary(
+                '/FlowAlertsService/flowAlertsRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_cisf_dot_message__pb2.FlowAlertsReadResponse.FromString,
+                )
         self.flowAlertsUpdate = channel.unary_unary(
                 '/FlowAlertsService/flowAlertsUpdate',
                 request_serializer=krypton_dot_cisf_dot_message__pb2.FlowAlertsUpdateRequest.SerializeToString,
@@ -1969,6 +2040,12 @@ class FlowAlertsServiceStub(object):
 
 class FlowAlertsServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
+
+    def flowAlertsRead(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def flowAlertsUpdate(self, request, context):
         """Missing associated documentation comment in .proto file."""
@@ -1991,6 +2068,11 @@ class FlowAlertsServiceServicer(object):
 
 def add_FlowAlertsServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'flowAlertsRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.flowAlertsRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_cisf_dot_message__pb2.FlowAlertsReadResponse.SerializeToString,
+            ),
             'flowAlertsUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.flowAlertsUpdate,
                     request_deserializer=krypton_dot_cisf_dot_message__pb2.FlowAlertsUpdateRequest.FromString,
@@ -2015,6 +2097,23 @@ def add_FlowAlertsServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class FlowAlertsService(object):
     """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def flowAlertsRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/FlowAlertsService/flowAlertsRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_cisf_dot_message__pb2.FlowAlertsReadResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def flowAlertsUpdate(request,
@@ -2062,260 +2161,6 @@ class FlowAlertsService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/FlowAlertsService/flowAlertsDelete',
-            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_common_dot_message__pb2.OkMessage.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-
-class CommonInfoServiceStub(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def __init__(self, channel):
-        """Constructor.
-
-        Args:
-            channel: A grpc.Channel.
-        """
-        self.commonInfoUpdate = channel.unary_unary(
-                '/CommonInfoService/commonInfoUpdate',
-                request_serializer=krypton_dot_cisf_dot_message__pb2.CommonInfoUpdateRequest.SerializeToString,
-                response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                )
-        self.commonInfoUpdateRead = channel.unary_unary(
-                '/CommonInfoService/commonInfoUpdateRead',
-                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_cisf_dot_message__pb2.CommonInfoUpdateReadResponse.FromString,
-                )
-        self.commonInfoDelete = channel.unary_unary(
-                '/CommonInfoService/commonInfoDelete',
-                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_common_dot_message__pb2.OkMessage.FromString,
-                )
-
-
-class CommonInfoServiceServicer(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def commonInfoUpdate(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def commonInfoUpdateRead(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def commonInfoDelete(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-
-def add_CommonInfoServiceServicer_to_server(servicer, server):
-    rpc_method_handlers = {
-            'commonInfoUpdate': grpc.unary_unary_rpc_method_handler(
-                    servicer.commonInfoUpdate,
-                    request_deserializer=krypton_dot_cisf_dot_message__pb2.CommonInfoUpdateRequest.FromString,
-                    response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            ),
-            'commonInfoUpdateRead': grpc.unary_unary_rpc_method_handler(
-                    servicer.commonInfoUpdateRead,
-                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_cisf_dot_message__pb2.CommonInfoUpdateReadResponse.SerializeToString,
-            ),
-            'commonInfoDelete': grpc.unary_unary_rpc_method_handler(
-                    servicer.commonInfoDelete,
-                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_common_dot_message__pb2.OkMessage.SerializeToString,
-            ),
-    }
-    generic_handler = grpc.method_handlers_generic_handler(
-            'CommonInfoService', rpc_method_handlers)
-    server.add_generic_rpc_handlers((generic_handler,))
-
-
- # This class is part of an EXPERIMENTAL API.
-class CommonInfoService(object):
-    """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def commonInfoUpdate(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/CommonInfoService/commonInfoUpdate',
-            krypton_dot_cisf_dot_message__pb2.CommonInfoUpdateRequest.SerializeToString,
-            krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def commonInfoUpdateRead(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/CommonInfoService/commonInfoUpdateRead',
-            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_cisf_dot_message__pb2.CommonInfoUpdateReadResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def commonInfoDelete(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/CommonInfoService/commonInfoDelete',
-            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_common_dot_message__pb2.OkMessage.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-
-class AmmoInfoServiceStub(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def __init__(self, channel):
-        """Constructor.
-
-        Args:
-            channel: A grpc.Channel.
-        """
-        self.ammoInfoUpdate = channel.unary_unary(
-                '/AmmoInfoService/ammoInfoUpdate',
-                request_serializer=krypton_dot_cisf_dot_message__pb2.AmmoInfoUpdateRequest.SerializeToString,
-                response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                )
-        self.ammoInfoUpdateRead = channel.unary_unary(
-                '/AmmoInfoService/ammoInfoUpdateRead',
-                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_cisf_dot_message__pb2.AmmoInfoUpdateReadResponse.FromString,
-                )
-        self.ammoInfoDelete = channel.unary_unary(
-                '/AmmoInfoService/ammoInfoDelete',
-                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_common_dot_message__pb2.OkMessage.FromString,
-                )
-
-
-class AmmoInfoServiceServicer(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def ammoInfoUpdate(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ammoInfoUpdateRead(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ammoInfoDelete(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-
-def add_AmmoInfoServiceServicer_to_server(servicer, server):
-    rpc_method_handlers = {
-            'ammoInfoUpdate': grpc.unary_unary_rpc_method_handler(
-                    servicer.ammoInfoUpdate,
-                    request_deserializer=krypton_dot_cisf_dot_message__pb2.AmmoInfoUpdateRequest.FromString,
-                    response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            ),
-            'ammoInfoUpdateRead': grpc.unary_unary_rpc_method_handler(
-                    servicer.ammoInfoUpdateRead,
-                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_cisf_dot_message__pb2.AmmoInfoUpdateReadResponse.SerializeToString,
-            ),
-            'ammoInfoDelete': grpc.unary_unary_rpc_method_handler(
-                    servicer.ammoInfoDelete,
-                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_common_dot_message__pb2.OkMessage.SerializeToString,
-            ),
-    }
-    generic_handler = grpc.method_handlers_generic_handler(
-            'AmmoInfoService', rpc_method_handlers)
-    server.add_generic_rpc_handlers((generic_handler,))
-
-
- # This class is part of an EXPERIMENTAL API.
-class AmmoInfoService(object):
-    """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def ammoInfoUpdate(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AmmoInfoService/ammoInfoUpdate',
-            krypton_dot_cisf_dot_message__pb2.AmmoInfoUpdateRequest.SerializeToString,
-            krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ammoInfoUpdateRead(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AmmoInfoService/ammoInfoUpdateRead',
-            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_cisf_dot_message__pb2.AmmoInfoUpdateReadResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ammoInfoDelete(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/AmmoInfoService/ammoInfoDelete',
             krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
             krypton_dot_common_dot_message__pb2.OkMessage.FromString,
             options, channel_credentials,
@@ -2996,133 +2841,6 @@ class UserService(object):
         return grpc.experimental.unary_unary(request, target, '/UserService/userCreateSuper',
             krypton_dot_cisf_dot_message__pb2.UserCreateRequest.SerializeToString,
             krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-
-class WeaponInfoServiceStub(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def __init__(self, channel):
-        """Constructor.
-
-        Args:
-            channel: A grpc.Channel.
-        """
-        self.weaponInfoUpdate = channel.unary_unary(
-                '/WeaponInfoService/weaponInfoUpdate',
-                request_serializer=krypton_dot_cisf_dot_message__pb2.WeaponInfoUpdateRequest.SerializeToString,
-                response_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                )
-        self.weaponInfoUpdateRead = channel.unary_unary(
-                '/WeaponInfoService/weaponInfoUpdateRead',
-                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_cisf_dot_message__pb2.WeaponInfoUpdateReadResponse.FromString,
-                )
-        self.weaponInfoDelete = channel.unary_unary(
-                '/WeaponInfoService/weaponInfoDelete',
-                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-                response_deserializer=krypton_dot_common_dot_message__pb2.OkMessage.FromString,
-                )
-
-
-class WeaponInfoServiceServicer(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def weaponInfoUpdate(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def weaponInfoUpdateRead(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def weaponInfoDelete(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-
-def add_WeaponInfoServiceServicer_to_server(servicer, server):
-    rpc_method_handlers = {
-            'weaponInfoUpdate': grpc.unary_unary_rpc_method_handler(
-                    servicer.weaponInfoUpdate,
-                    request_deserializer=krypton_dot_cisf_dot_message__pb2.WeaponInfoUpdateRequest.FromString,
-                    response_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            ),
-            'weaponInfoUpdateRead': grpc.unary_unary_rpc_method_handler(
-                    servicer.weaponInfoUpdateRead,
-                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_cisf_dot_message__pb2.WeaponInfoUpdateReadResponse.SerializeToString,
-            ),
-            'weaponInfoDelete': grpc.unary_unary_rpc_method_handler(
-                    servicer.weaponInfoDelete,
-                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-                    response_serializer=krypton_dot_common_dot_message__pb2.OkMessage.SerializeToString,
-            ),
-    }
-    generic_handler = grpc.method_handlers_generic_handler(
-            'WeaponInfoService', rpc_method_handlers)
-    server.add_generic_rpc_handlers((generic_handler,))
-
-
- # This class is part of an EXPERIMENTAL API.
-class WeaponInfoService(object):
-    """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def weaponInfoUpdate(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/WeaponInfoService/weaponInfoUpdate',
-            krypton_dot_cisf_dot_message__pb2.WeaponInfoUpdateRequest.SerializeToString,
-            krypton_dot_common_dot_message__pb2.IdMessage.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def weaponInfoUpdateRead(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/WeaponInfoService/weaponInfoUpdateRead',
-            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_cisf_dot_message__pb2.WeaponInfoUpdateReadResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def weaponInfoDelete(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/WeaponInfoService/weaponInfoDelete',
-            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
-            krypton_dot_common_dot_message__pb2.OkMessage.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

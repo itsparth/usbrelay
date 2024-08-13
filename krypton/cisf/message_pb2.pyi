@@ -446,22 +446,18 @@ class WeaponUpdateRequest(_message.Message):
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., count: _Optional[int] = ..., photo: _Optional[_Union[_message_pb2.IdMessage, _Mapping]] = ..., weaponAmmo: _Optional[_Union[WeaponAmmoCreateRequest, _Mapping]] = ...) -> None: ...
 
 class WeaponUpdateReadResponse(_message.Message):
-    __slots__ = ("id", "name", "count", "photo", "weaponAmmo", "issuedCount", "remainingCount")
+    __slots__ = ("id", "name", "count", "photo", "weaponAmmo")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     COUNT_FIELD_NUMBER: _ClassVar[int]
     PHOTO_FIELD_NUMBER: _ClassVar[int]
     WEAPONAMMO_FIELD_NUMBER: _ClassVar[int]
-    ISSUEDCOUNT_FIELD_NUMBER: _ClassVar[int]
-    REMAININGCOUNT_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
     count: int
     photo: WeaponUpdateReadResponsePhoto
     weaponAmmo: WeaponAmmoReadResponse
-    issuedCount: int
-    remainingCount: int
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., count: _Optional[int] = ..., photo: _Optional[_Union[WeaponUpdateReadResponsePhoto, _Mapping]] = ..., weaponAmmo: _Optional[_Union[WeaponAmmoReadResponse, _Mapping]] = ..., issuedCount: _Optional[int] = ..., remainingCount: _Optional[int] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., count: _Optional[int] = ..., photo: _Optional[_Union[WeaponUpdateReadResponsePhoto, _Mapping]] = ..., weaponAmmo: _Optional[_Union[WeaponAmmoReadResponse, _Mapping]] = ...) -> None: ...
 
 class WeaponListRequest(_message.Message):
     __slots__ = ("filters", "search", "sort", "cursor", "limit")
@@ -526,20 +522,16 @@ class AmmoUpdateRequest(_message.Message):
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., count: _Optional[int] = ..., photo: _Optional[_Union[_message_pb2.IdMessage, _Mapping]] = ...) -> None: ...
 
 class AmmoUpdateReadResponse(_message.Message):
-    __slots__ = ("id", "name", "count", "photo", "issuedCount", "remainingCount")
+    __slots__ = ("id", "name", "count", "photo")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     COUNT_FIELD_NUMBER: _ClassVar[int]
     PHOTO_FIELD_NUMBER: _ClassVar[int]
-    ISSUEDCOUNT_FIELD_NUMBER: _ClassVar[int]
-    REMAININGCOUNT_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
     count: int
     photo: AmmoUpdateReadResponsePhoto
-    issuedCount: int
-    remainingCount: int
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., count: _Optional[int] = ..., photo: _Optional[_Union[AmmoUpdateReadResponsePhoto, _Mapping]] = ..., issuedCount: _Optional[int] = ..., remainingCount: _Optional[int] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., count: _Optional[int] = ..., photo: _Optional[_Union[AmmoUpdateReadResponsePhoto, _Mapping]] = ...) -> None: ...
 
 class AmmoListRequest(_message.Message):
     __slots__ = ("filters", "search", "sort", "cursor", "limit")
@@ -604,20 +596,16 @@ class OtherItemsUpdateRequest(_message.Message):
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., count: _Optional[int] = ..., photo: _Optional[_Union[_message_pb2.IdMessage, _Mapping]] = ...) -> None: ...
 
 class OtherItemsUpdateReadResponse(_message.Message):
-    __slots__ = ("id", "name", "count", "photo", "issuedCount", "remainingCount")
+    __slots__ = ("id", "name", "count", "photo")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     COUNT_FIELD_NUMBER: _ClassVar[int]
     PHOTO_FIELD_NUMBER: _ClassVar[int]
-    ISSUEDCOUNT_FIELD_NUMBER: _ClassVar[int]
-    REMAININGCOUNT_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
     count: int
     photo: OtherItemsUpdateReadResponsePhoto
-    issuedCount: int
-    remainingCount: int
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., count: _Optional[int] = ..., photo: _Optional[_Union[OtherItemsUpdateReadResponsePhoto, _Mapping]] = ..., issuedCount: _Optional[int] = ..., remainingCount: _Optional[int] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., count: _Optional[int] = ..., photo: _Optional[_Union[OtherItemsUpdateReadResponsePhoto, _Mapping]] = ...) -> None: ...
 
 class OtherItemsListRequest(_message.Message):
     __slots__ = ("filters", "search", "sort", "cursor", "limit")
@@ -642,6 +630,26 @@ class OtherItemsListResponse(_message.Message):
     cursor: OtherItemsCursor
     count: int
     def __init__(self, items: _Optional[_Iterable[_Union[OtherItems, _Mapping]]] = ..., cursor: _Optional[_Union[OtherItemsCursor, _Mapping]] = ..., count: _Optional[int] = ...) -> None: ...
+
+class AssignmentReadResponse(_message.Message):
+    __slots__ = ("id", "employee", "dutyPost", "weapon", "weaponButtNo", "ammo", "ammoCount", "otherItems")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    EMPLOYEE_FIELD_NUMBER: _ClassVar[int]
+    DUTYPOST_FIELD_NUMBER: _ClassVar[int]
+    WEAPON_FIELD_NUMBER: _ClassVar[int]
+    WEAPONBUTTNO_FIELD_NUMBER: _ClassVar[int]
+    AMMO_FIELD_NUMBER: _ClassVar[int]
+    AMMOCOUNT_FIELD_NUMBER: _ClassVar[int]
+    OTHERITEMS_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    employee: AssignmentReadResponseEmployee
+    dutyPost: AssignmentReadResponseDutyPost
+    weapon: AssignmentReadResponseWeapon
+    weaponButtNo: str
+    ammo: AssignmentReadResponseAmmo
+    ammoCount: int
+    otherItems: _containers.RepeatedCompositeFieldContainer[AssignmentReadResponseOtherItems]
+    def __init__(self, id: _Optional[str] = ..., employee: _Optional[_Union[AssignmentReadResponseEmployee, _Mapping]] = ..., dutyPost: _Optional[_Union[AssignmentReadResponseDutyPost, _Mapping]] = ..., weapon: _Optional[_Union[AssignmentReadResponseWeapon, _Mapping]] = ..., weaponButtNo: _Optional[str] = ..., ammo: _Optional[_Union[AssignmentReadResponseAmmo, _Mapping]] = ..., ammoCount: _Optional[int] = ..., otherItems: _Optional[_Iterable[_Union[AssignmentReadResponseOtherItems, _Mapping]]] = ...) -> None: ...
 
 class AssignmentUpdateRequest(_message.Message):
     __slots__ = ("id", "employee", "dutyPost", "weapon", "weaponButtNo", "ammo", "ammoCount", "otherItems")
@@ -804,28 +812,24 @@ class ScheduleUpdateRequest(_message.Message):
     def __init__(self, id: _Optional[str] = ..., startTime: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., endTime: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., shiftIncharge: _Optional[_Union[_message_pb2.IdMessage, _Mapping]] = ..., koteNco: _Optional[_Union[_message_pb2.IdMessage, _Mapping]] = ..., armsIssueDepositSupervisor: _Optional[_Union[_message_pb2.IdMessage, _Mapping]] = ..., armsInspectionSupervisor: _Optional[_Union[_message_pb2.IdMessage, _Mapping]] = ..., clearingSupervisor: _Optional[_Union[_message_pb2.IdMessage, _Mapping]] = ...) -> None: ...
 
 class ScheduleUpdateReadResponse(_message.Message):
-    __slots__ = ("id", "startTime", "endTime", "employeesCount", "shiftIncharge", "koteNco", "armsIssueDepositSupervisor", "armsInspectionSupervisor", "clearingSupervisor", "assignments")
+    __slots__ = ("id", "startTime", "endTime", "shiftIncharge", "koteNco", "armsIssueDepositSupervisor", "armsInspectionSupervisor", "clearingSupervisor")
     ID_FIELD_NUMBER: _ClassVar[int]
     STARTTIME_FIELD_NUMBER: _ClassVar[int]
     ENDTIME_FIELD_NUMBER: _ClassVar[int]
-    EMPLOYEESCOUNT_FIELD_NUMBER: _ClassVar[int]
     SHIFTINCHARGE_FIELD_NUMBER: _ClassVar[int]
     KOTENCO_FIELD_NUMBER: _ClassVar[int]
     ARMSISSUEDEPOSITSUPERVISOR_FIELD_NUMBER: _ClassVar[int]
     ARMSINSPECTIONSUPERVISOR_FIELD_NUMBER: _ClassVar[int]
     CLEARINGSUPERVISOR_FIELD_NUMBER: _ClassVar[int]
-    ASSIGNMENTS_FIELD_NUMBER: _ClassVar[int]
     id: str
     startTime: _timestamp_pb2.Timestamp
     endTime: _timestamp_pb2.Timestamp
-    employeesCount: int
     shiftIncharge: ScheduleUpdateReadResponseShiftIncharge
     koteNco: ScheduleUpdateReadResponseKoteNco
     armsIssueDepositSupervisor: ScheduleUpdateReadResponseArmsIssueDepositSupervisor
     armsInspectionSupervisor: ScheduleUpdateReadResponseArmsInspectionSupervisor
     clearingSupervisor: ScheduleUpdateReadResponseClearingSupervisor
-    assignments: _containers.RepeatedCompositeFieldContainer[ScheduleUpdateReadResponseAssignments]
-    def __init__(self, id: _Optional[str] = ..., startTime: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., endTime: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., employeesCount: _Optional[int] = ..., shiftIncharge: _Optional[_Union[ScheduleUpdateReadResponseShiftIncharge, _Mapping]] = ..., koteNco: _Optional[_Union[ScheduleUpdateReadResponseKoteNco, _Mapping]] = ..., armsIssueDepositSupervisor: _Optional[_Union[ScheduleUpdateReadResponseArmsIssueDepositSupervisor, _Mapping]] = ..., armsInspectionSupervisor: _Optional[_Union[ScheduleUpdateReadResponseArmsInspectionSupervisor, _Mapping]] = ..., clearingSupervisor: _Optional[_Union[ScheduleUpdateReadResponseClearingSupervisor, _Mapping]] = ..., assignments: _Optional[_Iterable[_Union[ScheduleUpdateReadResponseAssignments, _Mapping]]] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., startTime: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., endTime: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., shiftIncharge: _Optional[_Union[ScheduleUpdateReadResponseShiftIncharge, _Mapping]] = ..., koteNco: _Optional[_Union[ScheduleUpdateReadResponseKoteNco, _Mapping]] = ..., armsIssueDepositSupervisor: _Optional[_Union[ScheduleUpdateReadResponseArmsIssueDepositSupervisor, _Mapping]] = ..., armsInspectionSupervisor: _Optional[_Union[ScheduleUpdateReadResponseArmsInspectionSupervisor, _Mapping]] = ..., clearingSupervisor: _Optional[_Union[ScheduleUpdateReadResponseClearingSupervisor, _Mapping]] = ...) -> None: ...
 
 class ScheduleListRequest(_message.Message):
     __slots__ = ("filters", "search", "sort", "cursor", "limit")
@@ -848,6 +852,16 @@ class ScheduleListResponse(_message.Message):
     items: _containers.RepeatedCompositeFieldContainer[Schedule]
     cursor: ScheduleCursor
     def __init__(self, items: _Optional[_Iterable[_Union[Schedule, _Mapping]]] = ..., cursor: _Optional[_Union[ScheduleCursor, _Mapping]] = ...) -> None: ...
+
+class WeaponAmmoReadResponse(_message.Message):
+    __slots__ = ("id", "ammo", "count")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    AMMO_FIELD_NUMBER: _ClassVar[int]
+    COUNT_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    ammo: WeaponAmmoReadResponseAmmo
+    count: int
+    def __init__(self, id: _Optional[str] = ..., ammo: _Optional[_Union[WeaponAmmoReadResponseAmmo, _Mapping]] = ..., count: _Optional[int] = ...) -> None: ...
 
 class WeaponAmmoUpdateRequest(_message.Message):
     __slots__ = ("id", "ammo", "count")
@@ -945,6 +959,20 @@ class GlobalConfigListResponse(_message.Message):
     cursor: GlobalConfigCursor
     def __init__(self, items: _Optional[_Iterable[_Union[GlobalConfig, _Mapping]]] = ..., cursor: _Optional[_Union[GlobalConfigCursor, _Mapping]] = ...) -> None: ...
 
+class FlowAlertsReadResponse(_message.Message):
+    __slots__ = ("id", "weaponIssueAfterShiftStartDuration", "clearingIssueAfterWeaponEntryDuration", "ammoIssueAfterClearingEntryDuration", "weaponNotDepositDuration")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    WEAPONISSUEAFTERSHIFTSTARTDURATION_FIELD_NUMBER: _ClassVar[int]
+    CLEARINGISSUEAFTERWEAPONENTRYDURATION_FIELD_NUMBER: _ClassVar[int]
+    AMMOISSUEAFTERCLEARINGENTRYDURATION_FIELD_NUMBER: _ClassVar[int]
+    WEAPONNOTDEPOSITDURATION_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    weaponIssueAfterShiftStartDuration: int
+    clearingIssueAfterWeaponEntryDuration: int
+    ammoIssueAfterClearingEntryDuration: int
+    weaponNotDepositDuration: int
+    def __init__(self, id: _Optional[str] = ..., weaponIssueAfterShiftStartDuration: _Optional[int] = ..., clearingIssueAfterWeaponEntryDuration: _Optional[int] = ..., ammoIssueAfterClearingEntryDuration: _Optional[int] = ..., weaponNotDepositDuration: _Optional[int] = ...) -> None: ...
+
 class FlowAlertsUpdateRequest(_message.Message):
     __slots__ = ("id", "weaponIssueAfterShiftStartDuration", "clearingIssueAfterWeaponEntryDuration", "ammoIssueAfterClearingEntryDuration", "weaponNotDepositDuration")
     ID_FIELD_NUMBER: _ClassVar[int]
@@ -972,54 +1000,6 @@ class FlowAlertsUpdateReadResponse(_message.Message):
     ammoIssueAfterClearingEntryDuration: int
     weaponNotDepositDuration: int
     def __init__(self, id: _Optional[str] = ..., weaponIssueAfterShiftStartDuration: _Optional[int] = ..., clearingIssueAfterWeaponEntryDuration: _Optional[int] = ..., ammoIssueAfterClearingEntryDuration: _Optional[int] = ..., weaponNotDepositDuration: _Optional[int] = ...) -> None: ...
-
-class CommonInfoUpdateRequest(_message.Message):
-    __slots__ = ("id", "time", "remarks")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    TIME_FIELD_NUMBER: _ClassVar[int]
-    REMARKS_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    time: _timestamp_pb2.Timestamp
-    remarks: str
-    def __init__(self, id: _Optional[str] = ..., time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., remarks: _Optional[str] = ...) -> None: ...
-
-class CommonInfoUpdateReadResponse(_message.Message):
-    __slots__ = ("id", "time", "acknowledgedBy", "remarks")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    TIME_FIELD_NUMBER: _ClassVar[int]
-    ACKNOWLEDGEDBY_FIELD_NUMBER: _ClassVar[int]
-    REMARKS_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    time: _timestamp_pb2.Timestamp
-    acknowledgedBy: CommonInfoUpdateReadResponseAcknowledgedBy
-    remarks: str
-    def __init__(self, id: _Optional[str] = ..., time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., acknowledgedBy: _Optional[_Union[CommonInfoUpdateReadResponseAcknowledgedBy, _Mapping]] = ..., remarks: _Optional[str] = ...) -> None: ...
-
-class AmmoInfoUpdateRequest(_message.Message):
-    __slots__ = ("id", "time", "remarks", "count")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    TIME_FIELD_NUMBER: _ClassVar[int]
-    REMARKS_FIELD_NUMBER: _ClassVar[int]
-    COUNT_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    time: _timestamp_pb2.Timestamp
-    remarks: str
-    count: int
-    def __init__(self, id: _Optional[str] = ..., time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., remarks: _Optional[str] = ..., count: _Optional[int] = ...) -> None: ...
-
-class AmmoInfoUpdateReadResponse(_message.Message):
-    __slots__ = ("id", "time", "acknowledgedBy", "remarks", "count")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    TIME_FIELD_NUMBER: _ClassVar[int]
-    ACKNOWLEDGEDBY_FIELD_NUMBER: _ClassVar[int]
-    REMARKS_FIELD_NUMBER: _ClassVar[int]
-    COUNT_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    time: _timestamp_pb2.Timestamp
-    acknowledgedBy: AmmoInfoUpdateReadResponseAcknowledgedBy
-    remarks: str
-    count: int
-    def __init__(self, id: _Optional[str] = ..., time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., acknowledgedBy: _Optional[_Union[AmmoInfoUpdateReadResponseAcknowledgedBy, _Mapping]] = ..., remarks: _Optional[str] = ..., count: _Optional[int] = ...) -> None: ...
 
 class FlowsCreateRequest(_message.Message):
     __slots__ = ("assignment", "weaponEntry", "clearingEntry", "ammoEntry", "ammoExit", "clearingExit", "weaponExit")
@@ -1082,7 +1062,7 @@ class FlowsUpdateRequest(_message.Message):
     def __init__(self, id: _Optional[str] = ..., assignment: _Optional[_Union[_message_pb2.IdMessage, _Mapping]] = ..., weaponEntry: _Optional[_Union[WeaponInfoCreateRequest, _Mapping]] = ..., clearingEntry: _Optional[_Union[CommonInfoCreateRequest, _Mapping]] = ..., ammoEntry: _Optional[_Union[AmmoInfoCreateRequest, _Mapping]] = ..., ammoExit: _Optional[_Union[AmmoInfoCreateRequest, _Mapping]] = ..., clearingExit: _Optional[_Union[CommonInfoCreateRequest, _Mapping]] = ..., weaponExit: _Optional[_Union[WeaponInfoCreateRequest, _Mapping]] = ...) -> None: ...
 
 class FlowsUpdateReadResponse(_message.Message):
-    __slots__ = ("id", "assignment", "weaponEntry", "clearingEntry", "ammoEntry", "ammoExit", "clearingExit", "weaponExit", "isActive")
+    __slots__ = ("id", "assignment", "weaponEntry", "clearingEntry", "ammoEntry", "ammoExit", "clearingExit", "weaponExit")
     ID_FIELD_NUMBER: _ClassVar[int]
     ASSIGNMENT_FIELD_NUMBER: _ClassVar[int]
     WEAPONENTRY_FIELD_NUMBER: _ClassVar[int]
@@ -1091,7 +1071,6 @@ class FlowsUpdateReadResponse(_message.Message):
     AMMOEXIT_FIELD_NUMBER: _ClassVar[int]
     CLEARINGEXIT_FIELD_NUMBER: _ClassVar[int]
     WEAPONEXIT_FIELD_NUMBER: _ClassVar[int]
-    ISACTIVE_FIELD_NUMBER: _ClassVar[int]
     id: str
     assignment: FlowsUpdateReadResponseAssignment
     weaponEntry: WeaponInfoReadResponse
@@ -1100,8 +1079,7 @@ class FlowsUpdateReadResponse(_message.Message):
     ammoExit: AmmoInfoReadResponse
     clearingExit: CommonInfoReadResponse
     weaponExit: WeaponInfoReadResponse
-    isActive: bool
-    def __init__(self, id: _Optional[str] = ..., assignment: _Optional[_Union[FlowsUpdateReadResponseAssignment, _Mapping]] = ..., weaponEntry: _Optional[_Union[WeaponInfoReadResponse, _Mapping]] = ..., clearingEntry: _Optional[_Union[CommonInfoReadResponse, _Mapping]] = ..., ammoEntry: _Optional[_Union[AmmoInfoReadResponse, _Mapping]] = ..., ammoExit: _Optional[_Union[AmmoInfoReadResponse, _Mapping]] = ..., clearingExit: _Optional[_Union[CommonInfoReadResponse, _Mapping]] = ..., weaponExit: _Optional[_Union[WeaponInfoReadResponse, _Mapping]] = ..., isActive: bool = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ..., assignment: _Optional[_Union[FlowsUpdateReadResponseAssignment, _Mapping]] = ..., weaponEntry: _Optional[_Union[WeaponInfoReadResponse, _Mapping]] = ..., clearingEntry: _Optional[_Union[CommonInfoReadResponse, _Mapping]] = ..., ammoEntry: _Optional[_Union[AmmoInfoReadResponse, _Mapping]] = ..., ammoExit: _Optional[_Union[AmmoInfoReadResponse, _Mapping]] = ..., clearingExit: _Optional[_Union[CommonInfoReadResponse, _Mapping]] = ..., weaponExit: _Optional[_Union[WeaponInfoReadResponse, _Mapping]] = ...) -> None: ...
 
 class FlowsListRequest(_message.Message):
     __slots__ = ("filters", "search", "sort", "cursor", "limit")
@@ -1274,32 +1252,6 @@ class UserListResponse(_message.Message):
     cursor: UserCursor
     count: int
     def __init__(self, items: _Optional[_Iterable[_Union[User, _Mapping]]] = ..., cursor: _Optional[_Union[UserCursor, _Mapping]] = ..., count: _Optional[int] = ...) -> None: ...
-
-class WeaponInfoUpdateRequest(_message.Message):
-    __slots__ = ("id", "time", "remarks", "issuedButtNo")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    TIME_FIELD_NUMBER: _ClassVar[int]
-    REMARKS_FIELD_NUMBER: _ClassVar[int]
-    ISSUEDBUTTNO_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    time: _timestamp_pb2.Timestamp
-    remarks: str
-    issuedButtNo: str
-    def __init__(self, id: _Optional[str] = ..., time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., remarks: _Optional[str] = ..., issuedButtNo: _Optional[str] = ...) -> None: ...
-
-class WeaponInfoUpdateReadResponse(_message.Message):
-    __slots__ = ("id", "time", "acknowledgedBy", "remarks", "issuedButtNo")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    TIME_FIELD_NUMBER: _ClassVar[int]
-    ACKNOWLEDGEDBY_FIELD_NUMBER: _ClassVar[int]
-    REMARKS_FIELD_NUMBER: _ClassVar[int]
-    ISSUEDBUTTNO_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    time: _timestamp_pb2.Timestamp
-    acknowledgedBy: WeaponInfoUpdateReadResponseAcknowledgedBy
-    remarks: str
-    issuedButtNo: str
-    def __init__(self, id: _Optional[str] = ..., time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., acknowledgedBy: _Optional[_Union[WeaponInfoUpdateReadResponseAcknowledgedBy, _Mapping]] = ..., remarks: _Optional[str] = ..., issuedButtNo: _Optional[str] = ...) -> None: ...
 
 class AccessControlCreateRequest(_message.Message):
     __slots__ = ("name", "active", "expiry", "auths", "perms", "scopes", "resourceGroups")
@@ -1733,16 +1685,6 @@ class WeaponReadResponsePhoto(_message.Message):
     name: str
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
 
-class WeaponAmmoReadResponse(_message.Message):
-    __slots__ = ("id", "ammo", "count")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    AMMO_FIELD_NUMBER: _ClassVar[int]
-    COUNT_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    ammo: WeaponAmmoReadResponseAmmo
-    count: int
-    def __init__(self, id: _Optional[str] = ..., ammo: _Optional[_Union[WeaponAmmoReadResponseAmmo, _Mapping]] = ..., count: _Optional[int] = ...) -> None: ...
-
 class WeaponUpdateReadResponsePhoto(_message.Message):
     __slots__ = ("id", "name")
     ID_FIELD_NUMBER: _ClassVar[int]
@@ -1904,6 +1846,46 @@ class OtherItems(_message.Message):
     issuedCount: int
     remainingCount: int
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., count: _Optional[int] = ..., photo: _Optional[_Union[OtherItemsPhoto, _Mapping]] = ..., issuedCount: _Optional[int] = ..., remainingCount: _Optional[int] = ...) -> None: ...
+
+class AssignmentReadResponseEmployee(_message.Message):
+    __slots__ = ("id", "name")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    name: str
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
+
+class AssignmentReadResponseDutyPost(_message.Message):
+    __slots__ = ("id", "name")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    name: str
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
+
+class AssignmentReadResponseWeapon(_message.Message):
+    __slots__ = ("id", "name")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    name: str
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
+
+class AssignmentReadResponseAmmo(_message.Message):
+    __slots__ = ("id", "name")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    name: str
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
+
+class AssignmentReadResponseOtherItems(_message.Message):
+    __slots__ = ("id", "name")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    name: str
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
 
 class AssignmentUpdateReadResponseEmployee(_message.Message):
     __slots__ = ("id", "name")
@@ -2137,26 +2119,6 @@ class ScheduleUpdateReadResponseClearingSupervisor(_message.Message):
     name: str
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
 
-class ScheduleUpdateReadResponseAssignments(_message.Message):
-    __slots__ = ("id", "employee", "dutyPost", "weapon", "weaponButtNo", "ammo", "ammoCount", "otherItems")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    EMPLOYEE_FIELD_NUMBER: _ClassVar[int]
-    DUTYPOST_FIELD_NUMBER: _ClassVar[int]
-    WEAPON_FIELD_NUMBER: _ClassVar[int]
-    WEAPONBUTTNO_FIELD_NUMBER: _ClassVar[int]
-    AMMO_FIELD_NUMBER: _ClassVar[int]
-    AMMOCOUNT_FIELD_NUMBER: _ClassVar[int]
-    OTHERITEMS_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    employee: ScheduleUpdateReadResponseAssignmentsEmployee
-    dutyPost: ScheduleUpdateReadResponseAssignmentsDutyPost
-    weapon: ScheduleUpdateReadResponseAssignmentsWeapon
-    weaponButtNo: str
-    ammo: ScheduleUpdateReadResponseAssignmentsAmmo
-    ammoCount: int
-    otherItems: _containers.RepeatedCompositeFieldContainer[ScheduleUpdateReadResponseAssignmentsOtherItems]
-    def __init__(self, id: _Optional[str] = ..., employee: _Optional[_Union[ScheduleUpdateReadResponseAssignmentsEmployee, _Mapping]] = ..., dutyPost: _Optional[_Union[ScheduleUpdateReadResponseAssignmentsDutyPost, _Mapping]] = ..., weapon: _Optional[_Union[ScheduleUpdateReadResponseAssignmentsWeapon, _Mapping]] = ..., weaponButtNo: _Optional[str] = ..., ammo: _Optional[_Union[ScheduleUpdateReadResponseAssignmentsAmmo, _Mapping]] = ..., ammoCount: _Optional[int] = ..., otherItems: _Optional[_Iterable[_Union[ScheduleUpdateReadResponseAssignmentsOtherItems, _Mapping]]] = ...) -> None: ...
-
 class ScheduleFilters(_message.Message):
     __slots__ = ("idIn", "startTimeMin", "startTimeMax", "endTimeMin", "endTimeMax")
     IDIN_FIELD_NUMBER: _ClassVar[int]
@@ -2205,6 +2167,14 @@ class Schedule(_message.Message):
     clearingSupervisor: ScheduleClearingSupervisor
     def __init__(self, id: _Optional[str] = ..., status: bool = ..., startTime: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., endTime: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., employeesCount: _Optional[int] = ..., shiftIncharge: _Optional[_Union[ScheduleShiftIncharge, _Mapping]] = ..., koteNco: _Optional[_Union[ScheduleKoteNco, _Mapping]] = ..., armsIssueDepositSupervisor: _Optional[_Union[ScheduleArmsIssueDepositSupervisor, _Mapping]] = ..., armsInspectionSupervisor: _Optional[_Union[ScheduleArmsInspectionSupervisor, _Mapping]] = ..., clearingSupervisor: _Optional[_Union[ScheduleClearingSupervisor, _Mapping]] = ...) -> None: ...
 
+class WeaponAmmoReadResponseAmmo(_message.Message):
+    __slots__ = ("id", "name")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    name: str
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
+
 class WeaponAmmoUpdateReadResponseAmmo(_message.Message):
     __slots__ = ("id", "name")
     ID_FIELD_NUMBER: _ClassVar[int]
@@ -2224,20 +2194,6 @@ class FlowAlertsCreateRequest(_message.Message):
     ammoIssueAfterClearingEntryDuration: int
     weaponNotDepositDuration: int
     def __init__(self, weaponIssueAfterShiftStartDuration: _Optional[int] = ..., clearingIssueAfterWeaponEntryDuration: _Optional[int] = ..., ammoIssueAfterClearingEntryDuration: _Optional[int] = ..., weaponNotDepositDuration: _Optional[int] = ...) -> None: ...
-
-class FlowAlertsReadResponse(_message.Message):
-    __slots__ = ("id", "weaponIssueAfterShiftStartDuration", "clearingIssueAfterWeaponEntryDuration", "ammoIssueAfterClearingEntryDuration", "weaponNotDepositDuration")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    WEAPONISSUEAFTERSHIFTSTARTDURATION_FIELD_NUMBER: _ClassVar[int]
-    CLEARINGISSUEAFTERWEAPONENTRYDURATION_FIELD_NUMBER: _ClassVar[int]
-    AMMOISSUEAFTERCLEARINGENTRYDURATION_FIELD_NUMBER: _ClassVar[int]
-    WEAPONNOTDEPOSITDURATION_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    weaponIssueAfterShiftStartDuration: int
-    clearingIssueAfterWeaponEntryDuration: int
-    ammoIssueAfterClearingEntryDuration: int
-    weaponNotDepositDuration: int
-    def __init__(self, id: _Optional[str] = ..., weaponIssueAfterShiftStartDuration: _Optional[int] = ..., clearingIssueAfterWeaponEntryDuration: _Optional[int] = ..., ammoIssueAfterClearingEntryDuration: _Optional[int] = ..., weaponNotDepositDuration: _Optional[int] = ...) -> None: ...
 
 class GlobalConfigFilters(_message.Message):
     __slots__ = ("idIn", "weaponIssueBeforeStartBufferMin", "weaponIssueBeforeStartBufferMax", "weaponIssueAfterStartBufferMin", "weaponIssueAfterStartBufferMax", "scheduleEditAfterBufferMin", "scheduleEditAfterBufferMax")
@@ -2278,22 +2234,6 @@ class GlobalConfig(_message.Message):
     weaponIssueAfterStartBuffer: int
     scheduleEditAfterBuffer: int
     def __init__(self, id: _Optional[str] = ..., weaponIssueBeforeStartBuffer: _Optional[int] = ..., weaponIssueAfterStartBuffer: _Optional[int] = ..., scheduleEditAfterBuffer: _Optional[int] = ...) -> None: ...
-
-class CommonInfoUpdateReadResponseAcknowledgedBy(_message.Message):
-    __slots__ = ("id", "name")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    name: str
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
-
-class AmmoInfoUpdateReadResponseAcknowledgedBy(_message.Message):
-    __slots__ = ("id", "name")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    name: str
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
 
 class WeaponInfoCreateRequest(_message.Message):
     __slots__ = ("time", "remarks", "issuedButtNo")
@@ -2382,22 +2322,10 @@ class AmmoInfoReadResponse(_message.Message):
     def __init__(self, id: _Optional[str] = ..., time: _Optional[_Union[_timestamp_pb2.Timestamp, _Mapping]] = ..., acknowledgedBy: _Optional[_Union[AmmoInfoReadResponseAcknowledgedBy, _Mapping]] = ..., remarks: _Optional[str] = ..., count: _Optional[int] = ...) -> None: ...
 
 class FlowsUpdateReadResponseAssignment(_message.Message):
-    __slots__ = ("id", "employee", "dutyPost", "weapon", "weaponButtNo", "ammo", "ammoCount")
+    __slots__ = ("id",)
     ID_FIELD_NUMBER: _ClassVar[int]
-    EMPLOYEE_FIELD_NUMBER: _ClassVar[int]
-    DUTYPOST_FIELD_NUMBER: _ClassVar[int]
-    WEAPON_FIELD_NUMBER: _ClassVar[int]
-    WEAPONBUTTNO_FIELD_NUMBER: _ClassVar[int]
-    AMMO_FIELD_NUMBER: _ClassVar[int]
-    AMMOCOUNT_FIELD_NUMBER: _ClassVar[int]
     id: str
-    employee: FlowsUpdateReadResponseAssignmentEmployee
-    dutyPost: DutyPost
-    weapon: FlowsUpdateReadResponseAssignmentWeapon
-    weaponButtNo: str
-    ammo: FlowsUpdateReadResponseAssignmentAmmo
-    ammoCount: int
-    def __init__(self, id: _Optional[str] = ..., employee: _Optional[_Union[FlowsUpdateReadResponseAssignmentEmployee, _Mapping]] = ..., dutyPost: _Optional[_Union[DutyPost, _Mapping]] = ..., weapon: _Optional[_Union[FlowsUpdateReadResponseAssignmentWeapon, _Mapping]] = ..., weaponButtNo: _Optional[str] = ..., ammo: _Optional[_Union[FlowsUpdateReadResponseAssignmentAmmo, _Mapping]] = ..., ammoCount: _Optional[int] = ...) -> None: ...
+    def __init__(self, id: _Optional[str] = ...) -> None: ...
 
 class FlowsFilters(_message.Message):
     __slots__ = ("idIn",)
@@ -2518,14 +2446,6 @@ class User(_message.Message):
     popUpFor: _containers.RepeatedScalarFieldContainer[CheckPoint]
     popUpDuration: int
     def __init__(self, id: _Optional[str] = ..., authName: _Optional[str] = ..., name: _Optional[str] = ..., popUpFor: _Optional[_Iterable[_Union[CheckPoint, str]]] = ..., popUpDuration: _Optional[int] = ...) -> None: ...
-
-class WeaponInfoUpdateReadResponseAcknowledgedBy(_message.Message):
-    __slots__ = ("id", "name")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    name: str
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
 
 class AccessControlReadResponseAuths(_message.Message):
     __slots__ = ("id", "authName")
@@ -2855,14 +2775,6 @@ class EmployeePhoto(_message.Message):
     name: str
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
 
-class WeaponAmmoReadResponseAmmo(_message.Message):
-    __slots__ = ("id", "name")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    name: str
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
-
 class WeaponPhoto(_message.Message):
     __slots__ = ("id", "name")
     ID_FIELD_NUMBER: _ClassVar[int]
@@ -2938,46 +2850,6 @@ class AssignmentOtherItems(_message.Message):
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
 
 class ScheduleReadResponseAssignmentsEmployee(_message.Message):
-    __slots__ = ("id", "name")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    name: str
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
-
-class ScheduleUpdateReadResponseAssignmentsEmployee(_message.Message):
-    __slots__ = ("id", "name")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    name: str
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
-
-class ScheduleUpdateReadResponseAssignmentsDutyPost(_message.Message):
-    __slots__ = ("id", "name")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    name: str
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
-
-class ScheduleUpdateReadResponseAssignmentsWeapon(_message.Message):
-    __slots__ = ("id", "name")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    name: str
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
-
-class ScheduleUpdateReadResponseAssignmentsAmmo(_message.Message):
-    __slots__ = ("id", "name")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    name: str
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
-
-class ScheduleUpdateReadResponseAssignmentsOtherItems(_message.Message):
     __slots__ = ("id", "name")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
@@ -3078,36 +2950,6 @@ class AmmoInfoReadResponseAcknowledgedBy(_message.Message):
     id: str
     name: str
     def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
-
-class FlowsUpdateReadResponseAssignmentEmployee(_message.Message):
-    __slots__ = ("id", "name", "photo")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
-    PHOTO_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    name: str
-    photo: _message_pb2.FileObject
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., photo: _Optional[_Union[_message_pb2.FileObject, _Mapping]] = ...) -> None: ...
-
-class FlowsUpdateReadResponseAssignmentWeapon(_message.Message):
-    __slots__ = ("id", "name", "photo")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
-    PHOTO_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    name: str
-    photo: _message_pb2.FileObject
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., photo: _Optional[_Union[_message_pb2.FileObject, _Mapping]] = ...) -> None: ...
-
-class FlowsUpdateReadResponseAssignmentAmmo(_message.Message):
-    __slots__ = ("id", "name", "photo")
-    ID_FIELD_NUMBER: _ClassVar[int]
-    NAME_FIELD_NUMBER: _ClassVar[int]
-    PHOTO_FIELD_NUMBER: _ClassVar[int]
-    id: str
-    name: str
-    photo: _message_pb2.FileObject
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., photo: _Optional[_Union[_message_pb2.FileObject, _Mapping]] = ...) -> None: ...
 
 class FlowsAssignment(_message.Message):
     __slots__ = ("id",)

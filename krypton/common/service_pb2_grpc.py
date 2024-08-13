@@ -461,6 +461,11 @@ class PointServiceStub(object):
         Args:
             channel: A grpc.Channel.
         """
+        self.pointRead = channel.unary_unary(
+                '/PointService/pointRead',
+                request_serializer=krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+                response_deserializer=krypton_dot_common_dot_message__pb2.PointReadResponse.FromString,
+                )
         self.pointUpdate = channel.unary_unary(
                 '/PointService/pointUpdate',
                 request_serializer=krypton_dot_common_dot_message__pb2.PointUpdateRequest.SerializeToString,
@@ -485,6 +490,12 @@ class PointServiceStub(object):
 
 class PointServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
+
+    def pointRead(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def pointUpdate(self, request, context):
         """Missing associated documentation comment in .proto file."""
@@ -513,6 +524,11 @@ class PointServiceServicer(object):
 
 def add_PointServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'pointRead': grpc.unary_unary_rpc_method_handler(
+                    servicer.pointRead,
+                    request_deserializer=krypton_dot_common_dot_message__pb2.IdMessage.FromString,
+                    response_serializer=krypton_dot_common_dot_message__pb2.PointReadResponse.SerializeToString,
+            ),
             'pointUpdate': grpc.unary_unary_rpc_method_handler(
                     servicer.pointUpdate,
                     request_deserializer=krypton_dot_common_dot_message__pb2.PointUpdateRequest.FromString,
@@ -542,6 +558,23 @@ def add_PointServiceServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class PointService(object):
     """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def pointRead(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/PointService/pointRead',
+            krypton_dot_common_dot_message__pb2.IdMessage.SerializeToString,
+            krypton_dot_common_dot_message__pb2.PointReadResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def pointUpdate(request,

@@ -236,6 +236,16 @@ class FileObjectListResponse(_message.Message):
     cursor: FileObjectCursor
     def __init__(self, items: _Optional[_Iterable[_Union[FileObject, _Mapping]]] = ..., cursor: _Optional[_Union[FileObjectCursor, _Mapping]] = ...) -> None: ...
 
+class PointReadResponse(_message.Message):
+    __slots__ = ("id", "lattitude", "longitude")
+    ID_FIELD_NUMBER: _ClassVar[int]
+    LATTITUDE_FIELD_NUMBER: _ClassVar[int]
+    LONGITUDE_FIELD_NUMBER: _ClassVar[int]
+    id: str
+    lattitude: float
+    longitude: float
+    def __init__(self, id: _Optional[str] = ..., lattitude: _Optional[float] = ..., longitude: _Optional[float] = ...) -> None: ...
+
 class PointUpdateRequest(_message.Message):
     __slots__ = ("id", "lattitude", "longitude")
     ID_FIELD_NUMBER: _ClassVar[int]

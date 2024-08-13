@@ -13,23 +13,69 @@ _sym_db = _symbol_database.Default()
 
 
 from krypton.common import message_pb2 as krypton_dot_common_dot_message__pb2
+from google.api import http_pb2 as google_dot_api_dot_http__pb2
+from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1ckrypton/common/service.proto\x1a\x1ckrypton/common/message.proto2\xc2\x01\n\x0b\x41uthService\x12/\n\x08\x61uthList\x12\x10.AuthListRequest\x1a\x11.AuthListResponse\x12)\n\x06signIn\x12\x0e.SignInRequest\x1a\x0f.SignInResponse\x12!\n\x07signOut\x12\n.OkMessage\x1a\n.OkMessage\x12\x34\n\x0e\x63hangePassword\x12\x16.ChangePasswordRequest\x1a\n.OkMessage2Z\n\x12\x41uthSessionService\x12\x44\n\x0f\x61uthSessionList\x12\x17.AuthSessionListRequest\x1a\x18.AuthSessionListResponse2\xf0\x02\n\x11\x46ileObjectService\x12\x38\n\x10\x66ileObjectCreate\x12\x18.FileObjectCreateRequest\x1a\n.IdMessage\x12\x35\n\x0e\x66ileObjectRead\x12\n.IdMessage\x1a\x17.FileObjectReadResponse\x12\x38\n\x10\x66ileObjectUpdate\x12\x18.FileObjectUpdateRequest\x1a\n.IdMessage\x12\x41\n\x14\x66ileObjectUpdateRead\x12\n.IdMessage\x1a\x1d.FileObjectUpdateReadResponse\x12*\n\x10\x66ileObjectDelete\x12\n.IdMessage\x1a\n.OkMessage\x12\x41\n\x0e\x66ileObjectList\x12\x16.FileObjectListRequest\x1a\x17.FileObjectListResponse2\xd2\x01\n\x0cPointService\x12.\n\x0bpointUpdate\x12\x13.PointUpdateRequest\x1a\n.IdMessage\x12\x37\n\x0fpointUpdateRead\x12\n.IdMessage\x1a\x18.PointUpdateReadResponse\x12%\n\x0bpointDelete\x12\n.IdMessage\x1a\n.OkMessage\x12\x32\n\tpointList\x12\x11.PointListRequest\x1a\x12.PointListResponse2\xa2\x02\n\x0bTagsService\x12,\n\ntagsCreate\x12\x12.TagsCreateRequest\x1a\n.IdMessage\x12)\n\x08tagsRead\x12\n.IdMessage\x1a\x11.TagsReadResponse\x12,\n\ntagsUpdate\x12\x12.TagsUpdateRequest\x1a\n.IdMessage\x12\x35\n\x0etagsUpdateRead\x12\n.IdMessage\x1a\x17.TagsUpdateReadResponse\x12$\n\ntagsDelete\x12\n.IdMessage\x1a\n.OkMessage\x12/\n\x08tagsList\x12\x10.TagsListRequest\x1a\x11.TagsListResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1ckrypton/common/service.proto\x1a\x1ckrypton/common/message.proto\x1a\x15google/api/http.proto\x1a\x1cgoogle/api/annotations.proto2\xa1\x02\n\x0b\x41uthService\x12\x46\n\x08\x61uthList\x12\x10.AuthListRequest\x1a\x11.AuthListResponse\"\x15\x82\xd3\xe4\x93\x02\x0f\"\r/api/authList\x12>\n\x06signIn\x12\x0e.SignInRequest\x1a\x0f.SignInResponse\"\x13\x82\xd3\xe4\x93\x02\r\"\x0b/api/signIn\x12\x37\n\x07signOut\x12\n.OkMessage\x1a\n.OkMessage\"\x14\x82\xd3\xe4\x93\x02\x0e\"\x0c/api/signOut\x12Q\n\x0e\x63hangePassword\x12\x16.ChangePasswordRequest\x1a\n.OkMessage\"\x1b\x82\xd3\xe4\x93\x02\x15\"\x13/api/changePassword2x\n\x12\x41uthSessionService\x12\x62\n\x0f\x61uthSessionList\x12\x17.AuthSessionListRequest\x1a\x18.AuthSessionListResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\"\x14/api/authSessionList2\xaa\x04\n\x11\x46ileObjectService\x12W\n\x10\x66ileObjectCreate\x12\x18.FileObjectCreateRequest\x1a\n.IdMessage\"\x1d\x82\xd3\xe4\x93\x02\x17\"\x15/api/fileObjectCreate\x12R\n\x0e\x66ileObjectRead\x12\n.IdMessage\x1a\x17.FileObjectReadResponse\"\x1b\x82\xd3\xe4\x93\x02\x15\"\x13/api/fileObjectRead\x12W\n\x10\x66ileObjectUpdate\x12\x18.FileObjectUpdateRequest\x1a\n.IdMessage\"\x1d\x82\xd3\xe4\x93\x02\x17\"\x15/api/fileObjectUpdate\x12\x64\n\x14\x66ileObjectUpdateRead\x12\n.IdMessage\x1a\x1d.FileObjectUpdateReadResponse\"!\x82\xd3\xe4\x93\x02\x1b\"\x19/api/fileObjectUpdateRead\x12I\n\x10\x66ileObjectDelete\x12\n.IdMessage\x1a\n.OkMessage\"\x1d\x82\xd3\xe4\x93\x02\x17\"\x15/api/fileObjectDelete\x12^\n\x0e\x66ileObjectList\x12\x16.FileObjectListRequest\x1a\x17.FileObjectListResponse\"\x1b\x82\xd3\xe4\x93\x02\x15\"\x13/api/fileObjectList2\x81\x03\n\x0cPointService\x12\x43\n\tpointRead\x12\n.IdMessage\x1a\x12.PointReadResponse\"\x16\x82\xd3\xe4\x93\x02\x10\"\x0e/api/pointRead\x12H\n\x0bpointUpdate\x12\x13.PointUpdateRequest\x1a\n.IdMessage\"\x18\x82\xd3\xe4\x93\x02\x12\"\x10/api/pointUpdate\x12U\n\x0fpointUpdateRead\x12\n.IdMessage\x1a\x18.PointUpdateReadResponse\"\x1c\x82\xd3\xe4\x93\x02\x16\"\x14/api/pointUpdateRead\x12?\n\x0bpointDelete\x12\n.IdMessage\x1a\n.OkMessage\"\x18\x82\xd3\xe4\x93\x02\x12\"\x10/api/pointDelete\x12J\n\tpointList\x12\x11.PointListRequest\x1a\x12.PointListResponse\"\x16\x82\xd3\xe4\x93\x02\x10\"\x0e/api/pointList2\xb8\x03\n\x0bTagsService\x12\x45\n\ntagsCreate\x12\x12.TagsCreateRequest\x1a\n.IdMessage\"\x17\x82\xd3\xe4\x93\x02\x11\"\x0f/api/tagsCreate\x12@\n\x08tagsRead\x12\n.IdMessage\x1a\x11.TagsReadResponse\"\x15\x82\xd3\xe4\x93\x02\x0f\"\r/api/tagsRead\x12\x45\n\ntagsUpdate\x12\x12.TagsUpdateRequest\x1a\n.IdMessage\"\x17\x82\xd3\xe4\x93\x02\x11\"\x0f/api/tagsUpdate\x12R\n\x0etagsUpdateRead\x12\n.IdMessage\x1a\x17.TagsUpdateReadResponse\"\x1b\x82\xd3\xe4\x93\x02\x15\"\x13/api/tagsUpdateRead\x12=\n\ntagsDelete\x12\n.IdMessage\x1a\n.OkMessage\"\x17\x82\xd3\xe4\x93\x02\x11\"\x0f/api/tagsDelete\x12\x46\n\x08tagsList\x12\x10.TagsListRequest\x1a\x11.TagsListResponse\"\x15\x82\xd3\xe4\x93\x02\x0f\"\r/api/tagsListb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'krypton.common.service_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
-  _globals['_AUTHSERVICE']._serialized_start=63
-  _globals['_AUTHSERVICE']._serialized_end=257
-  _globals['_AUTHSESSIONSERVICE']._serialized_start=259
-  _globals['_AUTHSESSIONSERVICE']._serialized_end=349
-  _globals['_FILEOBJECTSERVICE']._serialized_start=352
-  _globals['_FILEOBJECTSERVICE']._serialized_end=720
-  _globals['_POINTSERVICE']._serialized_start=723
-  _globals['_POINTSERVICE']._serialized_end=933
-  _globals['_TAGSSERVICE']._serialized_start=936
-  _globals['_TAGSSERVICE']._serialized_end=1226
+  _globals['_AUTHSERVICE'].methods_by_name['authList']._options = None
+  _globals['_AUTHSERVICE'].methods_by_name['authList']._serialized_options = b'\202\323\344\223\002\017\"\r/api/authList'
+  _globals['_AUTHSERVICE'].methods_by_name['signIn']._options = None
+  _globals['_AUTHSERVICE'].methods_by_name['signIn']._serialized_options = b'\202\323\344\223\002\r\"\013/api/signIn'
+  _globals['_AUTHSERVICE'].methods_by_name['signOut']._options = None
+  _globals['_AUTHSERVICE'].methods_by_name['signOut']._serialized_options = b'\202\323\344\223\002\016\"\014/api/signOut'
+  _globals['_AUTHSERVICE'].methods_by_name['changePassword']._options = None
+  _globals['_AUTHSERVICE'].methods_by_name['changePassword']._serialized_options = b'\202\323\344\223\002\025\"\023/api/changePassword'
+  _globals['_AUTHSESSIONSERVICE'].methods_by_name['authSessionList']._options = None
+  _globals['_AUTHSESSIONSERVICE'].methods_by_name['authSessionList']._serialized_options = b'\202\323\344\223\002\026\"\024/api/authSessionList'
+  _globals['_FILEOBJECTSERVICE'].methods_by_name['fileObjectCreate']._options = None
+  _globals['_FILEOBJECTSERVICE'].methods_by_name['fileObjectCreate']._serialized_options = b'\202\323\344\223\002\027\"\025/api/fileObjectCreate'
+  _globals['_FILEOBJECTSERVICE'].methods_by_name['fileObjectRead']._options = None
+  _globals['_FILEOBJECTSERVICE'].methods_by_name['fileObjectRead']._serialized_options = b'\202\323\344\223\002\025\"\023/api/fileObjectRead'
+  _globals['_FILEOBJECTSERVICE'].methods_by_name['fileObjectUpdate']._options = None
+  _globals['_FILEOBJECTSERVICE'].methods_by_name['fileObjectUpdate']._serialized_options = b'\202\323\344\223\002\027\"\025/api/fileObjectUpdate'
+  _globals['_FILEOBJECTSERVICE'].methods_by_name['fileObjectUpdateRead']._options = None
+  _globals['_FILEOBJECTSERVICE'].methods_by_name['fileObjectUpdateRead']._serialized_options = b'\202\323\344\223\002\033\"\031/api/fileObjectUpdateRead'
+  _globals['_FILEOBJECTSERVICE'].methods_by_name['fileObjectDelete']._options = None
+  _globals['_FILEOBJECTSERVICE'].methods_by_name['fileObjectDelete']._serialized_options = b'\202\323\344\223\002\027\"\025/api/fileObjectDelete'
+  _globals['_FILEOBJECTSERVICE'].methods_by_name['fileObjectList']._options = None
+  _globals['_FILEOBJECTSERVICE'].methods_by_name['fileObjectList']._serialized_options = b'\202\323\344\223\002\025\"\023/api/fileObjectList'
+  _globals['_POINTSERVICE'].methods_by_name['pointRead']._options = None
+  _globals['_POINTSERVICE'].methods_by_name['pointRead']._serialized_options = b'\202\323\344\223\002\020\"\016/api/pointRead'
+  _globals['_POINTSERVICE'].methods_by_name['pointUpdate']._options = None
+  _globals['_POINTSERVICE'].methods_by_name['pointUpdate']._serialized_options = b'\202\323\344\223\002\022\"\020/api/pointUpdate'
+  _globals['_POINTSERVICE'].methods_by_name['pointUpdateRead']._options = None
+  _globals['_POINTSERVICE'].methods_by_name['pointUpdateRead']._serialized_options = b'\202\323\344\223\002\026\"\024/api/pointUpdateRead'
+  _globals['_POINTSERVICE'].methods_by_name['pointDelete']._options = None
+  _globals['_POINTSERVICE'].methods_by_name['pointDelete']._serialized_options = b'\202\323\344\223\002\022\"\020/api/pointDelete'
+  _globals['_POINTSERVICE'].methods_by_name['pointList']._options = None
+  _globals['_POINTSERVICE'].methods_by_name['pointList']._serialized_options = b'\202\323\344\223\002\020\"\016/api/pointList'
+  _globals['_TAGSSERVICE'].methods_by_name['tagsCreate']._options = None
+  _globals['_TAGSSERVICE'].methods_by_name['tagsCreate']._serialized_options = b'\202\323\344\223\002\021\"\017/api/tagsCreate'
+  _globals['_TAGSSERVICE'].methods_by_name['tagsRead']._options = None
+  _globals['_TAGSSERVICE'].methods_by_name['tagsRead']._serialized_options = b'\202\323\344\223\002\017\"\r/api/tagsRead'
+  _globals['_TAGSSERVICE'].methods_by_name['tagsUpdate']._options = None
+  _globals['_TAGSSERVICE'].methods_by_name['tagsUpdate']._serialized_options = b'\202\323\344\223\002\021\"\017/api/tagsUpdate'
+  _globals['_TAGSSERVICE'].methods_by_name['tagsUpdateRead']._options = None
+  _globals['_TAGSSERVICE'].methods_by_name['tagsUpdateRead']._serialized_options = b'\202\323\344\223\002\025\"\023/api/tagsUpdateRead'
+  _globals['_TAGSSERVICE'].methods_by_name['tagsDelete']._options = None
+  _globals['_TAGSSERVICE'].methods_by_name['tagsDelete']._serialized_options = b'\202\323\344\223\002\021\"\017/api/tagsDelete'
+  _globals['_TAGSSERVICE'].methods_by_name['tagsList']._options = None
+  _globals['_TAGSSERVICE'].methods_by_name['tagsList']._serialized_options = b'\202\323\344\223\002\017\"\r/api/tagsList'
+  _globals['_AUTHSERVICE']._serialized_start=116
+  _globals['_AUTHSERVICE']._serialized_end=405
+  _globals['_AUTHSESSIONSERVICE']._serialized_start=407
+  _globals['_AUTHSESSIONSERVICE']._serialized_end=527
+  _globals['_FILEOBJECTSERVICE']._serialized_start=530
+  _globals['_FILEOBJECTSERVICE']._serialized_end=1084
+  _globals['_POINTSERVICE']._serialized_start=1087
+  _globals['_POINTSERVICE']._serialized_end=1472
+  _globals['_TAGSSERVICE']._serialized_start=1475
+  _globals['_TAGSSERVICE']._serialized_end=1915
 # @@protoc_insertion_point(module_scope)
