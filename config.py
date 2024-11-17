@@ -48,6 +48,7 @@ GrpcServerAddress: str = "localhost:8081"
 GrpcChannel = grpc.insecure_channel(GrpcServerAddress)
 
 DeviceIp: str = "192.168.22.55"
+RelayIp: str = "192.168.22.53"
 
 PositionPortMap: Dict[Position, int] = {
     Position.Position_weapon: 5000,

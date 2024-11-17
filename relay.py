@@ -1,24 +1,38 @@
-import usbrelay_py
+# import usbrelay_py
 import time
 import threading
+import requests
 
-count = usbrelay_py.board_count()
-print("Count: ", count)
+from .config import RelayIp
 
-boards = usbrelay_py.board_details()
-print("Boards: ", boards)
+# count = usbrelay_py.board_count()
+# print("Count: ", count)
+
+# boards = usbrelay_py.board_details()
+# print("Boards: ", boards)
+
+
+# def turnOn(index: int):
+#     board = boards[0]
+#     result = usbrelay_py.board_control(board[0], index, 1)
+#     print(f"Turn on: {index} result {result}")
+
+
+# def turnOff(index: int):
+#     board = boards[0]
+#     result = usbrelay_py.board_control(board[0], index, 0)
+#     print(f"Turn off: {index} result {result}")
 
 
 def turnOn(index: int):
-    board = boards[0]
-    result = usbrelay_py.board_control(board[0], index, 1)
-    print(f"Turn on: {index} result {result}")
+    # get request
+    requests.get(f"http://${RelayIp}/control?pin=${index}&state=HIGH")
+    print(f"Turn on: {index}")
 
 
 def turnOff(index: int):
-    board = boards[0]
-    result = usbrelay_py.board_control(board[0], index, 0)
-    print(f"Turn off: {index} result {result}")
+    requests.get(f"http://{RelayIp}/control?pin=${index}&state=LOW")
+    print(f"Turn off: {index}")
 
 
 def turnOnFor(index: int, duration: float):
