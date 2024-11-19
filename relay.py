@@ -3,7 +3,7 @@ import time
 import threading
 import requests
 
-from .config import RelayIp
+from config import RelayIp
 
 # count = usbrelay_py.board_count()
 # print("Count: ", count)
